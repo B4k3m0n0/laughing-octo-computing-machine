@@ -1,0 +1,508 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pt.ipleiria.tripPlanner.gui.GestaoViagens;
+
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Localidade;
+import pt.ipleiria.tripPlanner.gui.Models.Viagem;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererAlojamento;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererEtapa;
+import pt.ipleiria.tripPlanner.gui.events.CancelarInserirEditarViagensClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.CancelarInserirEditarViagensClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensEvent;
+import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
+
+/**
+ *
+ * @author DELL
+ */
+public class InserirEditarViagens extends javax.swing.JPanel {
+
+    private List<ConfirmarInsercaoViagensListener> confirmarInsercaoViagensListener;
+    private List<CancelarInserirEditarViagensClicadoListener> cancelarInserirEditarViagensListener;
+    private Viagem viagem;
+    private ArrayList<Etapa> etapasI;
+    private ArrayList<Alojamento> alojamentosI;
+
+    private ArrayList<Etapa> etapasModelList;
+    private ArrayList<Alojamento> alojamentosModelList;
+    private ArrayList<Etapa> etapasModelListS;
+    private ArrayList<Alojamento> alojamentosModelListS;
+
+    private DefaultListModel<Etapa> modelE;
+    private DefaultListModel<Alojamento> modelA;
+    private DefaultListModel<Etapa> modelES;
+    private DefaultListModel<Alojamento> modelAS;
+
+    /**
+     * Creates new form InserirEditarViagens
+     */
+    public InserirEditarViagens() {
+        initComponents();
+        this.confirmarInsercaoViagensListener = new ArrayList<>();
+        this.cancelarInserirEditarViagensListener = new ArrayList<>();
+        cbTipoViagem.addItem("Caminhada");
+        cbTipoViagem.addItem("Bicicleta");
+
+        etapasI = new ArrayList<>();
+        alojamentosI = new ArrayList<>();
+
+        etapasModelList = new ArrayList<>();
+        alojamentosModelList = new ArrayList<>();
+        etapasModelListS = new ArrayList<>();
+        alojamentosModelListS = new ArrayList<>();
+
+        modelE = new DefaultListModel<>();
+        modelA = new DefaultListModel<>();
+        modelES = new DefaultListModel<>();
+        modelAS = new DefaultListModel<>();
+
+//        setModel();
+        avisos();
+
+        lstEtapas.setCellRenderer((ListCellRenderer) new CellRendererEtapa());
+        actualizarListaAlojamentos();
+        lstAlojamentos.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
+        actualizarListaEtapas();
+
+        /*
+         pEtapas.setPreferredSize(new Dimension(228, 241));
+         pEtapas.setVisible(false);
+         pAlojamentos.setPreferredSize(new Dimension(228, 241));
+         pAlojamentos.setVisible(false);
+         */
+        lblAvisoE.setVisible(false);
+
+    }
+
+    public synchronized void addConfirmarInsercaoViagensListener(ConfirmarInsercaoViagensListener listener) {
+        this.confirmarInsercaoViagensListener.add(listener);
+    }
+
+    public synchronized void removeConfirmarInsercaoViagensListener(ConfirmarInsercaoViagensListener listener) {
+        this.confirmarInsercaoViagensListener.remove(listener);
+    }
+
+    protected synchronized void fireConfirmarInsercaoViagensListener() {
+        for (ConfirmarInsercaoViagensListener listener : this.confirmarInsercaoViagensListener) {
+            ConfirmarInsercaoViagensEvent evento = new ConfirmarInsercaoViagensEvent(this);
+            listener.confirmarInsercaoViagens(evento);
+        }
+    }
+
+    public synchronized void addCancelarInserirEditarViagensClicadoListener(CancelarInserirEditarViagensClicadoListener listener) {
+        this.cancelarInserirEditarViagensListener.add(listener);
+    }
+
+    public synchronized void removeCancelarInserirEditarViagensClicadoListener(CancelarInserirEditarViagensClicadoListener listener) {
+        this.cancelarInserirEditarViagensListener.remove(listener);
+    }
+
+    protected synchronized void fireCancelarInserirEditarViagensClicadoListener() {
+        for (CancelarInserirEditarViagensClicadoListener listener : this.cancelarInserirEditarViagensListener) {
+            CancelarInserirEditarViagensClicadoEvent evento = new CancelarInserirEditarViagensClicadoEvent(this);
+            listener.cancelarInserirEditarClicado(evento);
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel2 = new javax.swing.JPanel();
+        pEtapas = new javax.swing.JPanel();
+        lblEtapas = new javax.swing.JLabel();
+        spListaEtapas = new javax.swing.JScrollPane();
+        lstEtapas = new javax.swing.JList();
+        lblAvisoE = new javax.swing.JLabel();
+        pAlojamentos = new javax.swing.JPanel();
+        spListaAlojamentos = new javax.swing.JScrollPane();
+        lstAlojamentos = new javax.swing.JList();
+        lblAlojamentos = new javax.swing.JLabel();
+        lblAvisoA = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnOk = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanel3 = new javax.swing.JPanel();
+        cbTipoViagem = new javax.swing.JComboBox();
+        tfDesignacao = new javax.swing.JTextField();
+        lblTipoViagem = new javax.swing.JLabel();
+        lblDesignacao = new javax.swing.JLabel();
+        lblAvisoD = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(640, 480));
+        setMinimumSize(new java.awt.Dimension(640, 480));
+
+        pEtapas.setBackground(new java.awt.Color(255, 255, 255));
+        pEtapas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Etapas"));
+
+        lblEtapas.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblEtapas.setText("*Etapas:");
+
+        spListaEtapas.setViewportView(lstEtapas);
+
+        lblAvisoE.setText("jLabel1");
+
+        javax.swing.GroupLayout pEtapasLayout = new javax.swing.GroupLayout(pEtapas);
+        pEtapas.setLayout(pEtapasLayout);
+        pEtapasLayout.setHorizontalGroup(
+            pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pEtapasLayout.createSequentialGroup()
+                .addComponent(lblEtapas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblAvisoE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spListaEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addGap(0, 51, Short.MAX_VALUE))
+        );
+        pEtapasLayout.setVerticalGroup(
+            pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pEtapasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEtapas)
+                    .addComponent(spListaEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAvisoE)
+                .addContainerGap())
+        );
+
+        pAlojamentos.setBackground(new java.awt.Color(255, 255, 255));
+        pAlojamentos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Alojamentos"));
+
+        spListaAlojamentos.setViewportView(lstAlojamentos);
+
+        lblAlojamentos.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblAlojamentos.setText("*Alojamentos:");
+
+        lblAvisoA.setText("jLabel3");
+
+        javax.swing.GroupLayout pAlojamentosLayout = new javax.swing.GroupLayout(pAlojamentos);
+        pAlojamentos.setLayout(pAlojamentosLayout);
+        pAlojamentosLayout.setHorizontalGroup(
+            pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pAlojamentosLayout.createSequentialGroup()
+                .addComponent(lblAlojamentos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblAvisoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spListaAlojamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addGap(0, 47, Short.MAX_VALUE))
+        );
+        pAlojamentosLayout.setVerticalGroup(
+            pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pAlojamentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spListaAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAlojamentos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAvisoA)
+                .addContainerGap())
+        );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnOk.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnOk.setText("Ok");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(556, Short.MAX_VALUE)
+                .addComponent(btnOk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar)
+                .addGap(18, 18, 18))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOk)
+                    .addComponent(btnCancelar))
+                .addContainerGap())
+        );
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        jLabel1.setText("Inserir Viagem");
+
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados"));
+
+        lblTipoViagem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblTipoViagem.setText("*Tipo Viagem:");
+
+        lblDesignacao.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblDesignacao.setText("*Designação:");
+
+        lblAvisoD.setText("jLabel2");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblTipoViagem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbTipoViagem, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblDesignacao)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAvisoD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfDesignacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDesignacao)
+                    .addComponent(tfDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAvisoD)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTipoViagem)
+                    .addComponent(cbTipoViagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1))
+                .addGap(203, 203, 203))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(pEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        //Verificacoes
+        if (tfDesignacao.getText().isEmpty() || lstEtapas.getSelectedValuesList().isEmpty()
+                || lstAlojamentos.getSelectedValuesList().isEmpty()) {
+
+            if (tfDesignacao.getText().isEmpty()) {
+                lblAvisoD.setVisible(true);
+            }
+
+            if (lstEtapas.getSelectedValuesList().isEmpty()) {
+                lblAvisoE.setVisible(true);
+            }
+
+            if (lstAlojamentos.getSelectedValuesList().isEmpty()) {
+                lblAvisoA.setVisible(true);
+            }
+
+        } else {
+            //Adicionar Valores Inseridos
+            /*
+             for (int i = 0; i < lstEtapas.getSelectedValuesList().size(); i++) {
+             etapasI.add((Etapa) lstEtapas.getSelectedValuesList().get(i));
+             }
+
+             for (int i = 0; i < lstAlojamentos.getSelectedValuesList().size(); i++) {
+             alojamentosI.add((Alojamento) lstAlojamentos.getSelectedValuesList().get(i));
+             }
+             */
+
+            etapasI = (ArrayList<Etapa>) lstEtapas.getSelectedValuesList();
+            alojamentosI = (ArrayList<Alojamento>) lstAlojamentos.getSelectedValuesList();
+
+            viagem = new Viagem(tfDesignacao.getText(), etapasI, alojamentosI, cbTipoViagem.getSelectedItem().toString());
+            DadosAplicacao.getInstance().addViagem(viagem);
+            JOptionPane.showMessageDialog(this, "Viagem inserida com sucesso");
+            this.fireConfirmarInsercaoViagensListener();
+        }
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.fireCancelarInserirEditarViagensClicadoListener();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+//    private void setModel() {
+//        etapasModelList = DadosAplicacao.getInstance().getEtapas();
+//        modelE.clear();
+//        for (Etapa e : etapasModelList) {
+//            modelE.addElement(e);
+//        }
+//        lstEtapas.setModel(modelE);
+//
+//        alojamentosModelList = DadosAplicacao.getInstance().getAlojamentos();
+//        modelA.clear();
+//        for (Alojamento a : alojamentosModelList) {
+//            modelA.addElement(a);
+//        }
+//        lstAlojamentos.setModel(modelA);
+//
+//        /* DefaultListModel<Etapa> modelE =  new DefaultListModel<>();
+//         for (Etapa e : DadosAplicacao.getInstance().getEtapas()) {
+//         modelE.addElement(e);
+//         }
+//         lstEtapasP.setModel(modelE);
+//        
+//         /*
+//         JList<String> list = new JList<>();
+//         DefaultListModel<String> model = new DefaultListModel<>();
+//         model.addElement("1");
+//         model.addElement("2");
+//         list.setModel(model);
+//         JOptionPane.showMessageDialog(null, list, "Titulo", JOptionPane.QUESTION_MESSAGE);
+//         */
+//    }
+
+    public int getLstEtapasSize() {
+        int t = 0;
+
+        return t;
+    }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnOk;
+    private javax.swing.JComboBox cbTipoViagem;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblAlojamentos;
+    private javax.swing.JLabel lblAvisoA;
+    private javax.swing.JLabel lblAvisoD;
+    private javax.swing.JLabel lblAvisoE;
+    private javax.swing.JLabel lblDesignacao;
+    private javax.swing.JLabel lblEtapas;
+    private javax.swing.JLabel lblTipoViagem;
+    private javax.swing.JList lstAlojamentos;
+    private javax.swing.JList lstEtapas;
+    private javax.swing.JPanel pAlojamentos;
+    private javax.swing.JPanel pEtapas;
+    private javax.swing.JScrollPane spListaAlojamentos;
+    private javax.swing.JScrollPane spListaEtapas;
+    private javax.swing.JTextField tfDesignacao;
+    // End of variables declaration//GEN-END:variables
+
+    private void avisos() {
+        lblAvisoD.setVisible(false);
+        lblAvisoD.setText("Preencha o campo Designacao");
+        lblAvisoD.setForeground(Color.red);
+
+        lblAvisoE.setVisible(false);
+        lblAvisoE.setText("Adicione Etapas");
+        lblAvisoE.setForeground(Color.red);
+
+        lblAvisoA.setVisible(false);
+        lblAvisoA.setText("Adicione Alojamentos");
+        lblAvisoA.setForeground(Color.red);
+    }
+
+    public void actualizarListaEtapas() {
+        DefaultListModel<Etapa> model = new DefaultListModel<>();
+        for (Etapa etapas : DadosAplicacao.getInstance().getEtapas()) {
+            model.addElement(etapas);
+        }
+
+        lstEtapas.setModel(model);
+    }
+
+    public void actualizarListaAlojamentos() {
+        DefaultListModel<Alojamento> model = new DefaultListModel<>();
+        for (Alojamento alojamentos : DadosAplicacao.getInstance().getAlojamentos()) {
+            model.addElement(alojamentos);
+        }
+
+        lstAlojamentos.setModel(model);
+    }
+}

@@ -23,7 +23,6 @@ import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalListener;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author DELL
@@ -33,61 +32,62 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
     private List<CriarEditarAlojamentoClicadoListener> criarEditarAlojamentoClicadoListener;
     private List<VisualizarAlojamentoClicadoListener> visualizarAlojamentoClicadoListener;
     private List<VoltarMenuPrincipalListener> voltarMenuPrincipalListener;
+
     /**
      * Creates new form GestãodeCenáriodeAlojamento
      */
     public GestaodeAlojamentos() {
         initComponents();
-        
+
         this.criarEditarAlojamentoClicadoListener = new ArrayList<>();
         this.visualizarAlojamentoClicadoListener = new ArrayList<>();
         this.voltarMenuPrincipalListener = new ArrayList<>();
         jList1.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
         actualizarListaAlojamentos();
     }
-    
-    public synchronized void addCriarEditarAlojamentoClicadoListener(CriarEditarAlojamentoClicadoListener listener){
+
+    public synchronized void addCriarEditarAlojamentoClicadoListener(CriarEditarAlojamentoClicadoListener listener) {
         this.criarEditarAlojamentoClicadoListener.add(listener);
     }
-    
-    public synchronized void removeCriarEditarAlojamentoClicadoListener(CriarEditarAlojamentoClicadoListener listener){
+
+    public synchronized void removeCriarEditarAlojamentoClicadoListener(CriarEditarAlojamentoClicadoListener listener) {
         this.criarEditarAlojamentoClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireCriarEditarAlojamentoClicadoEvent(){
-        for(CriarEditarAlojamentoClicadoListener listener : this.criarEditarAlojamentoClicadoListener){
-        CriarEditarAlojamentoClicadoEvent evento = new CriarEditarAlojamentoClicadoEvent(this);
-        listener.criarEditarAlojamentoClicado(evento);
+    protected synchronized void fireCriarEditarAlojamentoClicadoEvent() {
+        for (CriarEditarAlojamentoClicadoListener listener : this.criarEditarAlojamentoClicadoListener) {
+            CriarEditarAlojamentoClicadoEvent evento = new CriarEditarAlojamentoClicadoEvent(this);
+            listener.criarEditarAlojamentoClicado(evento);
         }
     }
-    
-    public synchronized void addVisualizarAlojamentoClicadoListener(VisualizarAlojamentoClicadoListener listener){
+
+    public synchronized void addVisualizarAlojamentoClicadoListener(VisualizarAlojamentoClicadoListener listener) {
         this.visualizarAlojamentoClicadoListener.add(listener);
     }
-    
-    public synchronized void removeVisualizarAlojamentoClicadoListener(VisualizarAlojamentoClicadoListener listener){
+
+    public synchronized void removeVisualizarAlojamentoClicadoListener(VisualizarAlojamentoClicadoListener listener) {
         this.visualizarAlojamentoClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireVisualizarAlojamentoClicadoEvent(){
-        for(VisualizarAlojamentoClicadoListener listener : this.visualizarAlojamentoClicadoListener){
-        VisualizarAlojamentoClicadoEvent evento = new VisualizarAlojamentoClicadoEvent(this);
-        listener.visualizarAlojamentoClicado(evento);
+    protected synchronized void fireVisualizarAlojamentoClicadoEvent(Alojamento alojamentoSelecionado) {
+        for (VisualizarAlojamentoClicadoListener listener : this.visualizarAlojamentoClicadoListener) {
+            VisualizarAlojamentoClicadoEvent evento = new VisualizarAlojamentoClicadoEvent(this, alojamentoSelecionado);
+            listener.visualizarAlojamentoClicado(evento);
         }
     }
-    
-        public synchronized void addVoltarMenuPrincipalListener(VoltarMenuPrincipalListener listener){
+
+    public synchronized void addVoltarMenuPrincipalListener(VoltarMenuPrincipalListener listener) {
         this.voltarMenuPrincipalListener.add(listener);
     }
-    
-    public synchronized void removeVoltarMenuPrincipalListener(VoltarMenuPrincipalListener listener){
+
+    public synchronized void removeVoltarMenuPrincipalListener(VoltarMenuPrincipalListener listener) {
         this.voltarMenuPrincipalListener.remove(listener);
     }
 
-    protected synchronized void fireVoltarMenuPrincipalEvent(){
-        for(VoltarMenuPrincipalListener listener : this.voltarMenuPrincipalListener){
-        VoltarMenuPrincipalEvent evento = new VoltarMenuPrincipalEvent(this);
-        listener.voltarMenuPrincipal(evento);
+    protected synchronized void fireVoltarMenuPrincipalEvent() {
+        for (VoltarMenuPrincipalListener listener : this.voltarMenuPrincipalListener) {
+            VoltarMenuPrincipalEvent evento = new VoltarMenuPrincipalEvent(this);
+            listener.voltarMenuPrincipal(evento);
         }
     }
 
@@ -233,11 +233,14 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
     }//GEN-LAST:event_jbCriarActionPerformed
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-       this.fireCriarEditarAlojamentoClicadoEvent();
+        this.fireCriarEditarAlojamentoClicadoEvent();
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
-        this.fireVisualizarAlojamentoClicadoEvent();
+        if (jList1.getSelectedIndex() != -1) {
+            Alojamento alojamentoSelecionado = (Alojamento) jList1.getSelectedValue();
+            this.fireVisualizarAlojamentoClicadoEvent(alojamentoSelecionado);
+        }
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed

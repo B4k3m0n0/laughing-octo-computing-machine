@@ -9,6 +9,6 @@ package pt.ipleiria.tripPlanner.gui.events;
  * @author Ricardo
  */
 public interface VisualizarEtapasClicadoListener {
-
+    
     void visualizarEtapasClicado(VisualizarEtapasClicadoEvent evt);
 }

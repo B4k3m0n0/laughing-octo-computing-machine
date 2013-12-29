@@ -81,7 +81,7 @@ public class DadosAplicacao {
         addQuarto(new Quarto("quarto 1", "2", "Individual", "50", "quarto"));
         quartos.add(new Quarto("quarto 1", "2", "Individual", "50", "quarto"));
         Alojamento alojamento1;
-        alojamento1 = new Alojamento("Alojamento 1", "3.1111423", "-1.312421", "Albergue", quartos, "11", "8h", "21", "Rua da brilhantina", "");
+        alojamento1 = new Alojamento("Alojamento 1", "3.1111423", "-1.312421", "Albergue", quartos, "11", "8h","21", "214598745", "Rua da brilhantina", "");
         alojamentos.add(alojamento1);
 
     }

@@ -7,8 +7,10 @@ import javax.swing.JPanel;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.AdicionarQuarto;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.CriarEditarAlojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.GestaodeAlojamentos;
+import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.MostrarAlojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.GestaodeEtapas;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.InserirEditarEtapa;
+import pt.ipleiria.tripPlanner.gui.GestaoEtapas.VisualizarEtapa;
 import pt.ipleiria.tripPlanner.gui.GestaoViagens.AssociarViagens;
 import pt.ipleiria.tripPlanner.gui.GestaoViagens.GestaodeViagens;
 import pt.ipleiria.tripPlanner.gui.GestaoViagens.InserirEditarViagens;
@@ -132,6 +134,8 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     private AssociarViagens associarViagens;
     private GestaodeEtapas gestaodeEtapas;
     private InserirEditarEtapa inserirEditarEtapa;
+    private VisualizarEtapa visualizarEtapa;
+    private MostrarAlojamento mostrarAlojamento;
 
     /**
      * Creates new form TripPlanner
@@ -170,6 +174,10 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         jPanel1.add(gestaodeEtapas, "gestaodeEtapas");
         inserirEditarEtapa = new InserirEditarEtapa();
         jPanel1.add(inserirEditarEtapa, "inserirEditarEtapa");
+        visualizarEtapa = new VisualizarEtapa();
+        jPanel1.add(visualizarEtapa, "visualizarEtapa");
+        mostrarAlojamento = new MostrarAlojamento();
+        jPanel1.add(mostrarAlojamento, "mostrarAlojamento");
         
         login.addLoginEfetuadoListener(this);
         login.addPrimeiroLoginEfetuadoListener(this);
@@ -221,7 +229,8 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         adicionarQuarto.addCancelarAdicionarQuartoClicadoListener(this);
         visualizarViagens.addOkVisualizarViagensClicadoListener(this);
         associarViagens.addConfirmarAssociacaoViagensListener(this);
-        
+        visualizarEtapa.addOkVisualizarEtapasClicadoListener(this);
+        mostrarAlojamento.addConfirmarClicadoAlojamentoistener(this);
         jPanel1.setPreferredSize(new Dimension(400, 300));
         
         menuCenarios.addVoltarMenuPrincipalListener(this);
@@ -354,6 +363,8 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void visualizarAlojamentoClicado(VisualizarAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        mostrarAlojamento.preencherCampos(evt.getAlojamento());
+        mostrarAlojamento.actualizarListaQuartos();
         cl.show(this.jPanel1, "mostrarAlojamento");
     }
     
@@ -436,6 +447,8 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void visualizarEtapasClicado(VisualizarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        visualizarEtapa.preencherCampos(evt.getEtapa());
+        visualizarEtapa.actualizarListaLocalidades();
         cl.show(this.jPanel1, "visualizarEtapa");
     }
     

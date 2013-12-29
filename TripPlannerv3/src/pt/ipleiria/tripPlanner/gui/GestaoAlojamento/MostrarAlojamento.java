@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Quarto;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoAlojamentoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoAlojamentoListener;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoEvent;
@@ -20,27 +23,28 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
 public class MostrarAlojamento extends javax.swing.JPanel {
 
     private List<ConfirmarClicadoAlojamentoListener> confirmarClicadoAlojamentoListener;
+
     /**
      * Creates new form CriarAlojamento
      */
     public MostrarAlojamento() {
         initComponents();
-        
+
         this.confirmarClicadoAlojamentoListener = new ArrayList<>();
     }
-    
- public synchronized void addConfirmarClicadoAlojamentoistener(ConfirmarClicadoAlojamentoListener listener){
+
+    public synchronized void addConfirmarClicadoAlojamentoistener(ConfirmarClicadoAlojamentoListener listener) {
         this.confirmarClicadoAlojamentoListener.add(listener);
     }
-    
-    public synchronized void removeConfirmarClicadoAlojamentoListener(ConfirmarClicadoAlojamentoListener listener){
+
+    public synchronized void removeConfirmarClicadoAlojamentoListener(ConfirmarClicadoAlojamentoListener listener) {
         this.confirmarClicadoAlojamentoListener.remove(listener);
     }
 
-    protected synchronized void fireConfirmarClicadoAlojamentoEvent(){
-        for(ConfirmarClicadoAlojamentoListener listener : this.confirmarClicadoAlojamentoListener){
-        ConfirmarClicadoAlojamentoEvent evento = new ConfirmarClicadoAlojamentoEvent(this);
-        listener.confirmarClicadoAlojamento(evento);
+    protected synchronized void fireConfirmarClicadoAlojamentoEvent() {
+        for (ConfirmarClicadoAlojamentoListener listener : this.confirmarClicadoAlojamentoListener) {
+            ConfirmarClicadoAlojamentoEvent evento = new ConfirmarClicadoAlojamentoEvent(this);
+            listener.confirmarClicadoAlojamento(evento);
         }
     }
 
@@ -76,12 +80,14 @@ public class MostrarAlojamento extends javax.swing.JPanel {
         btnCancelar = new javax.swing.JButton();
         lblMostrarDesignacao = new javax.swing.JLabel();
         lblMostrarLongitude = new javax.swing.JLabel();
-        lblMostrarHorárioFuncionamento = new javax.swing.JLabel();
-        lblMostraCheckin_out = new javax.swing.JLabel();
+        lblMostrarHorarioFuncionamento = new javax.swing.JLabel();
+        lblMostraCheckin = new javax.swing.JLabel();
         lblMostrarContactos = new javax.swing.JLabel();
         lblMostrarMorada = new javax.swing.JLabel();
         lblMostrarObservacoes = new javax.swing.JLabel();
         lblMostrarLatitude = new javax.swing.JLabel();
+        lblCheckout = new javax.swing.JLabel();
+        lblMostrarCheckout = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -124,7 +130,7 @@ public class MostrarAlojamento extends javax.swing.JPanel {
 
         lblHorariodeFuncionamento.setText("Horário de Funcionamento:");
 
-        btnCheckin_out.setText("Check in / out:");
+        btnCheckin_out.setText("Check in:");
 
         lblContactos.setText("Contactos:");
 
@@ -141,74 +147,83 @@ public class MostrarAlojamento extends javax.swing.JPanel {
 
         btnCancelar.setText("Cancelar");
 
+        lblCheckout.setText("Check out:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblGPS)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblLongitude)
-                        .addGap(76, 76, 76)
-                        .addComponent(lblMostrarLongitude)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblLatitude)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMostrarLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTipo)
-                        .addGap(18, 18, 18)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(rbAlbergue)
+                                .addComponent(lblGPS)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbPensao)
+                                .addComponent(lblLongitude)
+                                .addGap(76, 76, 76)
+                                .addComponent(lblMostrarLongitude)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbHostal))
+                                .addComponent(lblLatitude)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMostrarLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(rbHotel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbOutros))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDesignacao)
-                        .addGap(83, 83, 83)
-                        .addComponent(lblMostrarDesignacao))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(lblMostraCheckin_out))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblTipo)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(rbAlbergue)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbPensao)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbHostal))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(rbHotel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbOutros))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDesignacao)
+                                .addGap(83, 83, 83)
+                                .addComponent(lblMostrarDesignacao))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(193, 193, 193)
+                                .addComponent(lblMostraCheckin))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(186, 186, 186)
-                                        .addComponent(lblMostrarMorada))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(186, 186, 186)
+                                                .addComponent(lblMostrarMorada))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(192, 192, 192)
+                                                .addComponent(lblMostrarContactos))
+                                            .addComponent(lblHorariodeFuncionamento))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblMostrarHorarioFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(192, 192, 192)
-                                        .addComponent(lblMostrarContactos))
-                                    .addComponent(lblHorariodeFuncionamento))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblMostrarHorárioFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblQuartos)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(69, 69, 69)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCheckin_out)
-                            .addComponent(lblObservacoes)
-                            .addComponent(lblMorada)
-                            .addComponent(lblContactos)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblMostrarObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnOk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCancelar)))))
+                                        .addComponent(lblQuartos)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(spQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(69, 69, 69)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCheckin_out)
+                                    .addComponent(lblObservacoes)
+                                    .addComponent(lblMorada)
+                                    .addComponent(lblContactos)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(lblMostrarObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnOk)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnCancelar))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(lblCheckout)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -239,14 +254,13 @@ public class MostrarAlojamento extends javax.swing.JPanel {
                             .addComponent(rbHotel)
                             .addComponent(rbOutros))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblQuartos)
-                                    .addComponent(spQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(22, 22, 22)
-                                .addComponent(lblHorariodeFuncionamento))
-                            .addComponent(lblMostrarHorárioFuncionamento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblQuartos)
+                            .addComponent(spQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblHorariodeFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMostrarHorarioFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCheckin_out)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -262,12 +276,16 @@ public class MostrarAlojamento extends javax.swing.JPanel {
                             .addComponent(btnOk)
                             .addComponent(btnCancelar))))
                 .addGap(23, 23, 23)
-                .addComponent(lblMostraCheckin_out)
+                .addComponent(lblMostraCheckin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMostrarContactos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMostrarMorada)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCheckout)
+                    .addComponent(lblMostrarCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -282,6 +300,7 @@ public class MostrarAlojamento extends javax.swing.JPanel {
     private javax.swing.JButton btnOk;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JList jList1;
+    private javax.swing.JLabel lblCheckout;
     private javax.swing.JLabel lblContactos;
     private javax.swing.JLabel lblDesignacao;
     private javax.swing.JLabel lblGPS;
@@ -289,10 +308,11 @@ public class MostrarAlojamento extends javax.swing.JPanel {
     private javax.swing.JLabel lblLatitude;
     private javax.swing.JLabel lblLongitude;
     private javax.swing.JLabel lblMorada;
-    private javax.swing.JLabel lblMostraCheckin_out;
+    private javax.swing.JLabel lblMostraCheckin;
+    private javax.swing.JLabel lblMostrarCheckout;
     private javax.swing.JLabel lblMostrarContactos;
     private javax.swing.JLabel lblMostrarDesignacao;
-    private javax.swing.JLabel lblMostrarHorárioFuncionamento;
+    private javax.swing.JLabel lblMostrarHorarioFuncionamento;
     private javax.swing.JLabel lblMostrarLatitude;
     private javax.swing.JLabel lblMostrarLongitude;
     private javax.swing.JLabel lblMostrarMorada;
@@ -307,4 +327,26 @@ public class MostrarAlojamento extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbPensao;
     private javax.swing.JScrollPane spQuartos;
     // End of variables declaration//GEN-END:variables
+public void preencherCampos(Alojamento alojamento) {
+        lblMostrarContactos.setText(alojamento.getContactos());
+        lblMostrarDesignacao.setText(alojamento.getDesignacao());
+        lblMostrarLongitude.setText(alojamento.getLongitude());
+        lblMostrarLatitude.setText(alojamento.getLatitude());
+        lblMostrarHorarioFuncionamento.setText(alojamento.getHorarioFunc());
+        lblMostrarMorada.setText(alojamento.getMorada());
+        lblMostraCheckin.setText(alojamento.getCheckin());
+        lblMostrarCheckout.setText(alojamento.getCheckout());
+        lblMostrarObservacoes.setText(alojamento.getObservacoes());
+        
+        //Mostrar o tipo
+    }
+
+    public void actualizarListaQuartos() {
+        DefaultListModel<Quarto> model = new DefaultListModel<>();
+        for (Quarto quarto : DadosAplicacao.getInstance().getQuartos()) {
+            model.addElement(quarto);
+        }
+        jList1.setModel(model);
+    }
+
 }

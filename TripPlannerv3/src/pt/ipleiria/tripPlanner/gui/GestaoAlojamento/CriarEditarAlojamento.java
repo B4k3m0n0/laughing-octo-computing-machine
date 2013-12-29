@@ -102,7 +102,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         lblErrTipo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         spObservacoes = new javax.swing.JScrollPane();
-        lblHoráriodeFuncionamento = new javax.swing.JTextArea();
+        jtaObservacoes = new javax.swing.JTextArea();
         tfMorada = new javax.swing.JTextField();
         tfContactos = new javax.swing.JTextField();
         tfCheckin = new javax.swing.JTextField();
@@ -111,7 +111,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         lblMorada = new javax.swing.JLabel();
         btnCheckin_out = new javax.swing.JLabel();
         spHorariodeFuncionamento = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtaHorarioFuncionamento = new javax.swing.JTextArea();
         lblHorariodeFuncionamento = new javax.swing.JLabel();
         btnCheckout = new javax.swing.JLabel();
         tfCheckout = new javax.swing.JTextField();
@@ -260,9 +260,9 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Contactos"));
 
-        lblHoráriodeFuncionamento.setColumns(20);
-        lblHoráriodeFuncionamento.setRows(5);
-        spObservacoes.setViewportView(lblHoráriodeFuncionamento);
+        jtaObservacoes.setColumns(20);
+        jtaObservacoes.setRows(5);
+        spObservacoes.setViewportView(jtaObservacoes);
 
         lblContactos.setText("*Contactos:");
 
@@ -272,9 +272,9 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
 
         btnCheckin_out.setText("*Check in:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        spHorariodeFuncionamento.setViewportView(jTextArea1);
+        jtaHorarioFuncionamento.setColumns(20);
+        jtaHorarioFuncionamento.setRows(5);
+        spHorariodeFuncionamento.setViewportView(jtaHorarioFuncionamento);
 
         lblHorariodeFuncionamento.setText("*Horário de Funcionamento:");
 
@@ -480,7 +480,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(btnCancelar))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -508,7 +508,8 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jtaHorarioFuncionamento;
+    private javax.swing.JTextArea jtaObservacoes;
     private javax.swing.JLabel lblContactos;
     private javax.swing.JLabel lblDesignacao;
     private javax.swing.JLabel lblErrCheckin;
@@ -522,7 +523,6 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
     private javax.swing.JLabel lblErrTipo;
     private javax.swing.JLabel lblGPS;
     private javax.swing.JLabel lblHorariodeFuncionamento;
-    private javax.swing.JTextArea lblHoráriodeFuncionamento;
     private javax.swing.JLabel lblLatitude;
     private javax.swing.JLabel lblLongitude;
     private javax.swing.JLabel lblMorada;
@@ -584,7 +584,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
             lblErrQuarto.setText("Escolha um quarto");
             isOk = false;
         }
-        if (jTextArea1.getText().isEmpty()) {
+        if (jtaHorarioFuncionamento.getText().isEmpty()) {
             lblErrHorarioFunc.setText("Insira o Horário de Funcionamento.");
             isOk = false;
         }
@@ -625,7 +625,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
             } else if (rbPensao.isSelected()) {
                 tipo = "Pensao";
             }
-            Alojamento alojamento = new Alojamento(tfDesignacao.getText(), tfLongitude.getText(), tfLatitude.getText(), tipo, quartos, jTextArea1.getText(), tfCheckin.getText(), tfCheckout.getText(), tfContactos.getText(), tfMorada.getText());
+            Alojamento alojamento = new Alojamento(tfDesignacao.getText(), tfLongitude.getText(), tfLatitude.getText(), tipo, quartos,jtaHorarioFuncionamento.getText() ,tfCheckin.getText(), tfCheckout.getText(), tfContactos.getText(), tfMorada.getText(),jtaObservacoes.getText() );
             DadosAplicacao.getInstance().addAlojamento(alojamento);
             JOptionPane.showMessageDialog(this, "Alojamento Inserida com Sucesso!", "Inserção Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.fireConfirmarClicadoAlojamentoEvent();

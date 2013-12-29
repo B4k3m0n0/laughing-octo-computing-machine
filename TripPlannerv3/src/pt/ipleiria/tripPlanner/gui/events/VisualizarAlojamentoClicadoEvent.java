@@ -5,6 +5,7 @@
 package pt.ipleiria.tripPlanner.gui.events;
 
 import java.util.EventObject;
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 
 /**
  *
@@ -12,10 +13,14 @@ import java.util.EventObject;
  */
 public class VisualizarAlojamentoClicadoEvent extends EventObject{
     
-
-    public VisualizarAlojamentoClicadoEvent(Object source){
+    Alojamento alojamento;
+    public VisualizarAlojamentoClicadoEvent(Object source, Alojamento alojamento){
         super(source);
-        
+        this.alojamento = alojamento;
+    }
+
+    public Alojamento getAlojamento() {
+        return alojamento;
     }
     
 }

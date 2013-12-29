@@ -5,14 +5,20 @@
 package pt.ipleiria.tripPlanner.gui.events;
 
 import java.util.EventObject;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 
 /**
  *
  * @author Ricardo
  */
 public class VisualizarEtapasClicadoEvent extends EventObject {
-
-    public VisualizarEtapasClicadoEvent(Object source) {
+    
+    Etapa etapa;
+    public VisualizarEtapasClicadoEvent(Object source, Etapa etapa) {
         super(source);
+        this.etapa = etapa;
+    }
+     public Etapa getEtapa(){
+        return etapa;
     }
 }

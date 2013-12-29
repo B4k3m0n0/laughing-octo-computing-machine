@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.GestaoLocalidades.*;
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
@@ -95,9 +96,9 @@ public class GestaodeEtapas extends javax.swing.JPanel {
         this.visualizarEtapasClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireVisualizarEtapasClicadoEvent() {
+    protected synchronized void fireVisualizarEtapasClicadoEvent(Etapa etapaSelecionada) {
         for (VisualizarEtapasClicadoListener listener : this.visualizarEtapasClicadoListener) {
-            VisualizarEtapasClicadoEvent evento = new VisualizarEtapasClicadoEvent(this);
+            VisualizarEtapasClicadoEvent evento = new VisualizarEtapasClicadoEvent(this,etapaSelecionada);
             listener.visualizarEtapasClicado(evento);
         }
     }
@@ -279,7 +280,10 @@ public class GestaodeEtapas extends javax.swing.JPanel {
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
-        this.fireEditarEtapasClicadoEvent();
+          if (jList1.getSelectedIndex() != -1) {
+            Etapa etapaSelecionado = (Etapa) jList1.getSelectedValue();
+            this.fireVisualizarEtapasClicadoEvent(etapaSelecionado);
+        }
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

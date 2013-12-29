@@ -3,17 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/participantes/InserirEditarParticipante.java</file>
-            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/Models/Participante.java</file>
-            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/TripPlanner/DadosAcesso.java</file>
+            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/events/VisualizarAlojamentoClicadoEvent.java</file>
+            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoEtapas/VisualizarEtapa.java</file>
+            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/participantes/MenuParticipantes.java</file>
+            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoAlojamento/MostrarAlojamento.java</file>
+            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoAlojamento/CriarEditarAlojamento.java</file>
+            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/events/VisualizarEtapasClicadoEvent.java</file>
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/TripPlanner/TripPlanner.java</file>
-            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoViagens/GestaodeViagens.java</file>
+            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoEtapas/GestaodeEtapas.java</file>
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoAlojamento/GestaodeAlojamentos.java</file>
-            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/Models/Quarto.java</file>
-            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoViagens/InserirEditarViagens.java</file>
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/Models/DadosAplicacao.java</file>
-            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/TripPlanner/Login.java</file>
-            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoViagens/AssociarViagens.java</file>
+            <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/Models/Alojamento.java</file>
         </group>
     </open-files>
 </project-private>

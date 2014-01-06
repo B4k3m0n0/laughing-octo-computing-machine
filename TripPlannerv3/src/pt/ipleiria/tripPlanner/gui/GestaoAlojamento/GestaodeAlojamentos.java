@@ -3,7 +3,10 @@ package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.GestaoLocalidades.*;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
@@ -131,7 +134,11 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
         });
 
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/eliminar1.png"))); // NOI18N
-        jbEliminar.setEnabled(false);
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/editar.png"))); // NOI18N
         jbEditar.setDefaultCapable(false);
@@ -143,7 +150,6 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
         });
 
         jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/lupa.png"))); // NOI18N
-        jbPesquisar.setEnabled(false);
         jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbPesquisarActionPerformed(evt);
@@ -240,12 +246,18 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
         if (jList1.getSelectedIndex() != -1) {
             Alojamento alojamentoSelecionado = (Alojamento) jList1.getSelectedValue();
             this.fireVisualizarAlojamentoClicadoEvent(alojamentoSelecionado);
+        }else{
+        JOptionPane.showMessageDialog(this, "Insira um alojamento da lista de alojamentos", "Erro", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed
         this.fireVoltarMenuPrincipalEvent();
     }//GEN-LAST:event_jbVoltarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        eliminar();
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -261,7 +273,22 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
     private javax.swing.JLabel lblAlojamentos;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
-     public void actualizarListaAlojamentos() {
+
+    public void eliminar() {
+        if (jList1.getSelectedIndex() != -1) {
+            Object[] options = {"Sim", "Não"};
+            int n = JOptionPane.showOptionDialog(getRootPane(), "Tem a certeza de que pretende eliminar o utilizador?", "Eliminar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
+            if (n == 0) {
+                Alojamento alojamentoSelecionado = (Alojamento) jList1.getSelectedValue();
+                DadosAplicacao.getInstance().removeAlojamento(alojamentoSelecionado);
+                actualizarListaAlojamentos();
+                JOptionPane.showMessageDialog(this, "Alojamento removido com Sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+    }
+
+    public void actualizarListaAlojamentos() {
         DefaultListModel<Alojamento> model = new DefaultListModel<>();
         for (Alojamento alojamento : DadosAplicacao.getInstance().getAlojamentos()) {
             model.addElement(alojamento);

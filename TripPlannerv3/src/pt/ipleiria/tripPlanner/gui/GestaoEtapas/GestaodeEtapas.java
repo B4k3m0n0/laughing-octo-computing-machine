@@ -3,6 +3,7 @@ package pt.ipleiria.tripPlanner.gui.GestaoEtapas;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.GestaoLocalidades.*;
 import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
@@ -111,9 +112,9 @@ public class GestaodeEtapas extends javax.swing.JPanel {
         this.associarEtapasClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireAssociarEtapasClicadoEvent() {
+    protected synchronized void fireAssociarEtapasClicadoEvent(Etapa etapaSelecionada) {
         for (AssociarEtapasClicadoListener listener : this.associarEtapasClicadoListener) {
-            AssociarEtapasClicadoEvent evento = new AssociarEtapasClicadoEvent(this, (Etapa) lstEtapas.getSelectedValue());
+            AssociarEtapasClicadoEvent evento = new AssociarEtapasClicadoEvent(this, etapaSelecionada);
             listener.associarEtapasClicado(evento);
         }
     }
@@ -185,7 +186,6 @@ public class GestaodeEtapas extends javax.swing.JPanel {
         });
 
         jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/lupa.png"))); // NOI18N
-        jbPesquisar.setEnabled(false);
         jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbPesquisarActionPerformed(evt);
@@ -204,7 +204,6 @@ public class GestaodeEtapas extends javax.swing.JPanel {
         lblLocalidades.setText("Etapas");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/synchronize_256.png"))); // NOI18N
-        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -280,21 +279,22 @@ public class GestaodeEtapas extends javax.swing.JPanel {
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
-<<<<<<< .mine
+
           if (lstEtapas.getSelectedIndex() != -1) {
             Etapa etapaSelecionado = (Etapa) lstEtapas.getSelectedValue();
             this.fireVisualizarEtapasClicadoEvent(etapaSelecionado);
-        }
-=======
-          if (jList1.getSelectedIndex() != -1) {
-            Etapa etapaSelecionado = (Etapa) jList1.getSelectedValue();
-            this.fireVisualizarEtapasClicadoEvent(etapaSelecionado);
-        }
->>>>>>> .r3
+        }else{
+          JOptionPane.showMessageDialog(this, "Insira uma etapa da lista de etapas", "Erro", JOptionPane.INFORMATION_MESSAGE);
+          }
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.fireAssociarEtapasClicadoEvent();
+         if (lstEtapas.getSelectedIndex() != -1) {
+            Etapa etapaSelecionado = (Etapa) lstEtapas.getSelectedValue();
+            this.fireAssociarEtapasClicadoEvent(etapaSelecionado);
+        }else{
+        JOptionPane.showMessageDialog(this, "Insira uma etapa da lista de etapas", "Erro", JOptionPane.INFORMATION_MESSAGE);
+          }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed

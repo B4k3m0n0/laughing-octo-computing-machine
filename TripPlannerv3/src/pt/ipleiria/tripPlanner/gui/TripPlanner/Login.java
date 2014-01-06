@@ -197,13 +197,11 @@ public class Login extends javax.swing.JPanel {
                                 && new String(pfPassword.getPassword()).equals(new String(participante.getPassword())) && !participante.isPrimeiroLogin()) {
                             DadosAplicacao.getInstance().setLogado(participante);
                             fireLoginEfetuadoEvent();
-                            mudarNome();
                         } else if (participante.isPrimeiroLogin()) {
                             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
                             String dataNasc = formatter.format(participante.getDataNasc().getTime());
                             if (tfUsername.getText().equals(participante.getBI() + "") && new String(pfPassword.getPassword()).equals(dataNasc) && participante.isPrimeiroLogin()) {
-                                mudarNome();
                                 firePrimeiroLoginEfetuadoEvent(participante);
 
                             } else {
@@ -229,8 +227,10 @@ public class Login extends javax.swing.JPanel {
         }
     }
 
-    public void mudarNome() {
+    public void atualizar() {
         tfUsername.setText("");
         pfPassword.setText("");
+        lblErros.setText("");
+        
     }
 }

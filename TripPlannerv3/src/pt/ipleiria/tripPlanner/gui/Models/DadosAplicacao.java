@@ -89,6 +89,10 @@ public class DadosAplicacao {
     public void addAlojamento(Alojamento alojamento) {
         alojamentos.add(alojamento);
     }
+    
+    public void removeAlojamento(Alojamento alojamento){
+        alojamentos.remove(alojamento);
+    }
 
     public void addViagem(Viagem viagem) {
         viagens.add(viagem);
@@ -154,7 +158,7 @@ public class DadosAplicacao {
     
     public Etapa getEtapa(Etapa etapa) {
         for (Etapa e : etapas) {
-            if (e.equals(etapas)) {
+            if (e.equals(etapa)) {
                 return e;
             }
         }

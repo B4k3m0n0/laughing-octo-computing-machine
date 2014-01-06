@@ -8,9 +8,12 @@ package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Quarto;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererLocalidade;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererQuartos;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoAlojamentoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoAlojamentoListener;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoEvent;
@@ -29,7 +32,7 @@ public class MostrarAlojamento extends javax.swing.JPanel {
      */
     public MostrarAlojamento() {
         initComponents();
-
+        jList1.setCellRenderer((ListCellRenderer) new CellRendererQuartos());
         this.confirmarClicadoAlojamentoListener = new ArrayList<>();
     }
 
@@ -58,67 +61,165 @@ public class MostrarAlojamento extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
-        lblDesignacao = new javax.swing.JLabel();
-        lblGPS = new javax.swing.JLabel();
-        lblLongitude = new javax.swing.JLabel();
-        lblLatitude = new javax.swing.JLabel();
-        lblTipo = new javax.swing.JLabel();
-        rbAlbergue = new javax.swing.JRadioButton();
-        rbPensao = new javax.swing.JRadioButton();
-        rbHostal = new javax.swing.JRadioButton();
-        rbHotel = new javax.swing.JRadioButton();
-        rbOutros = new javax.swing.JRadioButton();
-        lblQuartos = new javax.swing.JLabel();
-        spQuartos = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        btnOk = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         lblHorariodeFuncionamento = new javax.swing.JLabel();
-        btnCheckin_out = new javax.swing.JLabel();
+        btnCheckin = new javax.swing.JLabel();
         lblContactos = new javax.swing.JLabel();
         lblMorada = new javax.swing.JLabel();
         lblObservacoes = new javax.swing.JLabel();
-        btnOk = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        lblMostrarDesignacao = new javax.swing.JLabel();
-        lblMostrarLongitude = new javax.swing.JLabel();
-        lblMostrarHorarioFuncionamento = new javax.swing.JLabel();
-        lblMostraCheckin = new javax.swing.JLabel();
-        lblMostrarContactos = new javax.swing.JLabel();
-        lblMostrarMorada = new javax.swing.JLabel();
-        lblMostrarObservacoes = new javax.swing.JLabel();
-        lblMostrarLatitude = new javax.swing.JLabel();
         lblCheckout = new javax.swing.JLabel();
         lblMostrarCheckout = new javax.swing.JLabel();
+        lblMostrarObservacoes = new javax.swing.JLabel();
+        lblMostrarMorada = new javax.swing.JLabel();
+        lblMostrarContactos = new javax.swing.JLabel();
+        lblMostraCheckin = new javax.swing.JLabel();
+        lblMostrarHorarioFuncionamento = new javax.swing.JLabel();
+        lblGPS = new javax.swing.JLabel();
+        lblLongitude = new javax.swing.JLabel();
+        lblMostrarLongitude = new javax.swing.JLabel();
+        lblLatitude = new javax.swing.JLabel();
+        lblMostrarLatitude = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblQuartos = new javax.swing.JLabel();
+        spQuartos = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        lblTipo = new javax.swing.JLabel();
+        lblDesignacao = new javax.swing.JLabel();
+        lblMostrarDesignacao = new javax.swing.JLabel();
+        lblMostrarTipo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
         setPreferredSize(new java.awt.Dimension(640, 480));
 
-        lblDesignacao.setText("Designação:");
+        btnOk.setText("Ok");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Contactos"));
+
+        lblHorariodeFuncionamento.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblHorariodeFuncionamento.setText("Horário de Funcionamento:");
+
+        btnCheckin.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnCheckin.setText("Check in:");
+
+        lblContactos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblContactos.setText("Contactos:");
+
+        lblMorada.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblMorada.setText("Morada:");
+
+        lblObservacoes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblObservacoes.setText("Observações:");
+
+        lblCheckout.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblCheckout.setText("Check out:");
+
+        lblGPS.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblGPS.setText("GPS:");
 
+        lblLongitude.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLongitude.setText("Longitude:");
 
+        lblLatitude.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLatitude.setText("Latitude:");
 
-        lblTipo.setText("Tipo:");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCheckin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostraCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCheckout)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblHorariodeFuncionamento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarHorarioFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(70, 70, 70))
+                    .addComponent(lblMostrarObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblObservacoes)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblGPS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLongitude)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMostrarLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLatitude)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblMorada)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarMorada, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblContactos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarContactos, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblHorariodeFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMostrarHorarioFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCheckin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMostraCheckin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCheckout)
+                    .addComponent(lblMostrarCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblContactos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMostrarContactos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblMorada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMostrarMorada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblGPS)
+                        .addComponent(lblLongitude)
+                        .addComponent(lblLatitude)
+                        .addComponent(lblMostrarLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMostrarLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblObservacoes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMostrarObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-        buttonGroup2.add(rbAlbergue);
-        rbAlbergue.setText("Albergue");
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Designação"));
 
-        buttonGroup2.add(rbPensao);
-        rbPensao.setText("Pensão");
-
-        buttonGroup2.add(rbHostal);
-        rbHostal.setText("Hostal");
-
-        buttonGroup2.add(rbHotel);
-        rbHotel.setText("Hotel");
-
-        buttonGroup2.add(rbOutros);
-        rbOutros.setText("Outros");
-
+        lblQuartos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblQuartos.setText("Quartos:");
 
         jList1.setModel(new javax.swing.AbstractListModel() {
@@ -128,26 +229,60 @@ public class MostrarAlojamento extends javax.swing.JPanel {
         });
         spQuartos.setViewportView(jList1);
 
-        lblHorariodeFuncionamento.setText("Horário de Funcionamento:");
+        lblTipo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblTipo.setText("Tipo:");
 
-        btnCheckin_out.setText("Check in:");
+        lblDesignacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDesignacao.setText("Designação:");
 
-        lblContactos.setText("Contactos:");
+        lblMostrarTipo.setText("jLabel2");
 
-        lblMorada.setText("Morada:");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblDesignacao)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblMostrarDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblQuartos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(spQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMostrarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDesignacao)
+                    .addComponent(lblMostrarDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTipo)
+                    .addComponent(lblMostrarTipo))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblQuartos)
+                    .addComponent(spQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        lblObservacoes.setText("Observações:");
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        jLabel1.setText("Visualizar Alojamento");
 
-        btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
-        btnCancelar.setText("Cancelar");
-
-        lblCheckout.setText("Check out:");
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -157,135 +292,41 @@ public class MostrarAlojamento extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblGPS)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblLongitude)
-                                .addGap(76, 76, 76)
-                                .addComponent(lblMostrarLongitude)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblLatitude)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblMostrarLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTipo)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rbAlbergue)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rbPensao)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rbHostal))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rbHotel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rbOutros))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDesignacao)
-                                .addGap(83, 83, 83)
-                                .addComponent(lblMostrarDesignacao))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(193, 193, 193)
-                                .addComponent(lblMostraCheckin))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGap(186, 186, 186)
-                                                .addComponent(lblMostrarMorada))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGap(192, 192, 192)
-                                                .addComponent(lblMostrarContactos))
-                                            .addComponent(lblHorariodeFuncionamento))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMostrarHorarioFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(lblQuartos)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(spQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(69, 69, 69)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCheckin_out)
-                                    .addComponent(lblObservacoes)
-                                    .addComponent(lblMorada)
-                                    .addComponent(lblContactos)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(lblMostrarObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnOk)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnCancelar))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(lblCheckout)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMostrarCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(319, 319, 319)
+                .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDesignacao)
-                            .addComponent(lblMostrarDesignacao))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblGPS)
-                            .addComponent(lblLongitude)
-                            .addComponent(lblLatitude)
-                            .addComponent(lblMostrarLongitude)
-                            .addComponent(lblMostrarLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTipo)
-                            .addComponent(rbAlbergue)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(rbPensao)
-                                .addComponent(rbHostal)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbHotel)
-                            .addComponent(rbOutros))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblQuartos)
-                            .addComponent(spQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblHorariodeFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblMostrarHorarioFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCheckin_out)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblContactos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMorada)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblObservacoes)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMostrarObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnOk)
-                            .addComponent(btnCancelar))))
-                .addGap(23, 23, 23)
-                .addComponent(lblMostraCheckin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMostrarContactos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMostrarMorada)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCheckout)
-                    .addComponent(lblMostrarCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOk)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -295,11 +336,15 @@ public class MostrarAlojamento extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel btnCheckin_out;
+    private javax.swing.JLabel btnCheckin;
     private javax.swing.JButton btnOk;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblCheckout;
     private javax.swing.JLabel lblContactos;
     private javax.swing.JLabel lblDesignacao;
@@ -317,14 +362,10 @@ public class MostrarAlojamento extends javax.swing.JPanel {
     private javax.swing.JLabel lblMostrarLongitude;
     private javax.swing.JLabel lblMostrarMorada;
     private javax.swing.JLabel lblMostrarObservacoes;
+    private javax.swing.JLabel lblMostrarTipo;
     private javax.swing.JLabel lblObservacoes;
     private javax.swing.JLabel lblQuartos;
     private javax.swing.JLabel lblTipo;
-    private javax.swing.JRadioButton rbAlbergue;
-    private javax.swing.JRadioButton rbHostal;
-    private javax.swing.JRadioButton rbHotel;
-    private javax.swing.JRadioButton rbOutros;
-    private javax.swing.JRadioButton rbPensao;
     private javax.swing.JScrollPane spQuartos;
     // End of variables declaration//GEN-END:variables
 public void preencherCampos(Alojamento alojamento) {
@@ -337,6 +378,7 @@ public void preencherCampos(Alojamento alojamento) {
         lblMostraCheckin.setText(alojamento.getCheckin());
         lblMostrarCheckout.setText(alojamento.getCheckout());
         lblMostrarObservacoes.setText(alojamento.getObservacoes());
+        lblMostrarTipo.setText(alojamento.getTipo());
         
         //Mostrar o tipo
     }

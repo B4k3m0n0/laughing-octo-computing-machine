@@ -3,11 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.ipleiria.tripPlanner.gui.GestaoEtapas;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
+import pt.ipleiria.tripPlanner.gui.Models.Viagem;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import pt.ipleiria.tripPlanner.gui.events.OkAssociarEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkAssociarEtapasClicadoListener;
 
@@ -16,7 +22,14 @@ import pt.ipleiria.tripPlanner.gui.events.OkAssociarEtapasClicadoListener;
  * @author DELL
  */
 public class AssociarEtapas extends javax.swing.JPanel {
+
     private List<OkAssociarEtapasClicadoListener> okAssociarEtapasClicadoListener;
+
+    private ArrayList<Participante> participantesModelList;
+    private DefaultListModel<Participante> modelP;
+
+    private ArrayList<Participante> associadosModelList;
+    private DefaultListModel<Participante> modelA;
 
     /**
      * Creates new form ReservarAlojamento
@@ -24,8 +37,20 @@ public class AssociarEtapas extends javax.swing.JPanel {
     public AssociarEtapas() {
         initComponents();
         this.okAssociarEtapasClicadoListener = new ArrayList<>();
+
+        participantesModelList = new ArrayList<>();
+        modelP = new DefaultListModel<>();
+        lstParticipantes.setCellRenderer(new CellRendererParticipante());
+
+        associadosModelList = new ArrayList<>();
+        modelA = new DefaultListModel<>();
+        lstAssociados.setCellRenderer(new CellRendererParticipante());
+
+        setModel();
+
+        lblAviso.setVisible(false);
     }
-    
+
     public synchronized void addOkAssociarEtapasClicadoListener(OkAssociarEtapasClicadoListener listener) {
         this.okAssociarEtapasClicadoListener.add(listener);
     }
@@ -50,43 +75,28 @@ public class AssociarEtapas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblAlojamentos = new javax.swing.JLabel();
-        lblReservas = new javax.swing.JLabel();
-        spAlojamentos = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        spReservas = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
-        btnAssociar = new javax.swing.JButton();
-        btnEliminarAssociacao = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnEliminar = new javax.swing.JButton();
+        btnAssociar = new javax.swing.JButton();
+        spReservas = new javax.swing.JScrollPane();
+        lstAssociados = new javax.swing.JList();
+        spAlojamentos = new javax.swing.JScrollPane();
+        lstParticipantes = new javax.swing.JList();
+        lblReservas = new javax.swing.JLabel();
+        lblAlojamentos = new javax.swing.JLabel();
+        btnAssociarUm = new javax.swing.JButton();
+        btnEliminarUm = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lblAviso = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
 
-        lblAlojamentos.setText("Participantes");
-
-        lblReservas.setText("Etapa");
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        spAlojamentos.setViewportView(jList1);
-
-        jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        spReservas.setViewportView(jList2);
-
-        btnAssociar.setText(">>");
-
-        btnEliminarAssociacao.setText("<<");
-
+        btnOk.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         btnOk.setText("Ok");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,58 +104,162 @@ public class AssociarEtapas extends javax.swing.JPanel {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
+
+        btnEliminar.setText("<<");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnAssociar.setText(">>");
+        btnAssociar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssociarActionPerformed(evt);
+            }
+        });
+
+        lstAssociados.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        spReservas.setViewportView(lstAssociados);
+
+        lstParticipantes.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        spAlojamentos.setViewportView(lstParticipantes);
+
+        lblReservas.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblReservas.setText("Associados:");
+
+        lblAlojamentos.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblAlojamentos.setText("Participantes:");
+
+        btnAssociarUm.setText(">");
+        btnAssociarUm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssociarUmActionPerformed(evt);
+            }
+        });
+
+        btnEliminarUm.setText("<");
+        btnEliminarUm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarUmActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(spAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEliminarUm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAssociar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAssociarUm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(spReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(lblAlojamentos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblReservas)
+                .addGap(39, 39, 39))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnAssociarUm)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAssociar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(btnEliminarUm)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEliminar)
+                .addGap(62, 62, 62))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblReservas)
+                            .addComponent(lblAlojamentos))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(spReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblAviso.setText("jLabel1");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAviso)
+                .addContainerGap(328, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAviso)
+                .addContainerGap())
+        );
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        jLabel2.setText("Associar Participante a Etapa");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(115, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(lblAlojamentos)
-                        .addGap(172, 172, 172)
-                        .addComponent(lblReservas))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(spAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAssociar)
-                            .addComponent(btnEliminarAssociacao))
-                        .addGap(37, 37, 37)
-                        .addComponent(spReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(btnOk)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnCancelar)))
-                .addGap(123, 123, 123))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(364, 364, 364)
+                            .addComponent(btnOk)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnCancelar)
+                            .addGap(25, 25, 25)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(116, 116, 116))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblReservas, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblAlojamentos))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(spAlojamentos)
-                            .addComponent(spReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnAssociar)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnEliminarAssociacao)))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnOk))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,16 +267,108 @@ public class AssociarEtapas extends javax.swing.JPanel {
         this.fireOkAssociarEtapasClicadoEvent();
     }//GEN-LAST:event_btnOkActionPerformed
 
+    private void btnAssociarUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarUmActionPerformed
+        if (lstParticipantes.getSelectedValuesList().size() != 1) {
+            lblAviso.setText("Tem que selecionar um participante");
+            lblAviso.setForeground(Color.red);
+            lblAviso.setVisible(true);
+        } else {
+            lblAviso.setVisible(false);
+            Participante p = (Participante) lstParticipantes.getSelectedValue();
+            modelA.addElement(p);
+            modelP.removeElement(p);
+            lstParticipantes.setModel(modelP);
+            lstAssociados.setModel(modelA);
+        }
+    }//GEN-LAST:event_btnAssociarUmActionPerformed
+
+    private void btnAssociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarActionPerformed
+        ArrayList<Participante> part = new ArrayList<>();
+        for (int i = 0; i < lstParticipantes.getModel().getSize(); i++) {
+            Participante p = modelP.get(i);
+            modelA.addElement(p);
+            part.add(p);
+        }
+
+        for (Participante p : part) {
+            modelP.removeElement(p);
+        }
+
+        lstAssociados.setModel(modelA);
+        lstParticipantes.setModel(modelP);
+    }//GEN-LAST:event_btnAssociarActionPerformed
+
+    private void btnEliminarUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUmActionPerformed
+        if (lstAssociados.getSelectedValuesList().size() != 1) {
+            lblAviso.setText("Tem que selecionar um participante");
+            lblAviso.setForeground(Color.red);
+            lblAviso.setVisible(true);
+        } else {
+            lblAviso.setVisible(false);
+            Participante p = (Participante) lstAssociados.getSelectedValue();
+            modelA.removeElement(p);
+            modelP.addElement(p);
+            lstParticipantes.setModel(modelP);
+            lstAssociados.setModel(modelA);
+        }
+    }//GEN-LAST:event_btnEliminarUmActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        ArrayList<Participante> part = new ArrayList<>();
+        for (int i = 0; i < lstAssociados.getModel().getSize(); i++) {
+            Participante p = modelA.get(i);
+            modelP.addElement(p);
+            part.add(p);
+        }
+
+        for (Participante p : part) {
+            modelA.removeElement(p);
+        }
+
+        lstAssociados.setModel(modelA);
+        lstParticipantes.setModel(modelP);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void setModel() {
+        participantesModelList = DadosAplicacao.getInstance().getParticipantes();
+        modelP = new DefaultListModel<>();
+        for (Participante p : participantesModelList) {
+            modelP.addElement(p);
+        }
+        lstParticipantes.setModel(modelP);
+
+        modelA = new DefaultListModel<>();
+        lstAssociados.setModel(modelA);
+    }
+    
+    public ArrayList<Participante> getLstAssociados() {
+        ArrayList<Participante> p = new ArrayList<>();
+
+        for (int i = 0; i < lstAssociados.getModel().getSize(); i++) {
+            p.add((Participante) lstAssociados.getModel().getElementAt(i));
+        }
+        return p;
+    }
+
+    public void setDados(Etapa etapa){
+        DadosAplicacao.getInstance().getEtapa(etapa).setParticipantes(getLstAssociados());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssociar;
+    private javax.swing.JButton btnAssociarUm;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEliminarAssociacao;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminarUm;
     private javax.swing.JButton btnOk;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAlojamentos;
+    private javax.swing.JLabel lblAviso;
     private javax.swing.JLabel lblReservas;
+    private javax.swing.JList lstAssociados;
+    private javax.swing.JList lstParticipantes;
     private javax.swing.JScrollPane spAlojamentos;
     private javax.swing.JScrollPane spReservas;
     // End of variables declaration//GEN-END:variables

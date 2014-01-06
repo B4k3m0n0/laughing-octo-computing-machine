@@ -21,6 +21,7 @@ public class Etapa {
     private int altitudeAcumulada;
     private int altitudeMaxima;
     private int altitudeMinima;
+    private ArrayList<Participante> participantes; 
 
     public Etapa(String designacao,String localInicio, String localidadeFinal, ArrayList<Localidade> listaLocalidades, int distanciaTotal, int altitudeAcumulada, int altitudeMaxima, int altitudeMinima) {
         this.designacao = designacao;
@@ -31,6 +32,7 @@ public class Etapa {
         this.altitudeAcumulada = altitudeAcumulada;
         this.altitudeMaxima = altitudeMaxima;
         this.altitudeMinima = altitudeMinima;
+        participantes = new ArrayList<>();
     }
 
     public String getDesignacao() {
@@ -63,6 +65,10 @@ public class Etapa {
 
     public int getAltitudeMinima() {
         return altitudeMinima;
+    }
+
+    public void setParticipantes(ArrayList<Participante> participantes) {
+        this.participantes = participantes;
     }
 
    

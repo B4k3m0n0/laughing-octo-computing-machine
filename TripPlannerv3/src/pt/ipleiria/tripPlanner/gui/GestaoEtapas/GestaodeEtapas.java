@@ -54,7 +54,7 @@ public class GestaodeEtapas extends javax.swing.JPanel {
         this.visualizarEtapasClicadoListener = new ArrayList<>();
         this.associarEtapasClicadoListener = new ArrayList<>();
         this.voltarMenuPrincipalListener = new ArrayList<>();
-        jList1.setCellRenderer((ListCellRenderer) new CellRendererEtapa());
+        lstEtapas.setCellRenderer((ListCellRenderer) new CellRendererEtapa());
         actualizarListaEtapas();
     }
 
@@ -113,7 +113,7 @@ public class GestaodeEtapas extends javax.swing.JPanel {
 
     protected synchronized void fireAssociarEtapasClicadoEvent() {
         for (AssociarEtapasClicadoListener listener : this.associarEtapasClicadoListener) {
-            AssociarEtapasClicadoEvent evento = new AssociarEtapasClicadoEvent(this);
+            AssociarEtapasClicadoEvent evento = new AssociarEtapasClicadoEvent(this, (Etapa) lstEtapas.getSelectedValue());
             listener.associarEtapasClicado(evento);
         }
     }
@@ -143,7 +143,7 @@ public class GestaodeEtapas extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lstEtapas = new javax.swing.JList();
         jbCriar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbEditar = new javax.swing.JButton();
@@ -158,12 +158,12 @@ public class GestaodeEtapas extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        lstEtapas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lstEtapas);
 
         jbCriar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/Inserir1.png"))); // NOI18N
         jbCriar.addActionListener(new java.awt.event.ActionListener() {
@@ -280,10 +280,17 @@ public class GestaodeEtapas extends javax.swing.JPanel {
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
+<<<<<<< .mine
+          if (lstEtapas.getSelectedIndex() != -1) {
+            Etapa etapaSelecionado = (Etapa) lstEtapas.getSelectedValue();
+            this.fireVisualizarEtapasClicadoEvent(etapaSelecionado);
+        }
+=======
           if (jList1.getSelectedIndex() != -1) {
             Etapa etapaSelecionado = (Etapa) jList1.getSelectedValue();
             this.fireVisualizarEtapasClicadoEvent(etapaSelecionado);
         }
+>>>>>>> .r3
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -296,7 +303,6 @@ public class GestaodeEtapas extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCriar;
     private javax.swing.JButton jbEditar;
@@ -304,6 +310,7 @@ public class GestaodeEtapas extends javax.swing.JPanel {
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbVoltar;
     private javax.swing.JLabel lblLocalidades;
+    private javax.swing.JList lstEtapas;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
 
@@ -312,7 +319,7 @@ public class GestaodeEtapas extends javax.swing.JPanel {
         for(Etapa etapa: DadosAplicacao.getInstance().getEtapas()){
             model.addElement(etapa);
         }        
-        jList1.setModel(model);
+        lstEtapas.setModel(model);
     }
 
 }

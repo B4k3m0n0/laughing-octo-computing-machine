@@ -9,9 +9,14 @@ import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererAlojamento;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererEtapa;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import pt.ipleiria.tripPlanner.gui.events.OkVisualizarViagensClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkVisualizarViagensClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.VisualizarViagensClicadoEvent;
@@ -23,14 +28,12 @@ import pt.ipleiria.tripPlanner.gui.events.VisualizarViagensClicadoListener;
  */
 public class VisualizarViagens extends javax.swing.JPanel {
 
-    
-
     private ArrayList<Etapa> etapasModelList;
     private ArrayList<Alojamento> alojamentosModelList;
-    
+    private ArrayList<Participante> participantesModelList;
     private DefaultListModel<Etapa> modelE;
     private DefaultListModel<Alojamento> modelA;
-    
+    private DefaultListModel<Participante> modelP;
     private List<VisualizarViagensClicadoListener> visualizarViagensClicadoListener;
     private List<OkVisualizarViagensClicadoListener> okVisualizarViagensClicadoListener;
 
@@ -39,18 +42,20 @@ public class VisualizarViagens extends javax.swing.JPanel {
      */
     public VisualizarViagens() {
         initComponents();
-        
+
         this.okVisualizarViagensClicadoListener = new ArrayList<>();
-        
+
         etapasModelList = new ArrayList<>();
         alojamentosModelList = new ArrayList<>();
-        
+        participantesModelList = new ArrayList<>();
+
         modelE = new DefaultListModel<>();
         modelA = new DefaultListModel<>();
-        
-        
+        modelP = new DefaultListModel<>();
+
+
     }
-    
+
     public synchronized void addOkVisualizarViagensClicadoListener(OkVisualizarViagensClicadoListener listener) {
         this.okVisualizarViagensClicadoListener.add(listener);
     }
@@ -213,8 +218,6 @@ public class VisualizarViagens extends javax.swing.JPanel {
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         this.fireOkVisualizarViagensClicadoEvent();
     }//GEN-LAST:event_btnOkActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel lblAlojamentos;
@@ -236,20 +239,33 @@ public class VisualizarViagens extends javax.swing.JPanel {
     public void setDados(Viagem viagem) {
         lblDesignacaoI.setText(DadosAplicacao.getInstance().getViagem(viagem).getDesignacao());
         lblTipoViagemI.setText(DadosAplicacao.getInstance().getViagem(viagem).getTipoViagem());
-        
+
+        participantesModelList = DadosAplicacao.getInstance().getViagem(viagem).getParticipantes();
+        modelP.clear();
+        lstParticipantes.setCellRenderer((ListCellRenderer) new CellRendererParticipante());
+        for (Participante p : participantesModelList) {
+            modelP.addElement(p);
+        }
+        lstParticipantes.setModel(modelP);
+        lstParticipantes.setEnabled(false);
+
+
         etapasModelList = DadosAplicacao.getInstance().getViagem(viagem).getEtapas();
-        modelE.clear();        
+        modelE.clear();
+        lstEtapas.setCellRenderer((ListCellRenderer) new CellRendererEtapa());
         for (Etapa e : etapasModelList) {
             modelE.addElement(e);
         }
         lstEtapas.setModel(modelE);
-        
+        lstEtapas.setEnabled(false);
+
         alojamentosModelList = DadosAplicacao.getInstance().getViagem(viagem).getAlojamentos();
-        modelA.clear();        
+        modelA.clear();
+        lstAlojamentos.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
         for (Alojamento a : alojamentosModelList) {
             modelA.addElement(a);
         }
         lstAlojamentos.setModel(modelA);
+        lstAlojamentos.setEnabled(false);
     }
-    
 }

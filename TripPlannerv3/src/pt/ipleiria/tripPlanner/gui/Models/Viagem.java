@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.ipleiria.tripPlanner.gui.Models;
 
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
  * @author Ricardo
  */
 public class Viagem {
+
     String designacao;
     ArrayList<Etapa> etapas;
     ArrayList<Alojamento> alojamentos;
@@ -24,7 +24,9 @@ public class Viagem {
         this.etapas = etapas;
         this.alojamentos = alojamentos;
         this.tipoViagem = tipoViagem;
-        
+
+        participantes = new ArrayList<Participante>();
+
     }
 
     public Viagem(String designacao, ArrayList<Etapa> etapas, ArrayList<Alojamento> alojamentos, String tipoViagem, ArrayList<Participante> participantes) {
@@ -34,8 +36,6 @@ public class Viagem {
         this.tipoViagem = tipoViagem;
         this.participantes = participantes;
     }
-    
-    
 
     public String getDesignacao() {
         return designacao;
@@ -57,4 +57,7 @@ public class Viagem {
         this.participantes = participantes;
     }
 
+    public ArrayList<Participante> getParticipantes() {
+        return participantes;
+    }
 }

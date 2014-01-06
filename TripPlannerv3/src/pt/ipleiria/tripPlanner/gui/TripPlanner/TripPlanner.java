@@ -7,7 +7,12 @@ import javax.swing.JPanel;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.AdicionarQuarto;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.CriarEditarAlojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.GestaodeAlojamentos;
+<<<<<<< .mine
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.MostrarAlojamento;
+import pt.ipleiria.tripPlanner.gui.GestaoEtapas.AssociarEtapas;
+=======
+import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.MostrarAlojamento;
+>>>>>>> .r3
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.GestaodeEtapas;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.InserirEditarEtapa;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.VisualizarEtapa;
@@ -134,8 +139,14 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     private AssociarViagens associarViagens;
     private GestaodeEtapas gestaodeEtapas;
     private InserirEditarEtapa inserirEditarEtapa;
+<<<<<<< .mine
     private VisualizarEtapa visualizarEtapa;
     private MostrarAlojamento mostrarAlojamento;
+    private AssociarEtapas associarEtapas;
+=======
+    private VisualizarEtapa visualizarEtapa;
+    private MostrarAlojamento mostrarAlojamento;
+>>>>>>> .r3
 
     /**
      * Creates new form TripPlanner
@@ -455,6 +466,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void associarEtapasClicado(AssociarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        associarEtapas.setDados(evt.getEtapa());
         cl.show(this.jPanel1, "associarEtapas");
     }
     

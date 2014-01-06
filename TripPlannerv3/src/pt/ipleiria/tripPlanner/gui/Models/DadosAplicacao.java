@@ -151,4 +151,13 @@ public class DadosAplicacao {
         }
         return null;
     }
+    
+    public Etapa getEtapa(Etapa etapa) {
+        for (Etapa e : etapas) {
+            if (e.equals(etapas)) {
+                return e;
+            }
+        }
+        return null;
+    }
 }

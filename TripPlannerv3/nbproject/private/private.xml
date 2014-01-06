@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/pt/ipleiria/tripPlanner/gui/GestaoViagens/AssociarViagens.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>442</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< .mine
+            <file>file:/E:/Users/Ricardo/Documents/Projecto%20Dint%202013_2014/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/Models/Viagem.java</file>
+            <file>file:/E:/Users/Ricardo/Documents/Projecto%20Dint%202013_2014/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoViagens/AssociarViagens.java</file>
+            <file>file:/E:/Users/Ricardo/Documents/Projecto%20Dint%202013_2014/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoViagens/GestaodeViagens.java</file>
+            <file>file:/E:/Users/Ricardo/Documents/Projecto%20Dint%202013_2014/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoViagens/InserirEditarViagens.java</file>
+=======
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/events/VisualizarAlojamentoClicadoEvent.java</file>
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoEtapas/VisualizarEtapa.java</file>
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/participantes/MenuParticipantes.java</file>
@@ -14,6 +29,7 @@
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/GestaoAlojamento/GestaodeAlojamentos.java</file>
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/Models/DadosAplicacao.java</file>
             <file>file:/C:/Users/DELL/Desktop/D.Int/trunk/TripPlannerv3/src/pt/ipleiria/tripPlanner/gui/Models/Alojamento.java</file>
+>>>>>>> .r3
         </group>
     </open-files>
 </project-private>

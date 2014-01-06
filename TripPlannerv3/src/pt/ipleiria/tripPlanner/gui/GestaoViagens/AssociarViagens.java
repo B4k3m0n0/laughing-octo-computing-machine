@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;
@@ -26,6 +27,10 @@ public class AssociarViagens extends javax.swing.JPanel {
 
     private ArrayList<Participante> participantesModelList;
     private DefaultListModel<Participante> modelP;
+    
+    private ArrayList<Participante> participantesEditor;
+    
+    private DefaultTableModel modelTable;
 
     private ArrayList<Participante> associadosModelList;
     private DefaultListModel<Participante> modelA;
@@ -45,9 +50,16 @@ public class AssociarViagens extends javax.swing.JPanel {
         modelA = new DefaultListModel<>();
         lstAssociados.setCellRenderer(new CellRendererParticipante());
 
+        associadosModelList =  new ArrayList<>();
+        
+        modelTable =  (DefaultTableModel) jTable1.getModel();
+        
         setModel();
         
         lblAviso.setVisible(false);
+        
+        jTable1.setFocusable(false);
+        jTable1.setRowSelectionAllowed(false);
         
     }
 
@@ -116,6 +128,8 @@ public class AssociarViagens extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblAviso = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -244,19 +258,50 @@ public class AssociarViagens extends javax.swing.JPanel {
 
         lblAviso.setText("jLabel2");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Participante", "Associado?", "Editor?"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(lblAviso)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(lblAviso)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -264,13 +309,14 @@ public class AssociarViagens extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel1)
                         .addGap(82, 82, 82))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -281,7 +327,7 @@ public class AssociarViagens extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -406,15 +452,35 @@ public class AssociarViagens extends javax.swing.JPanel {
 
         modelA = new DefaultListModel<>();
         lstAssociados.setModel(modelA);
+        
+        for (Participante p : participantesModelList){
+            modelTable.addRow(new Object[]{p.getNome(),false,false});
+        }
     }
 
     public ArrayList<Participante> getLstAssociados() {
         ArrayList<Participante> p = new ArrayList<>();
-
+/*
         for (int i = 0; i < lstAssociados.getModel().getSize(); i++) {
             p.add((Participante) lstAssociados.getModel().getElementAt(i));
         }
+*/        
+        for (int i = 0; i < modelTable.getRowCount(); i++){
+            if (modelTable.getValueAt(1, i).equals(true)){
+                p.add((Participante) modelTable.getValueAt(0, i));
+            }
+        }
         return p;
+    }
+    
+    public void setListaEditor(){
+        ArrayList<Participante> p = new ArrayList<>();
+        for (int i = 0; i < modelTable.getRowCount(); i++){
+            if (modelTable.getValueAt(2, i).equals(true)){
+                p.add((Participante) modelTable.getValueAt(0, i));
+            }
+        }
+        participantesEditor = p;
     }
 
     public void setDados(Viagem viagem){
@@ -431,6 +497,8 @@ public class AssociarViagens extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAviso;
     private javax.swing.JLabel lblParticipantes;
     private javax.swing.JLabel lblViagens;

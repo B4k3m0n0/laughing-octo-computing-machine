@@ -20,7 +20,6 @@ public class DadosAplicacao {
     public static DadosAplicacao getInstance() {
         return instance;
     }
-
     private ArrayList<Participante> participantes;
     private ArrayList<Viagem> viagens;
     private ArrayList<Etapa> etapas;
@@ -28,6 +27,7 @@ public class DadosAplicacao {
     private ArrayList<Localidade> localidades;
     private Participante logado;
     private ArrayList<Quarto> quartos;
+    private ArrayList<CenarioAlojamento> cenariosDeAlojamento;
 
     private DadosAplicacao() {
         participantes = new ArrayList<>();
@@ -36,7 +36,7 @@ public class DadosAplicacao {
         viagens = new ArrayList<>();
         quartos = new ArrayList<>();
         localidades = new ArrayList<>();
-
+        cenariosDeAlojamento = new ArrayList<>();
         criarDadosTeste();
     }
 
@@ -57,14 +57,14 @@ public class DadosAplicacao {
 
         Participante participante1;
 
-        participante1 = new Participante("Rafael", dataNascJoao, 12175988, "Leiria", 5, true, "rafa", pass.toCharArray(), true, permissoes, false);
+        participante1 = new Participante("Rafael", dataNascJoao, 12175988, "Leiria", 5, true, "rafa", pass.toCharArray(), false);
         adicionarParticipante(participante1);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy");
         String dataNasc = formatter.format(dataNascJoao.getTime());
 
         Participante participante2;
-        participante2 = new Participante("Andre", dataNascJoao, 14187566, "Leiria", 5, false, "14187566", dataNasc.toCharArray(), true, permissoes, true);
+        participante2 = new Participante("Andre", dataNascJoao, 14187566, "Leiria", 5, false, "14187566", dataNasc.toCharArray(), true);
         adicionarParticipante(participante2);
 
         Viagem viagem1;
@@ -135,6 +135,17 @@ public class DadosAplicacao {
         participantes.add(p);
     }
 
+    public void atualizarParticipante(Participante p) {
+        int indice = 0;
+        for (int i = 0; i < participantes.size(); i++) {
+            if (participantes.get(i).getBI() == p.getBI()) {
+                indice = i;
+                break;
+            }
+        }
+        participantes.set(indice, p);
+    }
+
     public ArrayList<Participante> getParticipantes() {
         return (ArrayList<Participante>) participantes.clone();
     }
@@ -154,6 +165,22 @@ public class DadosAplicacao {
             }
         }
         return null;
+    }
+
+    public ArrayList<CenarioAlojamento> getCenarioAlojamento() {
+        return cenariosDeAlojamento;
+    }
+
+    public void adicionarCenarioAlojamento(CenarioAlojamento cenarioAlojamento) {
+        cenariosDeAlojamento.add(cenarioAlojamento);
+    }
+
+    public void removerCenarioAlojamento(CenarioAlojamento cenarioAlojamentoSelected) {
+        for (CenarioAlojamento cenarioAlojamento : cenariosDeAlojamento) {
+            if (cenarioAlojamento == cenarioAlojamentoSelected) {
+                cenariosDeAlojamento.remove(cenarioAlojamento);
+            }
+        }
     }
     
     public Etapa getEtapa(Etapa etapa) {

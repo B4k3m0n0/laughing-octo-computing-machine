@@ -141,6 +141,11 @@ public class AssociarViagens extends javax.swing.JPanel {
 
         btnCancelar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -437,6 +442,10 @@ public class AssociarViagens extends javax.swing.JPanel {
             lstParticipantes.setModel(modelP);
         //}
     }//GEN-LAST:event_btnEliminarAssociacaoVariosActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void setModel() {
         participantesModelList = DadosAplicacao.getInstance().getParticipantes();

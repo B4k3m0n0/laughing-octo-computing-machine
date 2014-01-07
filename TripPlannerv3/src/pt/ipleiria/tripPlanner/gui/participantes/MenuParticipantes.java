@@ -1,5 +1,6 @@
 package pt.ipleiria.tripPlanner.gui.participantes;
 
+import java.awt.Color;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalListener;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Ricardo
@@ -31,12 +31,13 @@ public class MenuParticipantes extends javax.swing.JPanel {
     private List<EditarParticipantesClicadoListener> editarParticipantesClicadoListener;
     private List<VisualizarParticipantesClicadoListener> visualizarParticipantesClicadoListener;
     private List<VoltarMenuPrincipalListener> voltarMenuPrincipalListener;
+
     /**
      * Creates new form MenuParticipantes
      */
     public MenuParticipantes() {
         initComponents();
-        
+
         this.inserirParticipantesClicadoListener = new ArrayList<>();
         this.editarParticipantesClicadoListener = new ArrayList<>();
         this.visualizarParticipantesClicadoListener = new ArrayList<>();
@@ -45,65 +46,66 @@ public class MenuParticipantes extends javax.swing.JPanel {
         actualizarListaParticipantes();
     }
 
-    public synchronized void addInserirParticipantesClicadoListener(InserirParticipantesClicadoListener listener){
+    public synchronized void addInserirParticipantesClicadoListener(InserirParticipantesClicadoListener listener) {
         this.inserirParticipantesClicadoListener.add(listener);
     }
-    
-    public synchronized void removeInserirParticipantesClicadoListener(InserirParticipantesClicadoListener listener){
+
+    public synchronized void removeInserirParticipantesClicadoListener(InserirParticipantesClicadoListener listener) {
         this.inserirParticipantesClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireInserirParticipantesClicadoEvent(){
-        for(InserirParticipantesClicadoListener listener : this.inserirParticipantesClicadoListener){
-        InserirParticipantesClicadoEvent evento = new InserirParticipantesClicadoEvent(this);
-        listener.InserirParticipantesClicado(evento);
+    protected synchronized void fireInserirParticipantesClicadoEvent() {
+        for (InserirParticipantesClicadoListener listener : this.inserirParticipantesClicadoListener) {
+            InserirParticipantesClicadoEvent evento = new InserirParticipantesClicadoEvent(this);
+            listener.InserirParticipantesClicado(evento);
         }
     }
-    
-    public synchronized void addEditarParticipantesClicadoListener(EditarParticipantesClicadoListener listener){
+
+    public synchronized void addEditarParticipantesClicadoListener(EditarParticipantesClicadoListener listener) {
         this.editarParticipantesClicadoListener.add(listener);
     }
-    
-    public synchronized void removeEditarParticipantesClicadoListener(EditarParticipantesClicadoListener listener){
+
+    public synchronized void removeEditarParticipantesClicadoListener(EditarParticipantesClicadoListener listener) {
         this.editarParticipantesClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireEditarParticipantesClicadoEvent(){
-        for(EditarParticipantesClicadoListener listener : this.editarParticipantesClicadoListener){
-        EditarParticipantesClicadoEvent evento = new EditarParticipantesClicadoEvent(this);
-        listener.EditarParticipantesClicado(evento);
+    protected synchronized void fireEditarParticipantesClicadoEvent(Participante participante) {
+        for (EditarParticipantesClicadoListener listener : this.editarParticipantesClicadoListener) {
+            EditarParticipantesClicadoEvent evento = new EditarParticipantesClicadoEvent(this, participante);
+            listener.EditarParticipantesClicado(evento);
         }
     }
-    
-    public synchronized void addVisualizarParticipantesClicadoListener(VisualizarParticipantesClicadoListener listener){
+
+    public synchronized void addVisualizarParticipantesClicadoListener(VisualizarParticipantesClicadoListener listener) {
         this.visualizarParticipantesClicadoListener.add(listener);
     }
-    
-    public synchronized void removeVisualizarParticipantesClicadoListener(VisualizarParticipantesClicadoListener listener){
+
+    public synchronized void removeVisualizarParticipantesClicadoListener(VisualizarParticipantesClicadoListener listener) {
         this.visualizarParticipantesClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireVisualizarParticipantesClicadoEvent(Participante participanteSelecionado){
-        for(VisualizarParticipantesClicadoListener listener : this.visualizarParticipantesClicadoListener){
-        VisualizarParticipantesClicadoEvent evento = new VisualizarParticipantesClicadoEvent(this, participanteSelecionado);
-        listener.visualizarParticipantesClicado(evento);
+    protected synchronized void fireVisualizarParticipantesClicadoEvent(Participante participanteSelecionado) {
+        for (VisualizarParticipantesClicadoListener listener : this.visualizarParticipantesClicadoListener) {
+            VisualizarParticipantesClicadoEvent evento = new VisualizarParticipantesClicadoEvent(this, participanteSelecionado);
+            listener.visualizarParticipantesClicado(evento);
         }
     }
-    
-    public synchronized void addVoltarMenuPrincipalListener(VoltarMenuPrincipalListener listener){
+
+    public synchronized void addVoltarMenuPrincipalListener(VoltarMenuPrincipalListener listener) {
         this.voltarMenuPrincipalListener.add(listener);
     }
-    
-    public synchronized void removeVoltarMenuPrincipalListener(VoltarMenuPrincipalListener listener){
+
+    public synchronized void removeVoltarMenuPrincipalListener(VoltarMenuPrincipalListener listener) {
         this.voltarMenuPrincipalListener.remove(listener);
     }
 
-    protected synchronized void fireVoltarMenuPrincipalEvent(){
-        for(VoltarMenuPrincipalListener listener : this.voltarMenuPrincipalListener){
-        VoltarMenuPrincipalEvent evento = new VoltarMenuPrincipalEvent(this);
-        listener.voltarMenuPrincipal(evento);
+    protected synchronized void fireVoltarMenuPrincipalEvent() {
+        for (VoltarMenuPrincipalListener listener : this.voltarMenuPrincipalListener) {
+            VoltarMenuPrincipalEvent evento = new VoltarMenuPrincipalEvent(this);
+            listener.voltarMenuPrincipal(evento);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,14 +126,24 @@ public class MenuParticipantes extends javax.swing.JPanel {
         lblParticipantes = new javax.swing.JLabel();
         lblLocalidades = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        lblErro = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         tfPesquisar.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        tfPesquisar.setText("Pesquisar");
+        tfPesquisar.setForeground(new java.awt.Color(153, 153, 153));
+        tfPesquisar.setText("Pesquise...");
         tfPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPesquisarActionPerformed(evt);
+            }
+        });
+        tfPesquisar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfPesquisarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfPesquisarFocusLost(evt);
             }
         });
         tfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -170,7 +182,6 @@ public class MenuParticipantes extends javax.swing.JPanel {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/editar.png"))); // NOI18N
         btnEditar.setToolTipText("Editar Participante");
-        btnEditar.setEnabled(false);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -191,6 +202,9 @@ public class MenuParticipantes extends javax.swing.JPanel {
         lblLocalidades.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblLocalidades.setText("Lista de Participantes:");
 
+        lblErro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblErro.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,13 +213,6 @@ public class MenuParticipantes extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(76, 76, 76)
-                            .addComponent(lblLocalidades)
-                            .addGap(159, 159, 159))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(34, 34, 34))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
@@ -218,12 +225,20 @@ public class MenuParticipantes extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnVisualizar)
-                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(76, 76, 76)
+                                    .addComponent(lblLocalidades))
+                                .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(101, 101, 101)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(lblParticipantes))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 37, Short.MAX_VALUE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblErro, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,13 +254,15 @@ public class MenuParticipantes extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(spListaParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVisualizar))
-                .addGap(17, 17, 17)
+                .addGap(4, 4, 4)
+                .addComponent(lblErro, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdicionar))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -254,15 +271,22 @@ public class MenuParticipantes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        this.fireEditarParticipantesClicadoEvent();
+        if (lstPesquisa.getSelectedIndex() != -1) {
+            Participante participanteSelecionado = (Participante) lstPesquisa.getSelectedValue();
+            this.fireEditarParticipantesClicadoEvent(participanteSelecionado);
+        } else {
+            lblErro.setText("Têm de selecionar um participante!");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
-        if(lstPesquisa.getSelectedIndex() != -1){
+        if (lstPesquisa.getSelectedIndex() != -1) {
             Participante participanteSelecionado = (Participante) lstPesquisa.getSelectedValue();
             this.fireVisualizarParticipantesClicadoEvent(participanteSelecionado);
+        } else {
+            lblErro.setText("Têm de selecionar um participante!");
         }
-        
+
     }//GEN-LAST:event_btnVisualizarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -270,23 +294,42 @@ public class MenuParticipantes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void tfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPesquisarActionPerformed
-        
     }//GEN-LAST:event_tfPesquisarActionPerformed
 
     private void filtro(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtro
 
-        
-        DefaultListModel<Participante> model =  new DefaultListModel<>();
+
+        DefaultListModel<Participante> model = new DefaultListModel<>();
         model.clear();
         String filtro = tfPesquisar.getText();
-        for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
-             if(participante.getNome().contains(filtro))
-                 model.addElement(participante);
+        for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
+            if (participante.getNome().contains(filtro)) {
+                model.addElement(participante);
+            }
         }
-        
+
         lstPesquisa.setModel(model);
     }//GEN-LAST:event_filtro
 
+    private void tfPesquisarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPesquisarFocusGained
+        tfPesquisar.setText("");
+        tfPesquisar.setForeground(Color.black);
+    }//GEN-LAST:event_tfPesquisarFocusGained
+
+    private void tfPesquisarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPesquisarFocusLost
+        tfPesquisar.setText("Pesquise...");
+        tfPesquisar.setForeground(Color.GRAY);
+    }//GEN-LAST:event_tfPesquisarFocusLost
+
+    public void actualizarListaParticipantes() {
+
+        DefaultListModel<Participante> model = new DefaultListModel<>();
+        for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
+            model.addElement(participante);
+        }
+
+        lstPesquisa.setModel(model);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnEditar;
@@ -294,20 +337,11 @@ public class MenuParticipantes extends javax.swing.JPanel {
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblErro;
     private javax.swing.JLabel lblLocalidades;
     private javax.swing.JLabel lblParticipantes;
     private javax.swing.JList lstPesquisa;
     private javax.swing.JScrollPane spListaParticipantes;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
-
-    public void actualizarListaParticipantes() {
-        
-        DefaultListModel<Participante> model =  new DefaultListModel<>();
-        for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
-            model.addElement(participante);
-        }
-        
-        lstPesquisa.setModel(model);
-    }
 }

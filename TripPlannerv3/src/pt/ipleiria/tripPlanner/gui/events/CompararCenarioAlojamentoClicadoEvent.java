@@ -4,7 +4,9 @@
  */
 package pt.ipleiria.tripPlanner.gui.events;
 
+import java.util.ArrayList;
 import java.util.EventObject;
+import pt.ipleiria.tripPlanner.gui.Models.CenarioAlojamento;
 
 /**
  *
@@ -12,10 +14,14 @@ import java.util.EventObject;
  */
 public class CompararCenarioAlojamentoClicadoEvent extends EventObject{
     
-
-    public CompararCenarioAlojamentoClicadoEvent(Object source){
+    ArrayList<CenarioAlojamento> cenariosAlojamento;
+    public CompararCenarioAlojamentoClicadoEvent(Object source, ArrayList<CenarioAlojamento> cenariosSelected){
         super(source);
-        
+        cenariosAlojamento = cenariosSelected;
+    }
+    
+    public ArrayList<CenarioAlojamento> getCenariosSelected(){
+        return cenariosAlojamento;
     }
     
 }

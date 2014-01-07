@@ -12,10 +12,14 @@ import java.util.EventObject;
  */
 public class InserirParticipantesClicadoEvent extends EventObject{
     
-
+    String string = "Inserir Participante";
     public InserirParticipantesClicadoEvent(Object source){
         super(source);
         
+    }
+    
+    public String getString(){
+        return string;
     }
     
 }

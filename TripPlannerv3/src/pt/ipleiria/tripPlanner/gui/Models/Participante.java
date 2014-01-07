@@ -21,11 +21,9 @@ public class Participante {
     private boolean administrador;
     private String username;
     private char[] password;
-    private boolean editor;
-    private ArrayList<String> permissoes;
     private boolean primeiroLogin;
 
-    public Participante(String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean editor, ArrayList<String> permissoes, boolean primeiroLogin) {
+    public Participante(String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean primeiroLogin) {
 
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -36,12 +34,7 @@ public class Participante {
         this.username = username;
         this.password = password;
         this.primeiroLogin = primeiroLogin;
-        this.editor = editor;
-        if (editor == true) {
-            for (int i = 0; i < permissoes.size(); i++) {
-                this.permissoes.add(permissoes.get(i));
-            }
-        }
+        
     }
 
     public void setPrimeiroLogin(boolean primeiroLogin) {
@@ -84,14 +77,6 @@ public class Participante {
         return password;
     }
 
-    public boolean isEditor() {
-        return editor;
-    }
-
-    public ArrayList<String> getPermissoes() {
-        return permissoes;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -122,13 +107,5 @@ public class Participante {
 
     public void setPassword(char[] password) {
         this.password = password;
-    }
-
-    public void setEditor(boolean editor) {
-        this.editor = editor;
-    }
-
-    public void setPermissoes(ArrayList<String> permissoes) {
-        this.permissoes = permissoes;
     }
 }

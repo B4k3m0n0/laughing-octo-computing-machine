@@ -8,6 +8,12 @@ package pt.ipleiria.tripPlanner.gui.cenario;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.ListCellRenderer;
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
+import pt.ipleiria.tripPlanner.gui.Models.CenarioAlojamento;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererAlojamento;
 import pt.ipleiria.tripPlanner.gui.events.OkEditarCenarioAlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkEditarCenarioAlojamentoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.OkInserirCenarioAlojamentoClicadoEvent;
@@ -20,7 +26,12 @@ import pt.ipleiria.tripPlanner.gui.events.OkInserirCenarioAlojamentoClicadoListe
 public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
 
     private List<OkInserirCenarioAlojamentoClicadoListener> okInserirCenarioAlojamentoClicadoListener;
-//    private List<OkEditarCenarioAlojamentoClicadoListener> okEditarCenarioAlojamentoClicadoListener;
+    
+    private ArrayList<Alojamento> alojamentoModelList;
+    private DefaultListModel<Alojamento> modelA;
+
+    private ArrayList<Alojamento> reservasModelList;
+    private DefaultListModel<Alojamento> modelR;
     
     /**
      * Creates new form CriarCenarioAlojamento
@@ -28,7 +39,19 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
     public CriarEditarCenarioAlojamento() {
         initComponents();
         this.okInserirCenarioAlojamentoClicadoListener = new ArrayList<>();
-//        this.okEditarCenarioAlojamentoClicadoListener = new ArrayList<>();
+
+        alojamentoModelList = new ArrayList<>();
+        modelA = new DefaultListModel<>();
+        
+        reservasModelList = new ArrayList<>();
+        modelA = new DefaultListModel<>();
+        
+        lstAlojamentos.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
+        lstReservas.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
+        
+        setModel();
+
+        lblAviso.setVisible(false);
     }
     
         public synchronized void addOkInserirCenarioAlojamentoClicadoListener(OkInserirCenarioAlojamentoClicadoListener listener) {
@@ -70,129 +93,371 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lReservas = new javax.swing.JList();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lCenario = new javax.swing.JList();
-        btnAdicionar = new javax.swing.JButton();
-        btnRemover = new javax.swing.JButton();
-        btnOk = new javax.swing.JButton();
-        lblReservas = new javax.swing.JLabel();
-        lblCenario = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        btnOk = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnEliminarAssociacaoVarios = new javax.swing.JButton();
+        btnAssociarVarios = new javax.swing.JButton();
+        spViagens = new javax.swing.JScrollPane();
+        lstReservas = new javax.swing.JList();
+        spParticipantes = new javax.swing.JScrollPane();
+        lstAlojamentos = new javax.swing.JList();
+        lblViagens = new javax.swing.JLabel();
+        lblParticipantes = new javax.swing.JLabel();
+        btnAssociarUm = new javax.swing.JButton();
+        btnEliminarAssociacaoUm = new javax.swing.JButton();
+        lblAviso = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tfDesignacao = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lReservas.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(lReservas);
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        jLabel1.setText("Criar/Editar Cenarios de Alojamento");
 
-        lCenario.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(lCenario);
-
-        btnAdicionar.setText(">>");
-
-        btnRemover.setText("<<");
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
-        btnOk.setText("Ok");
+        btnOk.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        btnOk.setText("Criar");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });
 
-        lblReservas.setText("Reservas");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblCenario.setText("Cenário");
+        btnEliminarAssociacaoVarios.setText("<<");
+        btnEliminarAssociacaoVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAssociacaoVariosActionPerformed(evt);
+            }
+        });
 
-        btnCancelar.setText("Cancelar");
+        btnAssociarVarios.setText(">>");
+        btnAssociarVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssociarVariosActionPerformed(evt);
+            }
+        });
+
+        lstReservas.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lstReservas.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        spViagens.setViewportView(lstReservas);
+
+        lstAlojamentos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lstAlojamentos.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        spParticipantes.setViewportView(lstAlojamentos);
+
+        lblViagens.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblViagens.setText("sdfghgd");
+
+        lblParticipantes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblParticipantes.setText("Reservas:");
+
+        btnAssociarUm.setText(">");
+        btnAssociarUm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssociarUmActionPerformed(evt);
+            }
+        });
+
+        btnEliminarAssociacaoUm.setText("<");
+        btnEliminarAssociacaoUm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAssociacaoUmActionPerformed(evt);
+            }
+        });
+
+        lblAviso.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        lblAviso.setForeground(new java.awt.Color(255, 0, 0));
+        lblAviso.setText("jLabel2");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblParticipantes)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(spParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnEliminarAssociacaoUm, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAssociarUm, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAssociarVarios)
+                                    .addComponent(btnEliminarAssociacaoVarios))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblViagens)
+                            .addComponent(spViagens, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(lblAviso, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(41, 41, 41))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblParticipantes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(spParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblViagens)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spViagens))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnAssociarUm)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAssociarVarios)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnEliminarAssociacaoUm)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminarAssociacaoVarios)
+                                .addGap(31, 31, 31)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblAviso))
+        );
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setText("Designacao:");
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("Etapas:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblReservas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblCenario)
-                        .addGap(130, 130, 130))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnOk)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(93, 93, 93))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(btnOk)
-                .addGap(27, 27, 27)
-                .addComponent(btnCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(144, 144, 144)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfDesignacao, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblReservas)
-                    .addComponent(lblCenario))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(btnAdicionar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRemover)))
-                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOk)
-                    .addComponent(btnCancelar))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(tfDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnOk))
+                .addGap(43, 43, 43))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRemoverActionPerformed
-
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        
+        if (tfDesignacao.getText().isEmpty()) {
+            lblAviso.setText("Introduza uma designacao!");
+            return;
+        }
+
+        for (Alojamento alojamento : DadosAplicacao.getInstance().getAlojamentos()) {
+            if (tfDesignacao.getText().equals(alojamento.getDesignacao())) {
+                lblAviso.setText("Designacao já existente!");
+                return;
+            }
+        }
+        
+        if(lstReservas.getModel().getSize() < 0){
+            lblAviso.setText("Reserve pelo menos um alojamento");
+            return;
+        }
+        
+        for (int i = 0; i < lstReservas.getModel().getSize(); i++) {
+                Alojamento alojamento = (Alojamento) lstReservas.getModel().getElementAt(i);
+                reservasModelList.add(alojamento);
+        }
+        
+        CenarioAlojamento cenarioAlojamento = new CenarioAlojamento(tfDesignacao.getText(), reservasModelList);
+        DadosAplicacao.getInstance().adicionarCenarioAlojamento(cenarioAlojamento);
+        
+        limparCampos();
+        
         this.fireOkInserirCenarioAlojamentoClicadoEvent();
     }//GEN-LAST:event_btnOkActionPerformed
 
+    private void btnEliminarAssociacaoVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAssociacaoVariosActionPerformed
+        if (lstAlojamentos.getModel().getSize() < 0) {
+            lblAviso.setText("Não há mais alojamentos para passar!");
+        } else {
+            for (int i = 0; i < lstReservas.getModel().getSize(); i++) {
+                Alojamento r = (Alojamento) lstReservas.getModel().getElementAt(i);
+                modelA.addElement(r);
+            }
+            modelR.removeAllElements();
+            lstAlojamentos.setModel(modelA);
+            lstReservas.setModel(modelR);
+        }
+    }//GEN-LAST:event_btnEliminarAssociacaoVariosActionPerformed
 
+    private void btnAssociarVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarVariosActionPerformed
+        if (lstAlojamentos.getModel().getSize() < 0) {
+            lblAviso.setText("Não há mais alojamentos para passar!");
+        } else {
+            for (int i = 0; i < lstAlojamentos.getModel().getSize(); i++) {
+                Alojamento a = (Alojamento) lstAlojamentos.getModel().getElementAt(i);
+                modelR.addElement(a);
+            }
+            modelA.removeAllElements();
+            lstAlojamentos.setModel(modelA);
+            lstReservas.setModel(modelR);
+        }
+    }//GEN-LAST:event_btnAssociarVariosActionPerformed
+
+    private void btnAssociarUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarUmActionPerformed
+        if (lstAlojamentos.getSelectedValuesList().size() != 1) {
+            lblAviso.setText("Apenas pode ter um alojamento selecionado");
+        } else {
+            Alojamento a = (Alojamento) lstAlojamentos.getSelectedValue();
+            modelR.addElement(a);
+            modelA.removeElement(a);
+            lstAlojamentos.setModel(modelA);
+            lstReservas.setModel(modelR);
+        }
+    }//GEN-LAST:event_btnAssociarUmActionPerformed
+
+    private void btnEliminarAssociacaoUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAssociacaoUmActionPerformed
+        if (lstReservas.getSelectedValuesList().size() != 1) {
+            lblAviso.setText("Selecione apenas um alojamento");
+        } else {
+            Alojamento a = (Alojamento) lstReservas.getSelectedValue();
+            modelR.removeElement(a);
+            modelA.addElement(a);
+            lstAlojamentos.setModel(modelA);
+            lstReservas.setModel(modelR);
+        }
+    }//GEN-LAST:event_btnEliminarAssociacaoUmActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limparCampos();
+        this.fireOkInserirCenarioAlojamentoClicadoEvent();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+
+    private void setModel() {
+        alojamentoModelList = DadosAplicacao.getInstance().getAlojamentos();
+        modelA = new DefaultListModel<>();
+        for (Alojamento a : alojamentoModelList) {
+            modelA.addElement(a);
+        }
+        lstAlojamentos.setModel(modelA);
+
+        modelR = new DefaultListModel<>();
+        lstReservas.setModel(modelR);
+    }
+    
+    public void preencherCampos(CenarioAlojamento cenarioAlojamento){
+        tfDesignacao.setText(cenarioAlojamento.getDesignacao());
+        DefaultListModel<Alojamento> model = new DefaultListModel();
+        ArrayList<Alojamento> listaAlojamentos= cenarioAlojamento.getAlojamentos();
+        for(Alojamento alojamento: listaAlojamentos){
+            model.addElement(alojamento);
+        }
+        
+        lstReservas.setModel(model);
+    }
+    
+    public void setTitulo(String string) {
+        jLabel1.setText(string);
+    }
+    
+    public void limparCampos(){
+        tfDesignacao.setText("");
+        setModel();
+        modelR.removeAllElements();
+        lstReservas.setModel(modelR);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnAssociarUm;
+    private javax.swing.JButton btnAssociarVarios;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEliminarAssociacaoUm;
+    private javax.swing.JButton btnEliminarAssociacaoVarios;
     private javax.swing.JButton btnOk;
-    private javax.swing.JButton btnRemover;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList lCenario;
-    private javax.swing.JList lReservas;
-    private javax.swing.JLabel lblCenario;
-    private javax.swing.JLabel lblReservas;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblAviso;
+    private javax.swing.JLabel lblParticipantes;
+    private javax.swing.JLabel lblViagens;
+    private javax.swing.JList lstAlojamentos;
+    private javax.swing.JList lstReservas;
+    private javax.swing.JScrollPane spParticipantes;
+    private javax.swing.JScrollPane spViagens;
+    private javax.swing.JTextField tfDesignacao;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,10 @@ package pt.ipleiria.tripPlanner.gui.cenario;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.ListCellRenderer;
+import pt.ipleiria.tripPlanner.gui.Models.CenarioAlojamento;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererCenarioAlojamento;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.OkInserirCenarioAlojamentoClicadoEvent;
@@ -27,7 +31,11 @@ public class CompararCenarioAlojamento extends javax.swing.JPanel {
         initComponents();
         
         this.okInserirCenarioAlojamentoClicadoListener = new ArrayList<>();
+        lCenarioAlojamento1.setCellRenderer((ListCellRenderer) new CellRendererCenarioAlojamento());
+        lCenarioAlojamento2.setCellRenderer((ListCellRenderer) new CellRendererCenarioAlojamento());
     }
+    
+    
         public synchronized void addOkInserirCenarioAlojamentoClicadoListener(OkInserirCenarioAlojamentoClicadoListener listener) {
         this.okInserirCenarioAlojamentoClicadoListener.add(listener);
     }
@@ -54,22 +62,27 @@ public class CompararCenarioAlojamento extends javax.swing.JPanel {
 
         lblCenarioAlojamento = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lCenarioAlojamento = new javax.swing.JList();
+        lCenarioAlojamento2 = new javax.swing.JList();
         btnOk = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         lCenarioAlojamento1 = new javax.swing.JList();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lblCenarioAlojamento.setText("Comparar Cenario Alojamento");
+        lblCenarioAlojamento.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        lblCenarioAlojamento.setText("Comparar Cenarios de Alojamento");
 
-        lCenarioAlojamento.setModel(new javax.swing.AbstractListModel() {
+        lCenarioAlojamento2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(lCenarioAlojamento);
+        jScrollPane1.setViewportView(lCenarioAlojamento2);
 
+        btnOk.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnOk.setText("Ok");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,38 +97,56 @@ public class CompararCenarioAlojamento extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(lCenarioAlojamento1);
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setText("Cenario XPTO");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setText("Cenarios PTOX");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(lblCenarioAlojamento))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(btnOk)))
+                .addGap(234, 234, 234)
+                .addComponent(btnOk)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(44, 44, 44))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblCenarioAlojamento))
+                    .addComponent(jSeparator1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addComponent(lblCenarioAlojamento)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addComponent(btnOk)
-                .addGap(21, 21, 21))
+                .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,13 +154,41 @@ public class CompararCenarioAlojamento extends javax.swing.JPanel {
         this.fireOkInserirCenarioAlojamentoClicadoEvent();
     }//GEN-LAST:event_btnOkActionPerformed
 
+    public void preencherCampos(ArrayList<CenarioAlojamento> cenariosAlojamento){
+
+        int i=0;
+        for(CenarioAlojamento cenarioSelected : cenariosAlojamento){
+            if(i==0){
+                jLabel1.setText("Cenario " + cenarioSelected.getDesignacao() + ":");
+                ArrayList<CenarioAlojamento> alojamentosReservados = cenarioSelected.getAlojamentos();
+                DefaultListModel model1 = new DefaultListModel();
+                for(CenarioAlojamento alojamentosCenario1 : alojamentosReservados){
+                    model1.addElement(alojamentosCenario1);
+                }
+                    lCenarioAlojamento1.setModel(model1);
+                    i++;
+            }else{
+                jLabel2.setText("Cenario " + cenarioSelected.getDesignacao() + ":");
+                ArrayList<CenarioAlojamento> alojamentosReservados = cenarioSelected.getAlojamentos();
+                DefaultListModel model2 = new DefaultListModel();
+                for(CenarioAlojamento alojamentosCenario2 : alojamentosReservados){
+                    model2.addElement(alojamentosCenario2);
+                }
+                    lCenarioAlojamento2.setModel(model2);
+            }
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList lCenarioAlojamento;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList lCenarioAlojamento1;
+    private javax.swing.JList lCenarioAlojamento2;
     private javax.swing.JLabel lblCenarioAlojamento;
     // End of variables declaration//GEN-END:variables
 }

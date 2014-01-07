@@ -113,6 +113,7 @@ public class Login extends javax.swing.JPanel {
         add(btnLogin);
         btnLogin.setBounds(290, 324, 65, 25);
 
+        tfUsername.setText("rafa");
         tfUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 EnterPressed(evt);
@@ -121,6 +122,7 @@ public class Login extends javax.swing.JPanel {
         add(tfUsername);
         tfUsername.setBounds(249, 211, 196, 20);
 
+        pfPassword.setText("1234");
         pfPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pfPasswordActionPerformed(evt);

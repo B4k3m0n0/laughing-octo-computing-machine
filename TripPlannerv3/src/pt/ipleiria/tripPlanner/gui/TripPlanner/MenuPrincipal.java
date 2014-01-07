@@ -215,7 +215,6 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnCenarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/cenario.png"))); // NOI18N
         btnCenarios.setToolTipText("Cenários");
         btnCenarios.setContentAreaFilled(false);
-        btnCenarios.setEnabled(false);
         btnCenarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCenariosActionPerformed(evt);

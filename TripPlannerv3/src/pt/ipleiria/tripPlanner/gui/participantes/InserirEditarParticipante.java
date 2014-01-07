@@ -2,9 +2,11 @@ package pt.ipleiria.tripPlanner.gui.participantes;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoEvent;
@@ -21,9 +23,10 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
 public class InserirEditarParticipante extends javax.swing.JPanel {
 
     private List<ConfirmarClicadoListener> confirmarClicadoListener;
-    private DefaultListModel<String> modelPermissoesUtilizador;
-    private DefaultListModel<String> modelPermissoes;
-    private ArrayList<String> permissoesUtilizador;
+//    private DefaultListModel<String> modelPermissoesUtilizador;
+//    private DefaultListModel<String> modelPermissoes;
+//    private ArrayList<String> permissoesUtilizador;
+    private Participante participante;
 
     /**
      * Creates new form InserirParticipante
@@ -32,16 +35,16 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         initComponents();
 
         this.confirmarClicadoListener = new ArrayList<>();
-        this.modelPermissoesUtilizador = new DefaultListModel<>();
-        this.modelPermissoes = new DefaultListModel<String>();
-        modelPermissoes.addElement("Localidades");
-        modelPermissoes.addElement("Viagens");
-        modelPermissoes.addElement("Etapas");
-        modelPermissoes.addElement("Alojamentos");
-        modelPermissoes.addElement("Participantes");
-        permissoesUtilizador = new ArrayList<>();
-        
-        lstPermissoes.setModel(modelPermissoes);
+//        this.modelPermissoesUtilizador = new DefaultListModel<>();
+//        this.modelPermissoes = new DefaultListModel<String>();
+//        modelPermissoes.addElement("Localidades");
+//        modelPermissoes.addElement("Viagens");
+//        modelPermissoes.addElement("Etapas");
+//        modelPermissoes.addElement("Alojamentos");
+//        modelPermissoes.addElement("Participantes");
+//        permissoesUtilizador = new ArrayList<>();
+
+//        lstPermissoes.setModel(modelPermissoes);
 
     }
 
@@ -83,29 +86,14 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         lblNome = new javax.swing.JLabel();
         cbICF = new javax.swing.JComboBox();
         lblCondicaoFisica = new javax.swing.JLabel();
-        lblNomeErro = new javax.swing.JLabel();
-        lblDataErro = new javax.swing.JLabel();
-        lblBIErro = new javax.swing.JLabel();
-        lblLocalidadeErro = new javax.swing.JLabel();
-        lblICFErro = new javax.swing.JLabel();
+        lblErros1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        cbEditor = new javax.swing.JCheckBox();
         cbAdministrador = new javax.swing.JCheckBox();
         panelAdmin = new javax.swing.JPanel();
         pfPassword = new javax.swing.JPasswordField();
         lblPassword = new javax.swing.JLabel();
         tfUsername = new javax.swing.JTextField();
         lblUsername = new javax.swing.JLabel();
-        panelEditor = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lstPermissoesUtilizador = new javax.swing.JList();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstPermissoes = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        lblEditorErro = new javax.swing.JLabel();
         lblAdminErro = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -129,7 +117,7 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
-        jLabel2.setText("Inserir Participantes");
+        jLabel2.setText("Inserir/Editar Participantes");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Pessoais"));
@@ -151,51 +139,45 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         lblCondicaoFisica.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCondicaoFisica.setText("*Indice Condicao Fisica:");
 
-        lblNomeErro.setForeground(new java.awt.Color(204, 0, 0));
+        lblErros1.setForeground(new java.awt.Color(204, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblLocalidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tfLocalidade))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblBI)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfBilheteIdentidade, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblDataNascimento)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblCondicaoFisica)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbICF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDataErro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblBIErro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblLocalidadeErro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblICFErro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblBI)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tfBilheteIdentidade, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblCondicaoFisica)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbICF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(14, 14, 14))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(lblNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(lblNomeErro, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(lblErros1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,49 +186,29 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
                     .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
-                .addComponent(lblNomeErro)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(lblDataErro)
-                        .addGap(34, 34, 34)
-                        .addComponent(lblBIErro)
-                        .addGap(40, 40, 40)
-                        .addComponent(lblLocalidadeErro, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(lblICFErro, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDataNascimento)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblBI)
-                            .addComponent(tfBilheteIdentidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLocalidade)
-                            .addComponent(tfLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCondicaoFisica)
-                            .addComponent(cbICF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblDataNascimento)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBI)
+                    .addComponent(tfBilheteIdentidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLocalidade)
+                    .addComponent(tfLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCondicaoFisica)
+                    .addComponent(cbICF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(lblErros1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Permissões"));
-
-        cbEditor.setBackground(new java.awt.Color(255, 255, 255));
-        cbEditor.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        cbEditor.setText("Editor");
-        cbEditor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEditorActionPerformed(evt);
-            }
-        });
 
         cbAdministrador.setBackground(new java.awt.Color(255, 255, 255));
         cbAdministrador.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -300,92 +262,6 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelEditor.setBackground(new java.awt.Color(255, 255, 255));
-        panelEditor.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Permissões de Editor"));
-        panelEditor.setEnabled(false);
-
-        lstPermissoesUtilizador.setEnabled(false);
-        jScrollPane2.setViewportView(lstPermissoesUtilizador);
-
-        lstPermissoes.setEnabled(false);
-        jScrollPane1.setViewportView(lstPermissoes);
-
-        jButton1.setText(">>");
-        jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("<<");
-        jButton2.setEnabled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText(">");
-        jButton3.setEnabled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("<");
-        jButton4.setEnabled(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelEditorLayout = new javax.swing.GroupLayout(panelEditor);
-        panelEditor.setLayout(panelEditorLayout);
-        panelEditorLayout.setHorizontalGroup(
-            panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEditorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEditorLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblEditorErro))
-                    .addGroup(panelEditorLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelEditorLayout.setVerticalGroup(
-            panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEditorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelEditorLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addGap(20, 20, 20)))
-                .addGap(16, 16, 16)
-                .addComponent(lblEditorErro))
-        );
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -393,19 +269,13 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbAdministrador)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(panelEditor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbAdministrador)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(cbEditor)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblAdminErro, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 4, Short.MAX_VALUE))
+                                .addGap(57, 57, 57)
+                                .addComponent(lblAdminErro, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 77, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(panelAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -416,17 +286,11 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbAdministrador)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(cbEditor))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAdminErro, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelEditor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAdminErro, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(232, 232, 232))
         );
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
@@ -436,28 +300,24 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnOk)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar)
-                .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnOk)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar)))
                 .addGap(35, 35, 35))
             .addGroup(layout.createSequentialGroup()
+                .addGap(195, 195, 195)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -469,16 +329,16 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(165, 165, 165)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCancelar)
-                            .addComponent(btnOk)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator1)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnCancelar)
+                                .addComponent(btnOk)))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -486,34 +346,41 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
 
 
         if (tfNome.getText().isEmpty()) {
-            lblNomeErro.setText("Introduza um nome!");
+            lblErros1.setText("Introduza um nome!");
             return;
         }
 
         if (jDateChooser2 == null) {
-            lblDataErro.setText("Introduza uma Data de Nascimento!");
+            lblErros1.setText("Introduza uma Data de Nascimento!");
             return;
         }
 
         if (tfBilheteIdentidade.getText().isEmpty()) {
-            lblBIErro.setText("Introduza um BI!");
+            lblErros1.setText("Introduza um BI!");
             return;
-        }
-
-        for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
-            if (tfBilheteIdentidade.getText().equals(participante.getBI() + "")) {
-                lblBIErro.setText("BI já existente!");
+        } else {
+            if (tfBilheteIdentidade.getText().length() != 8) {
+                lblErros1.setText("BI inválido!");
                 return;
             }
         }
 
+        if (participante == null) {
+            for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
+                if (tfBilheteIdentidade.getText().equals(participante.getBI() + "")) {
+                    lblErros1.setText("BI já existente!");
+                    return;
+                }
+            }
+        }
+
         if (tfLocalidade.getText().isEmpty()) {
-            lblLocalidadeErro.setText("Insira uma Localidade!");
+            lblErros1.setText("Insira uma Localidade!");
             return;
         }
 
         if (cbICF.getSelectedIndex() < 1) {
-            lblICFErro.setText("Escolha um ");
+            lblErros1.setText("Escolha um ICF");
             return;
         }
 
@@ -537,35 +404,45 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             }
         }
 
-        boolean editor = false;
+        //boolean editor = false;
 
-        if (cbEditor.isSelected()) {
-            if (lstPermissoesUtilizador.getModel().getSize() < 0) {
-                lblEditorErro.setText("Escolha pelo menos uma permissão de editor!");
-                return;
-            }
-            editor = true;
-        }
+//        if (cbEditor.isSelected()) {
+//            if (lstPermissoesUtilizador.getModel().getSize() < 0) {
+//                lblEditorErro.setText("Escolha pelo menos uma permissão de editor!");
+//                return;
+//            }
+//            editor = true;
+//        }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dataNasc = formatter.format(jDateChooser2.getCalendar().getTime());
 
-        Participante participante;
+        Participante part;
 
-        for (int i = 0; i < lstPermissoesUtilizador.getModel().getSize(); i++) {
-                String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
-                System.out.println(permissaoUtilizador);
-                permissoesUtilizador.add(permissaoUtilizador);
-            }
-        
+//        for (int i = 0; i < lstPermissoesUtilizador.getModel().getSize(); i++) {
+//            String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
+//            permissoesUtilizador.add(permissaoUtilizador);
+//        }
+
         if (cbAdministrador.isSelected()) {
-            participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), true, tfUsername.getText(), pfPassword.getPassword(), editor, permissoesUtilizador, false);
-            DadosAplicacao.getInstance().adicionarParticipante(participante);
+            part = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), true, tfUsername.getText(), pfPassword.getPassword(), false);
         } else {
-            participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), dataNasc.toCharArray(), editor, permissoesUtilizador, true);
-            DadosAplicacao.getInstance().adicionarParticipante(participante);
+            part = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), dataNasc.toCharArray(), true);
         }
 
-        JOptionPane.showMessageDialog(this, "Utilizador Inserido!");
+        if (participante == null) {
+            DadosAplicacao.getInstance().adicionarParticipante(part);
+            JOptionPane.showMessageDialog(this, "Utilizador Inserido!");
+        } else {
+            DadosAplicacao.getInstance().atualizarParticipante(part);
+            JOptionPane.showMessageDialog(this, "Utilizador Alterado!");
+        }
+
+
+        panelAdmin.setEnabled(false);
+        lblPassword.setEnabled(false);
+        lblUsername.setEnabled(false);
+        tfUsername.setEnabled(false);
+        pfPassword.setEnabled(false);
 
         this.fireConfirmarClicadoEvent();
 
@@ -578,163 +455,120 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         lblUsername.setEnabled(cbAdministrador.isEnabled());
         tfUsername.setEnabled(cbAdministrador.isEnabled());
         pfPassword.setEnabled(cbAdministrador.isEnabled());
-        if (!cbAdministrador.isEnabled()) {
+//        cbEditor.setEnabled(false);
+        if (!cbAdministrador.isSelected()) {
             tfUsername.setText("");
             pfPassword.setText("");
+            panelAdmin.setEnabled(false);
+            lblPassword.setEnabled(false);
+            lblUsername.setEnabled(false);
+            tfUsername.setEnabled(false);
+            pfPassword.setEnabled(false);
+//            cbEditor.setEnabled(true);
         }
+
     }//GEN-LAST:event_cbAdministradorActionPerformed
 
-    private void cbEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEditorActionPerformed
-        panelEditor.setEnabled(cbEditor.isEnabled());
-        jButton1.setEnabled(cbEditor.isEnabled());
-        jButton2.setEnabled(cbEditor.isEnabled());
-        jButton3.setEnabled(cbEditor.isEnabled());
-        jButton4.setEnabled(cbEditor.isEnabled());
-        lstPermissoes.setEnabled(cbEditor.isEnabled());
-        lstPermissoesUtilizador.setEnabled(cbEditor.isEnabled());
-        if (lstPermissoesUtilizador.getModel().getSize() > 0) {
-            DefaultListModel<String> model;
-            model = (DefaultListModel<String>) lstPermissoesUtilizador.getModel();
-            lstPermissoesUtilizador.removeAll();
-            if (lstPermissoes.getModel().getSize() > 0) {
-                for (int i = 0; i <= lstPermissoes.getModel().getSize(); i++) {
-                    String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
-                    model.addElement(permissaoUtilizador);
-                }
-                lstPermissoes.setModel(model);
-            } else {
-                lstPermissoes.setModel(model);
-            }
-        }
-
-    }//GEN-LAST:event_cbEditorActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        if (lstPermissoes.getModel().getSize() < 0) {
-            lblEditorErro.setText("Não há mais permissoes para passar!");
-        } else {
-            for (int i = 0; i < lstPermissoes.getModel().getSize(); i++) {
-                String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
-                modelPermissoesUtilizador.addElement(permissaoUtilizador);
-            }
-            modelPermissoes.removeAllElements();
-            lstPermissoes.setModel(modelPermissoes);
-            lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
-        }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        this.modelPermissoes = (DefaultListModel<String>) lstPermissoes.getModel();
-
-        if (lstPermissoes.getSelectedValuesList().size() > 1) {
-            lblEditorErro.setText("Apenas pode ter uma permissao selecionada");
-        } else {
-            if (lstPermissoes.getSelectedValuesList().size() < 1) {
-                lblEditorErro.setText("Tem que selecionnar pelo menos uma permissao");
-            } else {
-                int permissaoIndex = lstPermissoes.getSelectedIndex();
-                String permissao = modelPermissoes.remove(permissaoIndex);
-                modelPermissoesUtilizador.addElement(permissao);
-
-                lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
-                lstPermissoes.setModel(modelPermissoes);
-            }
-        }
-
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-
-        this.modelPermissoesUtilizador = (DefaultListModel<String>) lstPermissoesUtilizador.getModel();
-
-        if (lstPermissoesUtilizador.getSelectedValuesList().size() > 1) {
-            lblEditorErro.setText("Apenas pode ter uma permissao selecionada");
-        } else {
-            if (lstPermissoesUtilizador.getSelectedValuesList().size() < 1) {
-                lblEditorErro.setText("Tem que selecionnar pelo menos uma permissao");
-            } else {
-                int permissaoIndex = lstPermissoesUtilizador.getSelectedIndex();
-                String permissao = modelPermissoesUtilizador.remove(permissaoIndex);
-                modelPermissoes.addElement(permissao);
-
-                lstPermissoes.setModel(modelPermissoes);
-                lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
-            }
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        if (lstPermissoesUtilizador.getModel().getSize() < 0) {
-            lblEditorErro.setText("Não há mais permissoes para passar!");
-        } else {
-            for (int i = 0; i < lstPermissoesUtilizador.getModel().getSize(); i++) {
-                String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
-                modelPermissoes.addElement(permissaoUtilizador);
-            }
-            modelPermissoesUtilizador.removeAllElements();
-            lstPermissoes.setModel(modelPermissoes);
-            lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       tfBilheteIdentidade.setText("");
-       tfLocalidade.setText("");
-       tfNome.setText("");
-       tfUsername.setText("");
-       cbICF.setSelectedIndex(0);
-       lstPermissoes.removeAll();
-       pfPassword.setText("");
-       jDateChooser2.repaint();
+        limparCampos();
         this.fireConfirmarClicadoEvent();
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOk;
     private javax.swing.JCheckBox cbAdministrador;
-    private javax.swing.JCheckBox cbEditor;
     private javax.swing.JComboBox cbICF;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblAdminErro;
     private javax.swing.JLabel lblBI;
-    private javax.swing.JLabel lblBIErro;
     private javax.swing.JLabel lblCondicaoFisica;
-    private javax.swing.JLabel lblDataErro;
     private javax.swing.JLabel lblDataNascimento;
-    private javax.swing.JLabel lblEditorErro;
-    private javax.swing.JLabel lblICFErro;
+    private javax.swing.JLabel lblErros1;
     private javax.swing.JLabel lblLocalidade;
-    private javax.swing.JLabel lblLocalidadeErro;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblNomeErro;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
-    private javax.swing.JList lstPermissoes;
-    private javax.swing.JList lstPermissoesUtilizador;
     private javax.swing.JPanel panelAdmin;
-    private javax.swing.JPanel panelEditor;
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfBilheteIdentidade;
     private javax.swing.JTextField tfLocalidade;
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
+
+    public void setTitulo(String string) {
+        jLabel2.setText(string);
+    }
+
+    private void preencherCampos(Participante participante) {
+        tfBilheteIdentidade.setText(participante.getBI() + "");
+        tfLocalidade.setText(participante.getLocalidade());
+        tfNome.setText(participante.getNome());
+        cbICF.setSelectedIndex(participante.getICF());
+        if (participante.isAdministrador()) {
+            cbAdministrador.setSelected(true);
+            tfUsername.setText(participante.getUsername());
+            pfPassword.setText(participante.getPassword().toString());
+            panelAdmin.setEnabled(true);
+            lblPassword.setEnabled(true);
+            lblUsername.setEnabled(true);
+            tfUsername.setEnabled(true);
+            pfPassword.setEnabled(true);
+//            cbEditor.setEnabled(false);
+        } else {
+            panelAdmin.setEnabled(false);
+            lblPassword.setEnabled(false);
+            lblUsername.setEnabled(false);
+            tfUsername.setEnabled(false);
+            pfPassword.setEnabled(false);
+        }
+
+//        if (participante.isEditor()) {
+//            if (participante.getPermissoes() != null) {
+//                for (String string : participante.getPermissoes()) {
+//                    modelPermissoesUtilizador.addElement(string);
+//                }
+//                lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
+//            }
+//        }
+
+        jDateChooser2.setCalendar(participante.getDataNasc());
+
+    }
+
+    public void limparCampos() {
+        tfBilheteIdentidade.setText("");
+        tfLocalidade.setText("");
+        tfNome.setText("");
+        tfUsername.setText("");
+        cbICF.setSelectedIndex(0);
+        //lstPermissoes.removeAll();
+        pfPassword.setText("");
+        jDateChooser2.setCalendar(null);
+        lblErros1.setText("");
+        cbAdministrador.setSelected(false);
+        //cbEditor.setSelected(false);
+        panelAdmin.setEnabled(false);
+        lblPassword.setEnabled(false);
+        lblUsername.setEnabled(false);
+        tfUsername.setEnabled(false);
+        pfPassword.setEnabled(false);
+    }
+
+    public void setParticipante(Participante participante) {
+        this.participante = participante;
+        btnOk.setText("Criar");
+        tfBilheteIdentidade.setEnabled(true);
+        if (participante != null) {
+            preencherCampos(participante);
+            btnOk.setText("Editar");
+            tfBilheteIdentidade.setEnabled(false);
+        }
+    }
 }

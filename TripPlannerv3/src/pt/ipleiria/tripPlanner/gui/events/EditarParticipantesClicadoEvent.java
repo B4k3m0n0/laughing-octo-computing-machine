@@ -5,6 +5,7 @@
 package pt.ipleiria.tripPlanner.gui.events;
 
 import java.util.EventObject;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 
 /**
  *
@@ -12,10 +13,19 @@ import java.util.EventObject;
  */
 public class EditarParticipantesClicadoEvent extends EventObject{
     
-
-    public EditarParticipantesClicadoEvent(Object source){
+    String string = "Editar Participante";
+    Participante participante;
+    public EditarParticipantesClicadoEvent(Object source, Participante participante){
         super(source);
-        
+        this.participante = participante;
+    }
+    
+    public String getString(){
+        return string;
+    }
+    
+    public Participante getParticipante(){
+        return participante;
     }
     
 }

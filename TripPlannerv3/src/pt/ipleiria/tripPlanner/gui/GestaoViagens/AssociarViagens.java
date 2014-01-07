@@ -28,8 +28,6 @@ public class AssociarViagens extends javax.swing.JPanel {
     private ArrayList<Participante> participantesModelList;
     private DefaultListModel<Participante> modelP;
     
-    private ArrayList<Participante> participantesEditor;
-    
     private DefaultTableModel modelTable;
 
     private ArrayList<Participante> associadosModelList;
@@ -49,8 +47,6 @@ public class AssociarViagens extends javax.swing.JPanel {
         associadosModelList = new ArrayList<>();
         modelA = new DefaultListModel<>();
         lstAssociados.setCellRenderer(new CellRendererParticipante());
-
-        associadosModelList =  new ArrayList<>();
         
         modelTable =  (DefaultTableModel) jTable1.getModel();
         
@@ -466,25 +462,27 @@ public class AssociarViagens extends javax.swing.JPanel {
         }
 */        
         for (int i = 0; i < modelTable.getRowCount(); i++){
-            if (modelTable.getValueAt(1, i).equals(true)){
+            if (modelTable.getValueAt(i, 1).equals(true)){
                 p.add((Participante) modelTable.getValueAt(0, i));
             }
         }
         return p;
     }
     
-    public void setListaEditor(){
+    public ArrayList<Participante> getLstEditor(){
         ArrayList<Participante> p = new ArrayList<>();
         for (int i = 0; i < modelTable.getRowCount(); i++){
-            if (modelTable.getValueAt(2, i).equals(true)){
-                p.add((Participante) modelTable.getValueAt(0, i));
+            System.out.println(modelTable.getValueAt(i, 2));
+            if (modelTable.getValueAt(i, 2).equals(true)){
+                p.add((Participante) modelTable.getValueAt(i, 0));
             }
         }
-        participantesEditor = p;
+        return p;
     }
 
     public void setDados(Viagem viagem){
         DadosAplicacao.getInstance().getViagem(viagem).setParticipantes(getLstAssociados());
+        DadosAplicacao.getInstance().getViagem(viagem).setParticipantesAutor(getLstEditor());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

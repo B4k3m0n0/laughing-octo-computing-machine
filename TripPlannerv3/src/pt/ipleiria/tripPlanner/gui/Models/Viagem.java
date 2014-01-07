@@ -18,6 +18,7 @@ public class Viagem {
     ArrayList<Alojamento> alojamentos;
     String tipoViagem;
     ArrayList<Participante> participantes;
+    ArrayList<Participante> participantesAutor;
 
     public Viagem(String designacao, ArrayList<Etapa> etapas, ArrayList<Alojamento> alojamentos, String tipoViagem) {
         this.designacao = designacao;
@@ -25,7 +26,8 @@ public class Viagem {
         this.alojamentos = alojamentos;
         this.tipoViagem = tipoViagem;
 
-        participantes = new ArrayList<Participante>();
+        participantes = new ArrayList<>();
+        participantesAutor =  new ArrayList<>();
 
     }
 
@@ -60,4 +62,9 @@ public class Viagem {
     public ArrayList<Participante> getParticipantes() {
         return participantes;
     }
+
+    public void setParticipantesAutor(ArrayList<Participante> participantesAutor) {
+        this.participantesAutor = participantesAutor;
+    }
+    
 }

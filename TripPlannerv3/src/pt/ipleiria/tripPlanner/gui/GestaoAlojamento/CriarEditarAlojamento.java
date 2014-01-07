@@ -86,11 +86,6 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lblTipo = new javax.swing.JLabel();
         rbAlbergue = new javax.swing.JRadioButton();
-        tfLongitude = new javax.swing.JTextField();
-        lblLongitude = new javax.swing.JLabel();
-        tfLatitude = new javax.swing.JTextField();
-        lblLatitude = new javax.swing.JLabel();
-        lblGPS = new javax.swing.JLabel();
         lblDesignacao = new javax.swing.JLabel();
         tfDesignacao = new javax.swing.JTextField();
         rbHostal = new javax.swing.JRadioButton();
@@ -100,6 +95,9 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         lblErrD = new javax.swing.JLabel();
         lblErrGPS = new javax.swing.JLabel();
         lblErrTipo = new javax.swing.JLabel();
+        lblLocalidade = new javax.swing.JLabel();
+        tfLocalidade = new javax.swing.JTextField();
+        lblErrLocalidade = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         spObservacoes = new javax.swing.JScrollPane();
         jtaObservacoes = new javax.swing.JTextArea();
@@ -120,6 +118,11 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         lblErrCheckout = new javax.swing.JLabel();
         lblErrContactos = new javax.swing.JLabel();
         lblErrMorada = new javax.swing.JLabel();
+        tfLatitude = new javax.swing.JTextField();
+        lblLatitude = new javax.swing.JLabel();
+        tfLongitude = new javax.swing.JTextField();
+        lblLongitude = new javax.swing.JLabel();
+        lblGPS = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnAdicionar = new javax.swing.JButton();
         spQuartos = new javax.swing.JScrollPane();
@@ -153,12 +156,6 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         buttonGroup2.add(rbAlbergue);
         rbAlbergue.setText("Albergue");
 
-        lblLongitude.setText("Longitude:");
-
-        lblLatitude.setText("Latitude:");
-
-        lblGPS.setText("*GPS:");
-
         lblDesignacao.setText("*Designação:");
 
         buttonGroup2.add(rbHostal);
@@ -173,6 +170,8 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         buttonGroup2.add(rbHotel);
         rbHotel.setText("Hotel");
 
+        lblLocalidade.setText("*Localidade:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,6 +179,21 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(lblErrGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblDesignacao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblErrD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(tfDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -195,32 +209,16 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(rbHotel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rbOutros))))
+                                        .addComponent(rbOutros)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblErrTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblGPS)
+                                .addComponent(lblLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblLongitude)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(tfLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblLatitude)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfLatitude))
-                                    .addComponent(lblErrGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblDesignacao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblErrD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfDesignacao))))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(lblErrTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(lblErrLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,30 +229,32 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                     .addComponent(tfDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErrD, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGPS)
-                    .addComponent(lblLongitude)
-                    .addComponent(tfLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLatitude)
-                    .addComponent(tfLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblLocalidade)
+                    .addComponent(tfLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblErrGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTipo)
-                        .addComponent(rbAlbergue))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rbPensao)
-                        .addComponent(rbHostal)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbHotel)
-                    .addComponent(rbOutros))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblErrTipo)
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(lblErrGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblErrLocalidade))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(lblErrTipo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblTipo)
+                                .addComponent(rbAlbergue))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rbPensao)
+                                .addComponent(rbHostal)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbHotel)
+                            .addComponent(rbOutros))))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -279,6 +279,12 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         lblHorariodeFuncionamento.setText("*Horário de Funcionamento:");
 
         btnCheckout.setText("*Check out:");
+
+        lblLatitude.setText("Latitude:");
+
+        lblLongitude.setText("Longitude:");
+
+        lblGPS.setText("*GPS:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -323,11 +329,21 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                                             .addGap(68, 68, 68)
                                             .addComponent(spObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(lblObservacoes)))
-                                .addGap(0, 28, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblHorariodeFuncionamento)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spHorariodeFuncionamento)))))
+                                .addComponent(spHorariodeFuncionamento, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblGPS)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblLongitude)
+                                .addGap(2, 2, 2)
+                                .addComponent(tfLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblLatitude)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfLatitude)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -337,7 +353,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHorariodeFuncionamento)
                     .addComponent(spHorariodeFuncionamento, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(lblErrHorarioFunc)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -364,10 +380,17 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErrMorada)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGPS)
+                    .addComponent(lblLongitude)
+                    .addComponent(tfLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLatitude)
+                    .addComponent(tfLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
                 .addComponent(lblObservacoes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -437,29 +460,28 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOk)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)
-                        .addGap(97, 97, 97))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addGap(49, 49, 49)))
-                .addGap(254, 254, 254))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1)
+                                        .addGap(49, 49, 49)))
+                                .addGap(254, 254, 254))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnOk)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar)
+                                .addGap(79, 79, 79))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,15 +490,16 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator2)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSeparator2))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(btnCancelar))
@@ -518,12 +541,14 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
     private javax.swing.JLabel lblErrD;
     private javax.swing.JLabel lblErrGPS;
     private javax.swing.JLabel lblErrHorarioFunc;
+    private javax.swing.JLabel lblErrLocalidade;
     private javax.swing.JLabel lblErrMorada;
     private javax.swing.JLabel lblErrQuarto;
     private javax.swing.JLabel lblErrTipo;
     private javax.swing.JLabel lblGPS;
     private javax.swing.JLabel lblHorariodeFuncionamento;
     private javax.swing.JLabel lblLatitude;
+    private javax.swing.JLabel lblLocalidade;
     private javax.swing.JLabel lblLongitude;
     private javax.swing.JLabel lblMorada;
     private javax.swing.JLabel lblObservacoes;
@@ -542,6 +567,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
     private javax.swing.JTextField tfContactos;
     private javax.swing.JTextField tfDesignacao;
     private javax.swing.JTextField tfLatitude;
+    private javax.swing.JTextField tfLocalidade;
     private javax.swing.JTextField tfLongitude;
     private javax.swing.JTextField tfMorada;
     // End of variables declaration//GEN-END:variables
@@ -571,6 +597,10 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
             lblErrD.setText("Insira uma Designação.");
             isOk = false;
         }
+        if (tfLocalidade.getText().isEmpty()) {
+            lblErrLocalidade.setText("Insira uma Localidade.");
+            isOk = false;
+        }
         if (tfLongitude.getText().isEmpty() && tfLatitude.getText().isEmpty()) {
             lblErrGPS.setText("Insira as coordenadas GPS.");
             isOk = false;
@@ -579,7 +609,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
             lblErrTipo.setText("Selecione um tipo de alojamento.");
             isOk = false;
         }
-        // QUARTOS!!
+
         if (jList1.getSelectedIndex() < 0) {
             lblErrQuarto.setText("Escolha um quarto");
             isOk = false;
@@ -625,7 +655,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
             } else if (rbPensao.isSelected()) {
                 tipo = "Pensao";
             }
-            Alojamento alojamento = new Alojamento(tfDesignacao.getText(), tfLongitude.getText(), tfLatitude.getText(), tipo, quartos,jtaHorarioFuncionamento.getText() ,tfCheckin.getText(), tfCheckout.getText(), tfContactos.getText(), tfMorada.getText(),jtaObservacoes.getText() );
+            Alojamento alojamento = new Alojamento(tfDesignacao.getText(), tfLongitude.getText(), tfLatitude.getText(), tipo, quartos,jtaHorarioFuncionamento.getText() ,tfCheckin.getText(), tfCheckout.getText(), tfContactos.getText(), tfMorada.getText(),jtaObservacoes.getText(),tfLocalidade.getText() );
             DadosAplicacao.getInstance().addAlojamento(alojamento);
             JOptionPane.showMessageDialog(this, "Alojamento Inserida com Sucesso!", "Inserção Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.fireConfirmarClicadoAlojamentoEvent();

@@ -196,11 +196,11 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="lblMostrarLatitude" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblGPS" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblLongitude" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblLatitude" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblMostrarLatitude" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                       <Component id="lblMostrarLongitude" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
@@ -341,7 +341,7 @@
                           <Component id="lblMostrarTipo" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

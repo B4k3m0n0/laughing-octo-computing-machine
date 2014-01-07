@@ -444,6 +444,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     public void associarViagensClicado(AssociarViagensClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         associarViagens.setDados(evt.getViagem());
+        associarViagens.setLabel(evt.getViagem());
         cl.show(this.jPanel1, "associarViagens");
     }
     

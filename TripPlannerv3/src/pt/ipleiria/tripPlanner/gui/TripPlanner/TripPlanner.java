@@ -138,13 +138,14 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     private InserirEditarViagens inserirEditarViagens;
     private AssociarViagens associarViagens;
     private GestaodeEtapas gestaodeEtapas;
-    private InserirEditarEtapa inserirEditarEtapa;
+
 
     private CriarEditarCenarioAlojamento criarEditarCenarioAlojamento;
     private MostrarCenarioAlojamento mostrarCenarioAlojamento;
     private CompararCenarioAlojamento compararCenarioAlojamento;
     private GestaodeCenariodeAlojamento gestaodeCenariodeAlojamento;
 
+    private InserirEditarEtapa inserirEditarEtapa;
     private VisualizarEtapa visualizarEtapa;
     private MostrarAlojamento mostrarAlojamento;
     private AssociarEtapas associarEtapas;
@@ -351,6 +352,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void participantesClicado(ParticipantesClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        menuParticipante.limparCampos();
         cl.show(this.jPanel1, "menuParticipantes");
     }
     
@@ -382,6 +384,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     public void confirmarClicado(ConfirmarClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         menuParticipante.actualizarListaParticipantes();
+        menuParticipante.limparCampos();
         cl.show(this.jPanel1, "menuParticipantes");
     }
     
@@ -402,6 +405,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void alojamentosClicado(AlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeAlojamentos.limparCampos();
         cl.show(this.jPanel1, "gestaodeAlojamentos");
     }
     
@@ -410,6 +414,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void viagensClicado(ViagensClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeViagens.limparCampos();
         cl.show(this.jPanel1, "gestaodeViagens");
     }
     
@@ -425,6 +430,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     public void confirmarInsercaoViagens(ConfirmarInsercaoViagensEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         gestaodeViagens.actualizarListaViagens();
+        gestaodeViagens.limparCampos();
         cl.show(this.jPanel1, "gestaodeViagens");
     }
     
@@ -444,12 +450,14 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void confirmarAssociacaoViagens(ConfirmarAssociacaoViagensEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeViagens.limparCampos();
         cl.show(this.jPanel1, "gestaodeViagens");
     }
     
     @Override
     public void etapasClicado(EtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeEtapas.limparCampos();
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
     
@@ -462,6 +470,8 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void editarEtapasClicado(EditarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        inserirEditarEtapa.setTitulo(evt.getString());
+        inserirEditarEtapa.setEtapa(evt.getEtapa());
         cl.show(this.jPanel1, "inserirEditarEtapa");
     }
     
@@ -484,19 +494,21 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     public void okInserirEtapasClicado(OkInserirEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         gestaodeEtapas.actualizarListaEtapas();
+        gestaodeEtapas.limparCampos();
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
     
     @Override
     public void okVisualizarEtapasClicado(OkVisualizarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeEtapas.limparCampos();
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
     
     @Override
     public void okAssociarEtapasClicado(OkAssociarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
-        visualizarViagens.setDados(evt.getViagem());
+        associarEtapas.setDados(evt.getEtapa());
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
     
@@ -620,12 +632,14 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void cancelarInserirEditarClicado(CancelarInserirEditarViagensClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeViagens.limparCampos();
         cl.show(this.jPanel1, "gestaodeViagens");
     }
 
     @Override
     public void okVisualizarViagensClicado(OkVisualizarViagensClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeViagens.limparCampos();
         cl.show(this.jPanel1, "gestaodeViagens");
     }
 }

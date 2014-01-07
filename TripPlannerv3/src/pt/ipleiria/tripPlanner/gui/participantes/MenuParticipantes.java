@@ -37,7 +37,7 @@ public class MenuParticipantes extends javax.swing.JPanel {
      */
     public MenuParticipantes() {
         initComponents();
-
+        lblErro.setForeground(Color.red);
         this.inserirParticipantesClicadoListener = new ArrayList<>();
         this.editarParticipantesClicadoListener = new ArrayList<>();
         this.visualizarParticipantesClicadoListener = new ArrayList<>();
@@ -148,6 +148,12 @@ public class MenuParticipantes extends javax.swing.JPanel {
         });
         tfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
+                filtro(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filtro(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
                 filtro(evt);
             }
         });
@@ -303,7 +309,7 @@ public class MenuParticipantes extends javax.swing.JPanel {
         model.clear();
         String filtro = tfPesquisar.getText();
         for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
-            if (participante.getNome().contains(filtro)) {
+            if (participante.getNome().toLowerCase().contains(filtro)) {
                 model.addElement(participante);
             }
         }
@@ -330,6 +336,10 @@ public class MenuParticipantes extends javax.swing.JPanel {
 
         lstPesquisa.setModel(model);
     }
+     public void limparCampos(){
+        lblErro.setText("");
+        lstPesquisa.clearSelection();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnEditar;
@@ -345,3 +355,6 @@ public class MenuParticipantes extends javax.swing.JPanel {
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
 }
+
+
+

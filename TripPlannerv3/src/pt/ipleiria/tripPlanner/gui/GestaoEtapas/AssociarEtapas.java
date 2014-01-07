@@ -12,6 +12,7 @@ import javax.swing.DefaultListModel;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
+import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import pt.ipleiria.tripPlanner.gui.events.OkAssociarEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkAssociarEtapasClicadoListener;
@@ -58,9 +59,9 @@ public class AssociarEtapas extends javax.swing.JPanel {
         this.okAssociarEtapasClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireOkAssociarEtapasClicadoEvent() {
+    protected synchronized void fireOkAssociarEtapasClicadoEvent(Etapa e) {
         for (OkAssociarEtapasClicadoListener listener : this.okAssociarEtapasClicadoListener) {
-            OkAssociarEtapasClicadoEvent evento = new OkAssociarEtapasClicadoEvent(this);
+            OkAssociarEtapasClicadoEvent evento = new OkAssociarEtapasClicadoEvent(this,e);
             listener.okAssociarEtapasClicado(evento);
         }
     }
@@ -231,16 +232,17 @@ public class AssociarEtapas extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(115, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(364, 364, 364)
-                            .addComponent(btnOk)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnCancelar)
-                            .addGap(25, 25, 25)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(364, 364, 364)
+                                .addComponent(btnOk)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar)))
+                        .addGap(25, 25, 25))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(116, 116, 116))))
@@ -254,7 +256,7 @@ public class AssociarEtapas extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnOk))
@@ -263,7 +265,7 @@ public class AssociarEtapas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        this.fireOkAssociarEtapasClicadoEvent();
+        this.fireOkAssociarEtapasClicadoEvent(null);
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnAssociarUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarUmActionPerformed

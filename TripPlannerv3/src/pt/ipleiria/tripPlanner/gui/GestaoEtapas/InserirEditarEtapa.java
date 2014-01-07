@@ -14,6 +14,7 @@ import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.Localidade;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.Models.Quarto;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererLocalidade;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
@@ -27,6 +28,7 @@ import pt.ipleiria.tripPlanner.gui.events.OkInserirEtapasClicadoListener;
 public class InserirEditarEtapa extends javax.swing.JPanel {
 
     private List<OkInserirEtapasClicadoListener> okInserirEtapasClicadoListener;
+    private Etapa etapa;
 
     /**
      * Creates new form InserirEtapa
@@ -410,9 +412,14 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
                 Localidade l = model.elementAt(index);
                 localidades.add(l);
             }
-            Etapa etapa = new Etapa(tfDesignacao.getText(), tfLocalidadeInicio.getText(), tfLocalidadeFinal.getText(), localidades, Integer.parseInt(tfDistanciaTotal.getText()), Integer.parseInt(tfAltitudeAcumulada.getText()), Integer.parseInt(tfAltitudeMaxima.getText()), Integer.parseInt(tfAltitudeMinima.getText()));
-            DadosAplicacao.getInstance().addEtapa(etapa);
-            JOptionPane.showMessageDialog(this, "Etapa Inserida com Sucesso!", "Inserção Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            Etapa e = new Etapa(tfDesignacao.getText(), tfLocalidadeInicio.getText(), tfLocalidadeFinal.getText(), localidades, Integer.parseInt(tfDistanciaTotal.getText()), Integer.parseInt(tfAltitudeAcumulada.getText()), Integer.parseInt(tfAltitudeMaxima.getText()), Integer.parseInt(tfAltitudeMinima.getText()));
+            if (etapa == null) {
+                DadosAplicacao.getInstance().addEtapa(e);
+                JOptionPane.showMessageDialog(this, "Etapa Inserida com Sucesso!", "Inserção Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                DadosAplicacao.getInstance().atualizarEtapa(e);
+                JOptionPane.showMessageDialog(this, "Etapa Editada com Sucesso!", "Edição Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }
             this.fireOkInserirEtapasClicadoEvent();
         }
 
@@ -482,4 +489,28 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
         jList1.setModel(model);
     }
 
+    public void setEtapa(Etapa etapa) {
+        this.etapa = etapa;
+        btnOk.setText("Criar");
+        tfDesignacao.setEnabled(true);
+        if (etapa != null) {
+            preencherCampos(etapa);
+            btnOk.setText("Editar");
+            tfDesignacao.setEnabled(false);
+        }
+    }
+
+    private void preencherCampos(Etapa etapa) {
+        tfDesignacao.setText(etapa.getDesignacao());
+        tfLocalidadeInicio.setText(etapa.getLocalInicio());
+        tfLocalidadeFinal.setText(etapa.getLocalidadeFinal());
+        tfAltitudeAcumulada.setText(etapa.getAltitudeAcumulada() + "");
+        tfAltitudeMinima.setText(etapa.getAltitudeMinima() + "");
+        tfAltitudeMaxima.setText(etapa.getAltitudeMaxima() + "");
+        tfDistanciaTotal.setText(etapa.getDistanciaTotal() + "");
+    }
+
+    public void setTitulo(String string) {
+        lblTitulo.setText(string);
+    }
 }

@@ -28,6 +28,7 @@ public class DadosAplicacao {
     private Participante logado;
     private ArrayList<Quarto> quartos;
     private ArrayList<CenarioAlojamento> cenariosDeAlojamento;
+    private ArrayList<Reserva> reservas;
 
     private DadosAplicacao() {
         participantes = new ArrayList<>();
@@ -37,6 +38,8 @@ public class DadosAplicacao {
         quartos = new ArrayList<>();
         localidades = new ArrayList<>();
         cenariosDeAlojamento = new ArrayList<>();
+        reservas = new ArrayList<>();
+        
         criarDadosTeste();
     }
 
@@ -59,10 +62,10 @@ public class DadosAplicacao {
 
         participante1 = new Participante("Rafael", dataNascJoao, 12175988, "Leiria", 5, true, "rafa", pass.toCharArray(), false);
         adicionarParticipante(participante1);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy");
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dataNasc = formatter.format(dataNascJoao.getTime());
-
+            System.out.println(dataNasc.toCharArray());
         Participante participante2;
         participante2 = new Participante("Andre", dataNascJoao, 14187566, "Leiria", 5, false, "14187566", dataNasc.toCharArray(), true);
         adicionarParticipante(participante2);
@@ -83,7 +86,27 @@ public class DadosAplicacao {
         Alojamento alojamento1;
         alojamento1 = new Alojamento("Alojamento 1", "3.1111423", "-1.312421", "Albergue", quartos, "11", "8h","21", "214598745", "Rua da brilhantina", "");
         alojamentos.add(alojamento1);
+        
+        Reserva reserva1;
+        reserva1 = new Reserva(etapa1, quartos, participantes, alojamento1);
+        reservas.add(reserva1);
+        
+            
 
+    }
+    public void atualizarEtapa(Etapa e) {
+        int indice = 0;
+        for (int i = 0; i < etapas.size(); i++) {
+            if (etapas.get(i).getDesignacao().equals(e.getDesignacao())) {
+                indice = i;
+                break;
+            }
+        }
+        etapas.set(indice, e);
+    }
+    
+    public void addReserva(Reserva reserva){
+        reservas.add(reserva);
     }
 
     public void addAlojamento(Alojamento alojamento) {
@@ -129,6 +152,10 @@ public class DadosAplicacao {
 
     public ArrayList<Etapa> getEtapas() {
         return (ArrayList<Etapa>) etapas.clone();
+    }
+
+    public ArrayList<Reserva> getReservas() {
+        return (ArrayList<Reserva>) reservas.clone();
     }
 
     public void adicionarParticipante(Participante p) {

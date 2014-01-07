@@ -1,5 +1,6 @@
 package pt.ipleiria.tripPlanner.gui.GestaoViagens;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -54,10 +55,7 @@ public class GestaodeViagens extends javax.swing.JPanel {
 
         Lista();
 
-        jLabel2.setVisible(false);
-        jLabel3.setVisible(false);
-        jLabel4.setVisible(false);
-
+        lblErro.setForeground(Color.red);
     }
 
     public synchronized void addInserirViagemClicadoListener(InserirViagemClicadoListener listener) {
@@ -100,7 +98,7 @@ public class GestaodeViagens extends javax.swing.JPanel {
 
     protected synchronized void fireAssociarViagensClicadoEvent() {
         if (lstViagens.getSelectedValue() == null) {
-            
+
         } else {
             for (AssociarViagensClicadoListener listener : this.associarViagensClicadoListener) {
                 AssociarViagensClicadoEvent evento = new AssociarViagensClicadoEvent(this, (Viagem) lstViagens.getSelectedValue());
@@ -117,14 +115,10 @@ public class GestaodeViagens extends javax.swing.JPanel {
         this.visualizarViagensClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireVisualizarViagensClicadoEvent() {
-        if (lstViagens.getSelectedValue() == null) {
-
-        } else {
-            for (VisualizarViagensClicadoListener listener : this.visualizarViagensClicadoListener) {
-                VisualizarViagensClicadoEvent evento = new VisualizarViagensClicadoEvent(this, (Viagem) lstViagens.getSelectedValue());
-                listener.visualizarViagensClicado(evento);
-            }
+    protected synchronized void fireVisualizarViagensClicadoEvent(Viagem viagemSelecionada) {
+        for (VisualizarViagensClicadoListener listener : this.visualizarViagensClicadoListener) {
+            VisualizarViagensClicadoEvent evento = new VisualizarViagensClicadoEvent(this, viagemSelecionada);
+            listener.visualizarViagensClicado(evento);
         }
     }
 
@@ -167,9 +161,7 @@ public class GestaodeViagens extends javax.swing.JPanel {
         btnAssociar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblErro = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -224,49 +216,38 @@ public class GestaodeViagens extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         jLabel1.setText("Viagens");
 
-        jLabel2.setText("jLabel2");
-
-        jLabel3.setText("jLabel3");
-
-        jLabel4.setText("jLabel4");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblLocalidades)
-                        .addComponent(jScrollPane1)
-                        .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCriar)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnEliminar)
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(btnEditar))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVisualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAssociar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addComponent(btnVoltar))
-                .addGap(0, 123, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1))
                 .addGap(251, 251, 251))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblErro, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblLocalidades)
+                                .addComponent(jScrollPane1)
+                                .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCriar)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnEliminar)
+                                .addGap(40, 40, 40)
+                                .addComponent(btnEditar)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVisualizar)
+                            .addComponent(btnAssociar)
+                            .addComponent(btnVoltar))))
+                .addGap(0, 161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +264,9 @@ public class GestaodeViagens extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblErro)
+                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnEditar)
@@ -294,15 +277,8 @@ public class GestaodeViagens extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVisualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAssociar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel2)
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addContainerGap(78, Short.MAX_VALUE))
+                        .addComponent(btnAssociar)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -315,7 +291,12 @@ public class GestaodeViagens extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
-        this.fireVisualizarViagensClicadoEvent();
+        if (lstViagens.getSelectedIndex() != -1) {
+            Viagem viagemSelecionada = (Viagem) lstViagens.getSelectedValue();
+            this.fireVisualizarViagensClicadoEvent(viagemSelecionada);
+        } else {
+            lblErro.setText("Selecione uma viagem da lista!");
+        }
     }//GEN-LAST:event_btnVisualizarActionPerformed
 
     private void btnAssociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarActionPerformed
@@ -339,11 +320,9 @@ public class GestaodeViagens extends javax.swing.JPanel {
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblErro;
     private javax.swing.JLabel lblLocalidades;
     private javax.swing.JList lstViagens;
     private javax.swing.JTextField tfPesquisar;
@@ -354,5 +333,10 @@ public class GestaodeViagens extends javax.swing.JPanel {
             model.addElement(viagens);
         }
         lstViagens.setModel(model);
+    }
+
+    public void limparCampos() {
+        lblErro.setText("");
+        lstViagens.clearSelection();
     }
 }

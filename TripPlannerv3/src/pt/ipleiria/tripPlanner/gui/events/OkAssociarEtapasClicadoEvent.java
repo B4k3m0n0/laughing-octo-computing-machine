@@ -5,6 +5,7 @@
 package pt.ipleiria.tripPlanner.gui.events;
 
 import java.util.EventObject;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 
 /**
@@ -13,15 +14,15 @@ import pt.ipleiria.tripPlanner.gui.Models.Viagem;
  */
 public class OkAssociarEtapasClicadoEvent extends EventObject {
 
-    Viagem viagem;
+    Etapa etapa;
     
-    public OkAssociarEtapasClicadoEvent(Object source, Viagem viagem) {
+    public OkAssociarEtapasClicadoEvent(Object source,Etapa etapa) {
         super(source);
-        this.viagem = viagem;
+        this.etapa = etapa;
     }
 
-    public Viagem getViagem() {
-        return viagem;
+    public Etapa getEtapa() {
+        return etapa;
     }
     
     

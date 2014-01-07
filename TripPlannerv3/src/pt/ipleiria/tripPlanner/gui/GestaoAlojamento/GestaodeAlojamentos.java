@@ -1,5 +1,6 @@
 package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 
+import java.awt.Color;
 import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
      */
     public GestaodeAlojamentos() {
         initComponents();
-
+        lblErro.setForeground(Color.red);
         this.criarEditarAlojamentoClicadoListener = new ArrayList<>();
         this.visualizarAlojamentoClicadoListener = new ArrayList<>();
         this.voltarMenuPrincipalListener = new ArrayList<>();
@@ -114,6 +115,7 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
         lblAlojamentos = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        lblErro = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -182,26 +184,27 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(tfPesquisar)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(jbCriar)
-                                    .addGap(28, 28, 28)
-                                    .addComponent(jbEliminar)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(jbEditar)))
-                            .addComponent(lblAlojamentos))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfPesquisar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                            .addComponent(lblAlojamentos)
+                            .addComponent(lblErro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
-                            .addComponent(jbVoltar)
                             .addComponent(jbPesquisar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(177, 177, 177)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jbCriar)
+                        .addGap(28, 28, 28)
+                        .addComponent(jbEliminar)
+                        .addGap(40, 40, 40)
+                        .addComponent(jbEditar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbVoltar)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -222,7 +225,9 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
                         .addComponent(lblAlojamentos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(7, 7, 7)
+                .addComponent(lblErro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbEditar)
@@ -230,7 +235,7 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbCriar)
                         .addComponent(jbEliminar)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -247,7 +252,7 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
             Alojamento alojamentoSelecionado = (Alojamento) jList1.getSelectedValue();
             this.fireVisualizarAlojamentoClicadoEvent(alojamentoSelecionado);
         }else{
-        JOptionPane.showMessageDialog(this, "Insira um alojamento da lista de alojamentos", "Erro", JOptionPane.INFORMATION_MESSAGE);
+        lblErro.setText("Selecione um alojamento da lista!");
         }
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
@@ -271,6 +276,7 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbVoltar;
     private javax.swing.JLabel lblAlojamentos;
+    private javax.swing.JLabel lblErro;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
 
@@ -285,6 +291,8 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Alojamento removido com Sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
             }
+        }else{
+         lblErro.setText("Selecione um alojamento da lista!");
         }
     }
 
@@ -294,6 +302,10 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
             model.addElement(alojamento);
         }
         jList1.setModel(model);
+    }
+     public void limparCampos(){
+        lblErro.setText("");
+        jList1.clearSelection();
     }
 
 }

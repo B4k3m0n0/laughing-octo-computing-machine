@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.AdicionarQuarto;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.CriarEditarAlojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.GestaodeAlojamentos;
-import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.MostrarAlojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.AssociarEtapas;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.MostrarAlojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.GestaodeEtapas;
@@ -497,6 +496,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void okAssociarEtapasClicado(OkAssociarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        visualizarViagens.setDados(evt.getViagem());
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
     

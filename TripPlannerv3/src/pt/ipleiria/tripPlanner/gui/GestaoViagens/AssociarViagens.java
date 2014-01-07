@@ -27,11 +27,14 @@ public class AssociarViagens extends javax.swing.JPanel {
 
     private ArrayList<Participante> participantesModelList;
     private DefaultListModel<Participante> modelP;
-    
+
     private DefaultTableModel modelTable;
 
     private ArrayList<Participante> associadosModelList;
     private DefaultListModel<Participante> modelA;
+    
+    private ArrayList<Participante> associados;
+    private ArrayList<Participante> editores;
 
     /**
      * Creates new form ReservarAlojamento
@@ -42,21 +45,22 @@ public class AssociarViagens extends javax.swing.JPanel {
 
         participantesModelList = new ArrayList<>();
         modelP = new DefaultListModel<>();
-        lstParticipantes.setCellRenderer(new CellRendererParticipante());
 
         associadosModelList = new ArrayList<>();
         modelA = new DefaultListModel<>();
-        lstAssociados.setCellRenderer(new CellRendererParticipante());
-        
-        modelTable =  (DefaultTableModel) jTable1.getModel();
-        
+
+        modelTable = (DefaultTableModel) jTable1.getModel();
+
         setModel();
-        
+
         lblAviso.setVisible(false);
-        
+
         jTable1.setFocusable(false);
         jTable1.setRowSelectionAllowed(false);
         
+        associados = new ArrayList<>();
+        editores = new ArrayList<>();
+
     }
 
     /*
@@ -94,7 +98,7 @@ public class AssociarViagens extends javax.swing.JPanel {
 
     protected synchronized void fireConfirmarAssociacaoViagensEvent() {
         for (ConfirmarAssociacaoViagensListener listener : this.confirmarAssociacaoViagensListener) {
-            ConfirmarAssociacaoViagensEvent evento = new ConfirmarAssociacaoViagensEvent(this, getLstAssociados());
+            ConfirmarAssociacaoViagensEvent evento = new ConfirmarAssociacaoViagensEvent(this, associados, editores);
             listener.confirmarAssociacaoViagens(evento);
         }
     }
@@ -110,22 +114,11 @@ public class AssociarViagens extends javax.swing.JPanel {
 
         btnOk = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        btnEliminarAssociacaoVarios = new javax.swing.JButton();
-        btnAssociarVarios = new javax.swing.JButton();
-        spViagens = new javax.swing.JScrollPane();
-        lstAssociados = new javax.swing.JList();
-        spParticipantes = new javax.swing.JScrollPane();
-        lstParticipantes = new javax.swing.JList();
-        lblViagens = new javax.swing.JLabel();
-        lblParticipantes = new javax.swing.JLabel();
-        btnAssociarUm = new javax.swing.JButton();
-        btnEliminarAssociacaoUm = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        lblAviso = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        lblAviso = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -147,131 +140,35 @@ public class AssociarViagens extends javax.swing.JPanel {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnEliminarAssociacaoVarios.setText("<<");
-        btnEliminarAssociacaoVarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarAssociacaoVariosActionPerformed(evt);
-            }
-        });
-
-        btnAssociarVarios.setText(">>");
-        btnAssociarVarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssociarVariosActionPerformed(evt);
-            }
-        });
-
-        lstAssociados.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        spViagens.setViewportView(lstAssociados);
-
-        lstParticipantes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        spParticipantes.setViewportView(lstParticipantes);
-
-        lblViagens.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        lblViagens.setText("Associados:");
-
-        lblParticipantes.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        lblParticipantes.setText("Participantes:");
-
-        btnAssociarUm.setText(">");
-        btnAssociarUm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssociarUmActionPerformed(evt);
-            }
-        });
-
-        btnEliminarAssociacaoUm.setText("<");
-        btnEliminarAssociacaoUm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarAssociacaoUmActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(spParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnAssociarVarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarAssociacaoVarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAssociarUm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarAssociacaoUm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lblParticipantes)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblViagens)
-                        .addGap(25, 25, 25))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(spViagens, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(btnAssociarUm)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAssociarVarios)
-                                .addGap(27, 27, 27)
-                                .addComponent(btnEliminarAssociacaoUm)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminarAssociacaoVarios))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblParticipantes)
-                                    .addComponent(lblViagens))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(3, 3, 3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(spViagens)))
-                .addContainerGap())
-        );
-
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         jLabel1.setText("Associar Participante a Viagem");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblAviso.setText("jLabel2");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 268, Short.MAX_VALUE)
+        );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Participante", "Associado?", "Editor?"
+                "Participante", "BI", "Associar?", "Editor?"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -284,47 +181,30 @@ public class AssociarViagens extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblAviso)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblAviso)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
+        lblAviso.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(154, 154, 154))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(jLabel1)
-                        .addGap(82, 82, 82))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnOk)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)
-                        .addContainerGap())))
+                            .addComponent(jLabel1)
+                            .addComponent(lblAviso)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnOk)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnCancelar))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(82, 82, 82))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,116 +212,24 @@ public class AssociarViagens extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAviso)
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnOk))
-                .addGap(42, 42, 42))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        //GestaodeViagens.getInstance().getSelectedViagem();  
+        associados = getLstAssociados();
+        editores = getLstEditor();
         this.fireConfirmarAssociacaoViagensEvent();
     }//GEN-LAST:event_btnOkActionPerformed
-
-    private void btnAssociarUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarUmActionPerformed
-        if (lstParticipantes.getSelectedValuesList().size() != 1) {
-            lblAviso.setText("Tem que selecionar um participante");
-            lblAviso.setForeground(Color.red);
-            lblAviso.setVisible(true);
-        } else {
-            lblAviso.setVisible(false);
-            Participante p = (Participante) lstParticipantes.getSelectedValue();
-            modelA.addElement(p);
-            modelP.removeElement(p);
-            lstParticipantes.setModel(modelP);
-            lstAssociados.setModel(modelA);
-        }
-    }//GEN-LAST:event_btnAssociarUmActionPerformed
-
-    private void btnAssociarVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarVariosActionPerformed
-        //if (lstParticipantes.getSelectedValuesList().isEmpty()) {
-        //    lblAvisoP.setText("Não tem nenhum participante selecionado");
-        //} else {
-            ArrayList<Participante> part = new ArrayList<>();
-            for (int i=0; i<lstParticipantes.getModel().getSize(); i++){
-                Participante p = modelP.get(i);
-                modelA.addElement(p);
-                part.add(p);
-            }
-            
-            for (Participante p : part) {
-                modelP.removeElement(p);
-            }
-            /*
-            for (int index : lstParticipantes.getSelectedIndices()) {
-                Participante p = modelP.get(index);
-                modelA.addElement(p);
-                part.add(p);
-            }
-
-            for (Participante p : part) {
-                modelP.removeElement(p);
-            }
-*/
-            lstAssociados.setModel(modelA);
-            lstParticipantes.setModel(modelP);
-        //}
-    }//GEN-LAST:event_btnAssociarVariosActionPerformed
-
-    private void btnEliminarAssociacaoUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAssociacaoUmActionPerformed
-        if (lstAssociados.getSelectedValuesList().size() != 1) {
-            lblAviso.setText("Tem que selecionar um participante");
-            lblAviso.setForeground(Color.red);
-            lblAviso.setVisible(true);
-        } else {
-            lblAviso.setVisible(false);
-            Participante p = (Participante) lstAssociados.getSelectedValue();
-            modelA.removeElement(p);
-            modelP.addElement(p);
-            lstParticipantes.setModel(modelP);
-            lstAssociados.setModel(modelA);
-        }
-    }//GEN-LAST:event_btnEliminarAssociacaoUmActionPerformed
-
-    private void btnEliminarAssociacaoVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAssociacaoVariosActionPerformed
-        //if (lstAssociados.getSelectedValuesList().isEmpty()) {
-        //    lblAvisoP.setText("Não tem nenhum participante selecionado");
-        //} else {
-//            associadosModelList = (ArrayList<Participante>) lstAssociados.getSelectedValuesList();
-//            for (Participante p : associadosModelList) {
-//                modelA.removeElement(p);
-//                modelP.addElement(p);
-//            }
-            ArrayList<Participante> part = new ArrayList<>();
-            for (int i=0; i<lstAssociados.getModel().getSize(); i++){
-                Participante p = modelA.get(i);
-                modelP.addElement(p);
-                part.add(p);
-            }
-            
-            for (Participante p : part) {
-                modelA.removeElement(p);
-            }
-            /*
-            for (int index : lstAssociados.getSelectedIndices()) {
-                Participante p = modelA.get(index);
-                modelP.addElement(p);
-                part.add(p);
-            }
-
-            for (Participante p : part) {
-                modelA.removeElement(p);
-            }
-            */
-            lstAssociados.setModel(modelA);
-            lstParticipantes.setModel(modelP);
-        //}
-    }//GEN-LAST:event_btnEliminarAssociacaoVariosActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
@@ -449,70 +237,60 @@ public class AssociarViagens extends javax.swing.JPanel {
 
     private void setModel() {
         participantesModelList = DadosAplicacao.getInstance().getParticipantes();
-        modelP = new DefaultListModel<>();
-        for (Participante p : participantesModelList) {
-            modelP.addElement(p);
-        }
-        lstParticipantes.setModel(modelP);
 
-        modelA = new DefaultListModel<>();
-        lstAssociados.setModel(modelA);
-        
-        for (Participante p : participantesModelList){
-            modelTable.addRow(new Object[]{p.getNome(),false,false});
+        for (Participante p : participantesModelList) {
+            modelTable.addRow(new Object[]{p.getNome(), p.getBI(), false, false});
         }
     }
 
     public ArrayList<Participante> getLstAssociados() {
         ArrayList<Participante> p = new ArrayList<>();
-/*
-        for (int i = 0; i < lstAssociados.getModel().getSize(); i++) {
-            p.add((Participante) lstAssociados.getModel().getElementAt(i));
-        }
-*/        
-        for (int i = 0; i < modelTable.getRowCount(); i++){
-            if (modelTable.getValueAt(i, 1).equals(true)){
-                p.add((Participante) modelTable.getValueAt(0, i));
-            }
-        }
-        return p;
-    }
-    
-    public ArrayList<Participante> getLstEditor(){
-        ArrayList<Participante> p = new ArrayList<>();
-        for (int i = 0; i < modelTable.getRowCount(); i++){
-            System.out.println(modelTable.getValueAt(i, 2));
-            if (modelTable.getValueAt(i, 2).equals(true)){
-                p.add((Participante) modelTable.getValueAt(i, 0));
+        for (int i = 0; i < modelTable.getRowCount(); i++) {
+            if (modelTable.getValueAt(i, 2).equals(true)) {
+                for (Participante pt : DadosAplicacao.getInstance().getParticipantes()) {
+                    if (pt.getBI() == (int) modelTable.getValueAt(i, 1)) {
+                        p.add(pt);
+                    }
+                }
             }
         }
         return p;
     }
 
-    public void setDados(Viagem viagem){
-        DadosAplicacao.getInstance().getViagem(viagem).setParticipantes(getLstAssociados());
-        DadosAplicacao.getInstance().getViagem(viagem).setParticipantesAutor(getLstEditor());
+    public ArrayList<Participante> getLstEditor() {
+        ArrayList<Participante> p = new ArrayList<>();
+        for (int i = 0; i < modelTable.getRowCount(); i++) {
+            if (modelTable.getValueAt(i, 3).equals(true)) {
+                for (Participante pt : DadosAplicacao.getInstance().getParticipantes()) {
+                    if (pt.getBI() == (int) modelTable.getValueAt(i, 1)) {
+                        p.add(pt);
+                    }
+                }
+            }
+        }
+        return p;
+    }
+
+    public void setDados(Viagem viagem) {
+//        DadosAplicacao.getInstance().getViagem(viagem).setParticipantes(getLstAssociados());
+//        DadosAplicacao.getInstance().getViagem(viagem).setParticipantesAutor(getLstEditor());
+        
+        DadosAplicacao.getInstance().getViagem(viagem).setParticipantes(associados);
+        DadosAplicacao.getInstance().getViagem(viagem).setParticipantesAutor(editores);
+        
+       /* for (Participante a : associados){
+            System.out.println(a.getBI());
+        }*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAssociarUm;
-    private javax.swing.JButton btnAssociarVarios;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEliminarAssociacaoUm;
-    private javax.swing.JButton btnEliminarAssociacaoVarios;
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAviso;
-    private javax.swing.JLabel lblParticipantes;
-    private javax.swing.JLabel lblViagens;
-    private javax.swing.JList lstAssociados;
-    private javax.swing.JList lstParticipantes;
-    private javax.swing.JScrollPane spParticipantes;
-    private javax.swing.JScrollPane spViagens;
     // End of variables declaration//GEN-END:variables
 
 }

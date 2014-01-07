@@ -15,15 +15,23 @@ import pt.ipleiria.tripPlanner.gui.Models.Participante;
 public class ConfirmarAssociacaoViagensEvent extends EventObject {
 
     ArrayList<Participante> participantes;
+    ArrayList<Participante> editores;
 
-    public ConfirmarAssociacaoViagensEvent(Object source, ArrayList<Participante> participantes) {
+    public ConfirmarAssociacaoViagensEvent(Object source, ArrayList<Participante> participantes, ArrayList<Participante> editores) {
         super(source);
 
         this.participantes = participantes;
+        this.editores = editores;
 
     }
 
     public ArrayList<Participante> getParticipantes() {
         return participantes;
     }
+
+    public ArrayList<Participante> getEditores() {
+        return editores;
+    }
+    
+    
 }

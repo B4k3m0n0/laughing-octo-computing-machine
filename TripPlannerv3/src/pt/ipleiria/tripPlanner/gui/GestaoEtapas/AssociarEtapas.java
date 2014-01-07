@@ -12,7 +12,6 @@ import javax.swing.DefaultListModel;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
-import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import pt.ipleiria.tripPlanner.gui.events.OkAssociarEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkAssociarEtapasClicadoListener;

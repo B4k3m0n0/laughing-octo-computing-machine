@@ -48,7 +48,7 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
         reservasModelList = new ArrayList<>();
         modelA = new DefaultListModel<>();
 
-        lstReservas.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
+        lstAlojamentos.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
 
         lblAviso.setVisible(false);
     }
@@ -96,7 +96,7 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
         btnOk = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         spParticipantes = new javax.swing.JScrollPane();
-        lstReservas = new javax.swing.JList();
+        lstAlojamentos = new javax.swing.JList();
         lblViagens = new javax.swing.JLabel();
         lblParticipantes = new javax.swing.JLabel();
         btnAssociarUm = new javax.swing.JButton();
@@ -132,13 +132,13 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lstReservas.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        lstReservas.setModel(new javax.swing.AbstractListModel() {
+        lstAlojamentos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lstAlojamentos.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        spParticipantes.setViewportView(lstReservas);
+        spParticipantes.setViewportView(lstAlojamentos);
 
         lblViagens.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lblViagens.setText("Reserva Escolhidas:");
@@ -323,14 +323,14 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnAssociarUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarUmActionPerformed
-        if (lstReservas.getSelectedValuesList().size() != 1) {
+        if (lstAlojamentos.getSelectedValuesList().size() != 1) {
             lblAviso.setText("Apenas pode ter um alojamento selecionado");
         } else {
             Etapa etapaEscolhida = (Etapa) comboModelEtapas.getElementAt(jComboBox1.getSelectedIndex());
 
-            Alojamento a = (Alojamento) lstReservas.getSelectedValue();
+            Alojamento a = (Alojamento) lstAlojamentos.getSelectedValue();
             modelA.removeElement(a);
-            lstReservas.setModel(modelA);
+            lstAlojamentos.setModel(modelA);
             cenarioAlojamento.getMapaReservas().put(etapaEscolhida, a);
             lblReservaEscolhida.setText(a.getDesignacao());
         }
@@ -341,9 +341,9 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
         if (!cenarioAlojamento.getMapaReservas().containsKey(etapaEscolhida) || cenarioAlojamento.getMapaReservas().get(etapaEscolhida) == null) {
             lblAviso.setText("Selecione apenas um alojamento");
         } else {
-            Alojamento a = (Alojamento) lstReservas.getSelectedValue();
+            Alojamento a = (Alojamento) lstAlojamentos.getSelectedValue();
             modelA.addElement(a);
-            lstReservas.setModel(modelA);
+            lstAlojamentos.setModel(modelA);
             cenarioAlojamento.getMapaReservas().put(etapaEscolhida, a);
             lblReservaEscolhida.setText("");
 
@@ -356,7 +356,15 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        preencherPainel();
+        DefaultListModel listModel = new DefaultListModel();
+        Etapa etapaEscolhida = (Etapa) jComboBox1.getSelectedItem();
+        if (!DadosAplicacao.getInstance().getAlojamentos().isEmpty()) {
+            for (Alojamento alojamento : DadosAplicacao.getInstance().getAlojamentos()) {
+                if (etapaEscolhida.getLocalidadeFinal().equals(alojamento.getLocalidade())) {
+                    listModel.addElement(alojamento);
+                }
+            }
+        }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     public void preencherCampos(CenarioAlojamento cenarioAlojamento) {
@@ -423,20 +431,44 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
     private javax.swing.JLabel lblParticipantes;
     private javax.swing.JLabel lblReservaEscolhida;
     private javax.swing.JLabel lblViagens;
-    private javax.swing.JList lstReservas;
+    private javax.swing.JList lstAlojamentos;
     private javax.swing.JScrollPane spParticipantes;
     private javax.swing.JTextField tfDesignacao;
     // End of variables declaration//GEN-END:variables
 
-    private void preencherPainel() {
-        modelA = new DefaultListModel();
-        Etapa etapaEscolhida = (Etapa) comboModelEtapas.getElementAt(jComboBox1.getSelectedIndex());
+    private void preencherPainel(Viagem viagem) {
+
+        this.viagem = viagem;
+
+        comboModelEtapas = new DefaultComboBoxModel<>();
+
+        for (Etapa etapa : viagem.getEtapas()) {
+            comboModelEtapas.addElement(etapa);
+        }
+        jComboBox1.setModel(comboModelEtapas);
+
+        jComboBox1.setSelectedIndex(0);
+
+        DefaultListModel listModel = new DefaultListModel();
+        Etapa etapaEscolhida = (Etapa) jComboBox1.getSelectedItem();
+        if (!DadosAplicacao.getInstance().getAlojamentos().isEmpty()) {
+            for (Alojamento alojamento : DadosAplicacao.getInstance().getAlojamentos()) {
+                if (etapaEscolhida.getLocalidadeFinal().equals(alojamento.getLocalidade())) {
+                    listModel.addElement(alojamento);
+                }
+            }
+        }
+
+        lstAlojamentos.setModel(listModel);
+
+//        modelA = new DefaultListModel();
+//        Etapa etapaEscolhida = (Etapa) comboModelEtapas.getElementAt(jComboBox1.getSelectedIndex());
 //        for (Alojamento alojamento : etapaEscolhida.getReservas()) {
 //            modelA.addElement(alojamento);
 //        }
         Alojamento alojamento = cenarioAlojamento.getMapaReservas().get(etapaEscolhida);
         lblReservaEscolhida.setText(alojamento.getDesignacao());
         modelA.removeElement(alojamento);
-        lstReservas.setModel(modelA);
+        lstAlojamentos.setModel(modelA);
     }
 }

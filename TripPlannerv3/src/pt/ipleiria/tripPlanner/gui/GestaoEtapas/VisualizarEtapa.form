@@ -56,7 +56,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
                       <Component id="btnOk" min="-2" pref="62" max="-2" attributes="0"/>
-                      <EmptySpace pref="215" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="67" max="32767" attributes="0"/>

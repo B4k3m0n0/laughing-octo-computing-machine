@@ -25,9 +25,9 @@ public class Alojamento {
     private String morada;
     private String observacoes;
     private String checkout;
-    private String localidade;
+    private Localidade localidade;
 
-    public Alojamento(String designacao, String longitude, String latitude, String tipo, ArrayList<Quarto> listaQuartos, String horarioFunc, String checkin,String checkout, String contactos, String morada, String observacoes, String localidade) {
+    public Alojamento(String designacao, String longitude, String latitude, String tipo, ArrayList<Quarto> listaQuartos, String horarioFunc, String checkin,String checkout, String contactos, String morada, String observacoes, Localidade localidade) {
         this.designacao = designacao;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -42,7 +42,7 @@ public class Alojamento {
         this.localidade = localidade;
     }
 
-    public String getLocalidade() {
+    public Localidade getLocalidade() {
         return localidade;
     }
 

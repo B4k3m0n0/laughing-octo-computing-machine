@@ -13,6 +13,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Localidade;
 import pt.ipleiria.tripPlanner.gui.Models.Quarto;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererQuartos;
 import pt.ipleiria.tripPlanner.gui.events.AdicionarQuartoClicadoEvent;
@@ -655,7 +656,9 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
             } else if (rbPensao.isSelected()) {
                 tipo = "Pensao";
             }
-            Alojamento alojamento = new Alojamento(tfDesignacao.getText(), tfLongitude.getText(), tfLatitude.getText(), tipo, quartos,jtaHorarioFuncionamento.getText() ,tfCheckin.getText(), tfCheckout.getText(), tfContactos.getText(), tfMorada.getText(),jtaObservacoes.getText(),tfLocalidade.getText() );
+            
+            Localidade localidade = new Localidade(tfLocalidade.getText());
+            Alojamento alojamento = new Alojamento(tfDesignacao.getText(), tfLongitude.getText(), tfLatitude.getText(), tipo, quartos,jtaHorarioFuncionamento.getText() ,tfCheckin.getText(), tfCheckout.getText(), tfContactos.getText(), tfMorada.getText(),jtaObservacoes.getText(),localidade );
             DadosAplicacao.getInstance().addAlojamento(alojamento);
             JOptionPane.showMessageDialog(this, "Alojamento Inserida com Sucesso!", "Inserção Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.fireConfirmarClicadoAlojamentoEvent();

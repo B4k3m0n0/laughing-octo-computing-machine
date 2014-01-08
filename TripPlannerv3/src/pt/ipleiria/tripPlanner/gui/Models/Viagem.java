@@ -20,6 +20,7 @@ public class Viagem {
     ArrayList<Participante> participantes;
     ArrayList<Participante> participantesAutor;
     ArrayList<Reserva> reservas;
+    ArrayList<CenarioAlojamento> cenariosDeAlojamento;
 
 
     public Viagem(String designacao, ArrayList<Etapa> etapas, ArrayList<Alojamento> alojamentos, String tipoViagem) {
@@ -67,6 +68,10 @@ public class Viagem {
 
     public void setParticipantesAutor(ArrayList<Participante> participantesAutor) {
         this.participantesAutor = participantesAutor;
+    }
+
+    public ArrayList<CenarioAlojamento> getCenariosDeAlojamento() {
+        return cenariosDeAlojamento;
     }
     
 }

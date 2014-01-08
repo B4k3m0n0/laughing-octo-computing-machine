@@ -157,7 +157,7 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         lblErro = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableCenario = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -234,8 +234,8 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
         lblErro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lblErro.setForeground(new java.awt.Color(255, 0, 0));
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableCenario.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tableCenario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -246,7 +246,7 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tableCenario);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -319,12 +319,15 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
-//         if(jList1.getSelectedIndex() != -1){
-//            CenarioAlojamento cenarioAlojamentoSelecionado =  (CenarioAlojamento) jList1.getSelectedValue();
-//            this.fireVisualizarCenarioAlojamentoClicadoEvent(cenarioAlojamentoSelecionado);
-//        }else{
-//            lblErro.setText("Tem de selecionar um cenario de alojamento!");
-//        }
+        lblErro.setText("");
+
+        if (tableCenario.getSelectedRowCount() != 1) {
+            CenariosTableModel model = (CenariosTableModel) tableCenario.getModel();
+            CenarioAlojamento cenario = model.getSelectedRow(tableCenario.getSelectedRow());
+            this.fireVisualizarCenarioAlojamentoClicadoEvent(cenario);
+        } else {
+            lblErro.setText("Tem de selecionar um cenario!");
+        }
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jbCompararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCompararActionPerformed
@@ -341,15 +344,22 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     }//GEN-LAST:event_jbVoltarActionPerformed
 
     private void jbCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCriarActionPerformed
+        lblErro.setText("");
         this.fireInserirCenarioAlojamentoClicadoEvent(viagem);
     }//GEN-LAST:event_jbCriarActionPerformed
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-        if (jTable1.getSelectedRow() != -1) {
-//            CenarioAlojamento cenarioAlojamento = (CenarioAlojamento) jTable1.getSelectedRow();
-//            this.fireEditarCenarioAlojamentoClicadoEvent(cenarioAlojamento);
+        lblErro.setText("");
+
+        if (tableCenario.getSelectedRow() != -1) {
+
+            CenariosTableModel model = (CenariosTableModel) tableCenario.getModel();
+
+            CenarioAlojamento cenario = model.getSelectedRow(tableCenario.getSelectedRow());
+
+            this.fireEditarCenarioAlojamentoClicadoEvent(cenario);
         } else {
-            lblErro.setText("Têm de selecionar um participante!");
+            lblErro.setText("Tem de selecionar um cenario de alojamento!");
         }
 
     }//GEN-LAST:event_jbEditarActionPerformed
@@ -383,8 +393,8 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
 
-        CenariosTableModel model = (CenariosTableModel) jTable1.getModel();
-        CenarioAlojamento cenarioAlojamento = model.getSelectedRow(jTable1.getSelectedRow());
+        CenariosTableModel model = (CenariosTableModel) tableCenario.getModel();
+        CenarioAlojamento cenarioAlojamento = model.getSelectedRow(tableCenario.getSelectedRow());
         //        if(jList1.getSelectedIndex() != -1){
 //            int resposta = JOptionPane.showConfirmDialog(this, "Têm a certeza que pretende remover o cenario de alojamento " + jList1.getSelectedValue().toString() + "?");
 //            if(resposta == 1){
@@ -399,7 +409,6 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbComparar;
     private javax.swing.JButton jbCriar;
     private javax.swing.JButton jbEditar;
@@ -409,23 +418,14 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     private javax.swing.JLabel lblErro;
     private javax.swing.JLabel lblLista;
     private javax.swing.JLabel lblParticipantes;
+    private javax.swing.JTable tableCenario;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
 
-    public void actualizarListaCenariosAlojamento(Viagem viagem) {
+    public void preencherCampos(Viagem viagem) {
 
         this.viagem = viagem;
         lblLista.setText("Lista de Cenários de Alojamento da viagem " + viagem.getDesignacao() + ":");
 
-//        jTable1.setModel(new CenariosTableModel(viagem.getCenariosAlojamento()));
-
-
-
-        //DefaultListModel<CenarioAlojamento> model =  new DefaultListModel<>();
-        //for(CenarioAlojamento cenarioAlojamento: viagem.getCenarioAlojamento){
-        //   model.addElement(cenarioAlojamento);
-        //}
-
-        // jList1.setModel(model);
     }
 }

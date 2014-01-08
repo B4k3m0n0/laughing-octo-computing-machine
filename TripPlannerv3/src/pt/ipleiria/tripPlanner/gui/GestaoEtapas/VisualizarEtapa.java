@@ -338,8 +338,8 @@ public class VisualizarEtapa extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void preencherCampos(Etapa etapa) {
-        lblMostrarLocalidadeInicio.setText(etapa.getLocalInicio());
-        lblMostrarLocalidadeFinal.setText(etapa.getLocalidadeFinal());
+        lblMostrarLocalidadeInicio.setText(etapa.getLocalInicio().toString());
+        lblMostrarLocalidadeFinal.setText(etapa.getLocalidadeFinal().toString());
         lblMostrarAltitudeAcumulada.setText(etapa.getAltitudeAcumulada() + "");
         lblMostrarAltitudeMaxima.setText(etapa.getAltitudeMaxima() + "");
         lblMostrarAltitudeMinima.setText(etapa.getAltitudeMinima() + "");

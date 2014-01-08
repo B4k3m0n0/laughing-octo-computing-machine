@@ -412,7 +412,8 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
                 Localidade l = model.elementAt(index);
                 localidades.add(l);
             }
-            Etapa e = new Etapa(tfDesignacao.getText(), tfLocalidadeInicio.getText(), tfLocalidadeFinal.getText(), localidades, Integer.parseInt(tfDistanciaTotal.getText()), Integer.parseInt(tfAltitudeAcumulada.getText()), Integer.parseInt(tfAltitudeMaxima.getText()), Integer.parseInt(tfAltitudeMinima.getText()));
+            
+            Etapa e = new Etapa(tfDesignacao.getText(), new Localidade(tfLocalidadeInicio.getText()), new Localidade(tfLocalidadeFinal.getText()), localidades, Integer.parseInt(tfDistanciaTotal.getText()), Integer.parseInt(tfAltitudeAcumulada.getText()), Integer.parseInt(tfAltitudeMaxima.getText()), Integer.parseInt(tfAltitudeMinima.getText()));
             if (etapa == null) {
                 DadosAplicacao.getInstance().addEtapa(e);
                 JOptionPane.showMessageDialog(this, "Etapa Inserida com Sucesso!", "Inserção Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -502,8 +503,8 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
 
     private void preencherCampos(Etapa etapa) {
         tfDesignacao.setText(etapa.getDesignacao());
-        tfLocalidadeInicio.setText(etapa.getLocalInicio());
-        tfLocalidadeFinal.setText(etapa.getLocalidadeFinal());
+        tfLocalidadeInicio.setText(etapa.getLocalInicio().toString());
+        tfLocalidadeFinal.setText(etapa.getLocalidadeFinal().toString());
         tfAltitudeAcumulada.setText(etapa.getAltitudeAcumulada() + "");
         tfAltitudeMinima.setText(etapa.getAltitudeMinima() + "");
         tfAltitudeMaxima.setText(etapa.getAltitudeMaxima() + "");

@@ -81,14 +81,14 @@ public class DadosAplicacao {
         localidade.add(new Localidade("Leiria"));
         
         Etapa etapa1;
-        etapa1 = new Etapa("Etapa2", "Pombal City", "Leiria", localidade, 30, 1, 1, 1);
+        etapa1 = new Etapa("Etapa2", new Localidade("Pombal City"), new Localidade("Leiria"), localidade, 30, 1, 1, 1);
         etapas.add(etapa1);
         
         addQuarto(new Quarto("quarto 1", "2", "Individual", "50", "quarto"));
         quartos.add(new Quarto("quarto 1", "2", "Individual", "50", "quarto"));
         Alojamento alojamento1;
 
-        alojamento1 = new Alojamento("Alojamento 1", "3.1111423", "-1.312421", "Albergue", quartos, "11", "8h","21", "214598745", "Rua da brilhantina", "", "Lisboa");
+        alojamento1 = new Alojamento("Alojamento 1", "3.1111423", "-1.312421", "Albergue", quartos, "11", "8h","21", "214598745", "Rua da brilhantina", "", new Localidade("Lisboa"));
 
         alojamentos.add(alojamento1);
 

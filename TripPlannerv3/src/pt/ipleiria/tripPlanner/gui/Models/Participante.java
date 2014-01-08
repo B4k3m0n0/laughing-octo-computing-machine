@@ -18,7 +18,7 @@ public class Participante {
     private int BI;
     private String localidade;
     private int ICF;
-    private boolean administrador;
+    private boolean autor;
     private String username;
     private char[] password;
     private boolean primeiroLogin;
@@ -30,7 +30,7 @@ public class Participante {
         this.BI = BI;
         this.localidade = localidade;
         this.ICF = ICF;
-        this.administrador = administrador;
+        this.autor = administrador;
         this.username = username;
         this.password = password;
         this.primeiroLogin = primeiroLogin;
@@ -65,10 +65,6 @@ public class Participante {
         return ICF;
     }
 
-    public boolean isAdministrador() {
-        return administrador;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -97,10 +93,6 @@ public class Participante {
         this.ICF = ICF;
     }
 
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -108,4 +100,14 @@ public class Participante {
     public void setPassword(char[] password) {
         this.password = password;
     }
+
+    public boolean isAutor() {
+        return autor;
+    }
+
+    public void setAutor(boolean autor) {
+        this.autor = autor;
+    }
+    
+    
 }

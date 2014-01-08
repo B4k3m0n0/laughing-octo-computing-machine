@@ -71,6 +71,11 @@ public class Etapa {
         this.participantes = participantes;
     }
 
+    @Override
+    public String toString() {
+        return designacao;
+    }
+
    
     
     

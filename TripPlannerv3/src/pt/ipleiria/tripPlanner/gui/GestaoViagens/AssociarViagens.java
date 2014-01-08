@@ -35,6 +35,7 @@ public class AssociarViagens extends javax.swing.JPanel {
     
     private ArrayList<Participante> associados;
     private ArrayList<Participante> editores;
+    private Viagem viagem;
 
     /**
      * Creates new form ReservarAlojamento
@@ -247,6 +248,14 @@ public class AssociarViagens extends javax.swing.JPanel {
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         associados = getLstAssociados();
         editores = getLstEditor();
+        ArrayList<Participante> participantes = new ArrayList<>();
+        participantes.addAll(associados);
+        
+        
+        ArrayList<Participante> aux = new ArrayList<>(editores);
+        aux.removeAll(editores);
+        participantes.addAll(aux);
+        DadosAplicacao.getInstance().getViagem(viagem).setParticipantes(participantes);
         this.fireConfirmarAssociacaoViagensEvent();
     }//GEN-LAST:event_btnOkActionPerformed
 
@@ -293,7 +302,7 @@ public class AssociarViagens extends javax.swing.JPanel {
     public void setDados(Viagem viagem) {
 //        DadosAplicacao.getInstance().getViagem(viagem).setParticipantes(getLstAssociados());
 //        DadosAplicacao.getInstance().getViagem(viagem).setParticipantesAutor(getLstEditor());
-        
+        this.viagem = viagem;
         DadosAplicacao.getInstance().getViagem(viagem).setParticipantes(associados);
         DadosAplicacao.getInstance().getViagem(viagem).setParticipantesAutor(editores);
         

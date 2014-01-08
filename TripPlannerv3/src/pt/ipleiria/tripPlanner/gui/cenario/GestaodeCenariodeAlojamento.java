@@ -10,6 +10,7 @@ import pt.ipleiria.tripPlanner.gui.Models.CenarioAlojamento;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererCenarioAlojamento;
+import pt.ipleiria.tripPlanner.gui.Utils.CenariosTableModel;
 import pt.ipleiria.tripPlanner.gui.events.CompararCenarioAlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.CompararCenarioAlojamentoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.EditarCenarioAlojamentoClicadoEvent;
@@ -30,7 +31,6 @@ import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalListener;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author DELL
@@ -43,53 +43,54 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     private List<InserirCenarioAlojamentoClicadoListener> inserirCenarioAlojamentoClicadoListener;
     private List<EditarCenarioAlojamentoClicadoListener> editarCenarioAlojamentoClicadoListener;
     private List<VoltarGestaoCenarioAlojamentoClicadoListener> voltarGestaoCenarioAlojamentoClicadoListener;
+    private Viagem viagem;
 
     /**
      * Creates new form GestãodeCenáriodeAlojamento
      */
     public GestaodeCenariodeAlojamento() {
         initComponents();
-        
+
         this.visualizarCenarioAlojamentoClicadoListener = new ArrayList<>();
         this.compararCenarioAlojamentoClicadoListener = new ArrayList<>();
         this.voltarMenuCenariosClicadoListener = new ArrayList<>();
         this.inserirCenarioAlojamentoClicadoListener = new ArrayList<>();
         this.editarCenarioAlojamentoClicadoListener = new ArrayList<>();
         this.voltarGestaoCenarioAlojamentoClicadoListener = new ArrayList<>();
-        
+
         //jList1.setCellRenderer((ListCellRenderer) new CellRendererCenarioAlojamento());
     }
-    
-    public synchronized void addVisualizarCenarioAlojamentoClicadoListener(VisualizarCenarioAlojamentoClicadoListener listener){
+
+    public synchronized void addVisualizarCenarioAlojamentoClicadoListener(VisualizarCenarioAlojamentoClicadoListener listener) {
         this.visualizarCenarioAlojamentoClicadoListener.add(listener);
     }
-    
-    public synchronized void removeVisualizarCenarioAlojamentoClicadoListener(VisualizarCenarioAlojamentoClicadoListener listener){
+
+    public synchronized void removeVisualizarCenarioAlojamentoClicadoListener(VisualizarCenarioAlojamentoClicadoListener listener) {
         this.visualizarCenarioAlojamentoClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireVisualizarCenarioAlojamentoClicadoEvent(CenarioAlojamento cenarioAlojamento){
-        for(VisualizarCenarioAlojamentoClicadoListener listener : this.visualizarCenarioAlojamentoClicadoListener){
-        VisualizarCenarioAlojamentoClicadoEvent evento = new VisualizarCenarioAlojamentoClicadoEvent(this, cenarioAlojamento);
-        listener.visualizarCenarioAlojamentoClicado(evento);
+    protected synchronized void fireVisualizarCenarioAlojamentoClicadoEvent(CenarioAlojamento cenarioAlojamento) {
+        for (VisualizarCenarioAlojamentoClicadoListener listener : this.visualizarCenarioAlojamentoClicadoListener) {
+            VisualizarCenarioAlojamentoClicadoEvent evento = new VisualizarCenarioAlojamentoClicadoEvent(this, cenarioAlojamento);
+            listener.visualizarCenarioAlojamentoClicado(evento);
         }
     }
-    
-    public synchronized void addCompararCenarioAlojamentoClicadoListener(CompararCenarioAlojamentoClicadoListener listener){
+
+    public synchronized void addCompararCenarioAlojamentoClicadoListener(CompararCenarioAlojamentoClicadoListener listener) {
         this.compararCenarioAlojamentoClicadoListener.add(listener);
     }
-    
-    public synchronized void removeCompararCenarioAlojamentoClicadoListener(CompararCenarioAlojamentoClicadoListener listener){
+
+    public synchronized void removeCompararCenarioAlojamentoClicadoListener(CompararCenarioAlojamentoClicadoListener listener) {
         this.compararCenarioAlojamentoClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireCompararCenarioAlojamentoClicadoEvent(ArrayList<CenarioAlojamento> cenarioAlojamentosSelected){
-        for(CompararCenarioAlojamentoClicadoListener listener : this.compararCenarioAlojamentoClicadoListener){
-        CompararCenarioAlojamentoClicadoEvent evento = new CompararCenarioAlojamentoClicadoEvent(this, cenarioAlojamentosSelected);
-        listener.compararCenarioAlojamentoClicado(evento);
+    protected synchronized void fireCompararCenarioAlojamentoClicadoEvent(ArrayList<CenarioAlojamento> cenarioAlojamentosSelected) {
+        for (CompararCenarioAlojamentoClicadoListener listener : this.compararCenarioAlojamentoClicadoListener) {
+            CompararCenarioAlojamentoClicadoEvent evento = new CompararCenarioAlojamentoClicadoEvent(this, cenarioAlojamentosSelected);
+            listener.compararCenarioAlojamentoClicado(evento);
         }
     }
-    
+
     public synchronized void addInserirCenarioAlojamentoClicadoListener(InserirCenarioAlojamentoClicadoListener listener) {
         this.inserirCenarioAlojamentoClicadoListener.add(listener);
     }
@@ -98,9 +99,9 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
         this.inserirCenarioAlojamentoClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireInserirCenarioAlojamentoClicadoEvent() {
+    protected synchronized void fireInserirCenarioAlojamentoClicadoEvent(Viagem viagem) {
         for (InserirCenarioAlojamentoClicadoListener listener : this.inserirCenarioAlojamentoClicadoListener) {
-            InserirCenarioAlojamentoClicadoEvent evento = new InserirCenarioAlojamentoClicadoEvent(this);
+            InserirCenarioAlojamentoClicadoEvent evento = new InserirCenarioAlojamentoClicadoEvent(this, viagem);
             listener.inserirCenarioAlojamentoClicado(evento);
         }
     }
@@ -119,7 +120,7 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
             listener.editarCenarioAlojamentoClicado(evento);
         }
     }
-    
+
     public synchronized void addVoltarMenuCenariosClicadoListener(VoltarMenuCenariosClicadoListener listener) {
         this.voltarMenuCenariosClicadoListener.add(listener);
     }
@@ -134,6 +135,7 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
             listener.voltarMenuCenariosAlojamentoClicado(evento);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -232,6 +234,7 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
         lblErro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lblErro.setForeground(new java.awt.Color(255, 0, 0));
 
+        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -261,22 +264,18 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                        .addGap(19, 19, 19)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jbPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jbComparar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(lblErro, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(lblLista)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGap(19, 19, 19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jbPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbComparar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lblErro, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblLista))
                         .addGap(0, 3, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -296,9 +295,9 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
                 .addComponent(lblParticipantes)
                 .addGap(2, 2, 2)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblLista)
                 .addGap(10, 10, 10)
+                .addComponent(lblLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,7 +325,6 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
 //        }else{
 //            lblErro.setText("Tem de selecionar um cenario de alojamento!");
 //        }
-        
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jbCompararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCompararActionPerformed
@@ -343,17 +341,17 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     }//GEN-LAST:event_jbVoltarActionPerformed
 
     private void jbCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCriarActionPerformed
-        this.fireInserirCenarioAlojamentoClicadoEvent();
+        this.fireInserirCenarioAlojamentoClicadoEvent(viagem);
     }//GEN-LAST:event_jbCriarActionPerformed
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-//         if(jList1.getSelectedIndex() != -1){
-//            CenarioAlojamento cenarioAlojamento = (CenarioAlojamento) jList1.getSelectedValue();
+        if (jTable1.getSelectedRow() != -1) {
+//            CenarioAlojamento cenarioAlojamento = (CenarioAlojamento) jTable1.getSelectedRow();
 //            this.fireEditarCenarioAlojamentoClicadoEvent(cenarioAlojamento);
-//        }else{
-//            lblErro.setText("Têm de selecionar um participante!");
-//        }
-        
+        } else {
+            lblErro.setText("Têm de selecionar um participante!");
+        }
+
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void tfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPesquisarActionPerformed
@@ -361,14 +359,15 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     }//GEN-LAST:event_tfPesquisarActionPerformed
 
     private void tfPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPesquisarKeyPressed
-        DefaultListModel<Viagem> model =  new DefaultListModel<>();
+        DefaultListModel<Viagem> model = new DefaultListModel<>();
         model.clear();
         String filtro = tfPesquisar.getText();
-        for(Viagem viagem: DadosAplicacao.getInstance().getViagens()){
-             if(viagem.getDesignacao().contains(filtro))
-                 model.addElement(viagem);
+        for (Viagem viagem : DadosAplicacao.getInstance().getViagens()) {
+            if (viagem.getDesignacao().contains(filtro)) {
+                model.addElement(viagem);
+            }
         }
-        
+
 //        jList1.setModel(model);
     }//GEN-LAST:event_tfPesquisarKeyPressed
 
@@ -378,12 +377,15 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     }//GEN-LAST:event_tfPesquisarFocusGained
 
     private void tfPesquisarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPesquisarFocusLost
-       tfPesquisar.setText("Pesquise...");
+        tfPesquisar.setText("Pesquise...");
         tfPesquisar.setForeground(Color.GRAY);
     }//GEN-LAST:event_tfPesquisarFocusLost
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-//        if(jList1.getSelectedIndex() != -1){
+
+        CenariosTableModel model = (CenariosTableModel) jTable1.getModel();
+        CenarioAlojamento cenarioAlojamento = model.getSelectedRow(jTable1.getSelectedRow());
+        //        if(jList1.getSelectedIndex() != -1){
 //            int resposta = JOptionPane.showConfirmDialog(this, "Têm a certeza que pretende remover o cenario de alojamento " + jList1.getSelectedValue().toString() + "?");
 //            if(resposta == 1){
 //                CenarioAlojamento cenarioAlojamentoSelected = (CenarioAlojamento) jList1.getSelectedValue();
@@ -394,9 +396,6 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
 //            lblErro.setText("Têm de selecionar um cenario de alojamento!");
 //        }
     }//GEN-LAST:event_jbEliminarActionPerformed
-
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -414,15 +413,19 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void actualizarListaCenariosAlojamento(Viagem viagem) {
-        
+
+        this.viagem = viagem;
         lblLista.setText("Lista de Cenários de Alojamento da viagem " + viagem.getDesignacao() + ":");
-        
+
+//        jTable1.setModel(new CenariosTableModel(viagem.getCenariosAlojamento()));
+
+
+
         //DefaultListModel<CenarioAlojamento> model =  new DefaultListModel<>();
         //for(CenarioAlojamento cenarioAlojamento: viagem.getCenarioAlojamento){
-         //   model.addElement(cenarioAlojamento);
+        //   model.addElement(cenarioAlojamento);
         //}
-        
-       // jList1.setModel(model);
-    }
 
+        // jList1.setModel(model);
+    }
 }

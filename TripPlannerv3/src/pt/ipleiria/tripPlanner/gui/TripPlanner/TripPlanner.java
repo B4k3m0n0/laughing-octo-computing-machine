@@ -259,7 +259,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         visualizarEtapa.addOkVisualizarEtapasClicadoListener(this);
         mostrarAlojamento.addConfirmarClicadoAlojamentoistener(this);
         jPanel1.setPreferredSize(new Dimension(400, 300));
-        
+        gestaodeViagens.addGestaoCenarioAlojamentoClicadoListener(this);
         menuCenarios.addVoltarMenuPrincipalListener(this);
         menuPrincipal.addTerminarSessaoClicadoListener(this);
         dadosAcesso.addTerminarSessaoClicadoListener(this);
@@ -352,6 +352,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void participantesClicado(ParticipantesClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        menuParticipante.actualizarListaParticipantes();
         menuParticipante.limparCampos();
         cl.show(this.jPanel1, "menuParticipantes");
     }
@@ -529,6 +530,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     public void inserirCenarioAlojamentoClicado(InserirCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         criarEditarCenarioAlojamento.setTitulo("Novo Cenario de Alojamento");
+//        criarEditarCenarioAlojamento.preencherCampos(evt.getViagem());
         cl.show(this.jPanel1, "criarEditarCenarioAlojamento");
     }
     

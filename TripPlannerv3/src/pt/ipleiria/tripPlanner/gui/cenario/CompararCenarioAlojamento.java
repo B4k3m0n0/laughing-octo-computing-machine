@@ -8,9 +8,11 @@ package pt.ipleiria.tripPlanner.gui.cenario;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.CenarioAlojamento;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererCenarioAlojamento;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
@@ -31,8 +33,8 @@ public class CompararCenarioAlojamento extends javax.swing.JPanel {
         initComponents();
         
         this.okInserirCenarioAlojamentoClicadoListener = new ArrayList<>();
-        lCenarioAlojamento1.setCellRenderer((ListCellRenderer) new CellRendererCenarioAlojamento());
-        lCenarioAlojamento2.setCellRenderer((ListCellRenderer) new CellRendererCenarioAlojamento());
+//        lCenarioAlojamento1.setCellRenderer((ListCellRenderer) new CellRendererCenarioAlojamento());
+//        lCenarioAlojamento2.setCellRenderer((ListCellRenderer) new CellRendererCenarioAlojamento());
     }
     
     
@@ -61,26 +63,21 @@ public class CompararCenarioAlojamento extends javax.swing.JPanel {
     private void initComponents() {
 
         lblCenarioAlojamento = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lCenarioAlojamento2 = new javax.swing.JList();
         btnOk = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lCenarioAlojamento1 = new javax.swing.JList();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         lblCenarioAlojamento.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         lblCenarioAlojamento.setText("Comparar Cenarios de Alojamento");
-
-        lCenarioAlojamento2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(lCenarioAlojamento2);
 
         btnOk.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnOk.setText("Ok");
@@ -90,63 +87,95 @@ public class CompararCenarioAlojamento extends javax.swing.JPanel {
             }
         });
 
-        lCenarioAlojamento1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(lCenarioAlojamento1);
-
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel1.setText("Cenario XPTO");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel2.setText("Cenarios PTOX");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable2);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("Mostrar apenas etapa:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(btnOk)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(44, 44, 44))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblCenarioAlojamento))
-                    .addComponent(jSeparator1))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(249, 249, 249)
+                        .addComponent(btnOk))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblCenarioAlojamento)
+                            .addGap(37, 37, 37)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblCenarioAlojamento)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addComponent(btnOk)
-                .addGap(29, 29, 29))
+                .addGap(35, 35, 35))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,39 +185,49 @@ public class CompararCenarioAlojamento extends javax.swing.JPanel {
 
     public void preencherCampos(ArrayList<CenarioAlojamento> cenariosAlojamento){
 
-        int i=0;
-        for(CenarioAlojamento cenarioSelected : cenariosAlojamento){
-            if(i==0){
-                jLabel1.setText("Cenario " + cenarioSelected.getDesignacao() + ":");
-                ArrayList<CenarioAlojamento> alojamentosReservados = cenarioSelected.getAlojamentos();
-                DefaultListModel model1 = new DefaultListModel();
-                for(CenarioAlojamento alojamentosCenario1 : alojamentosReservados){
-                    model1.addElement(alojamentosCenario1);
-                }
-                    lCenarioAlojamento1.setModel(model1);
-                    i++;
-            }else{
-                jLabel2.setText("Cenario " + cenarioSelected.getDesignacao() + ":");
-                ArrayList<CenarioAlojamento> alojamentosReservados = cenarioSelected.getAlojamentos();
-                DefaultListModel model2 = new DefaultListModel();
-                for(CenarioAlojamento alojamentosCenario2 : alojamentosReservados){
-                    model2.addElement(alojamentosCenario2);
-                }
-                    lCenarioAlojamento2.setModel(model2);
-            }
-        }
+        DefaultComboBoxModel model = new DefaultComboBoxModel<>();
+        
+//        for(Etapa etapa : cenariosAlojamento.getEtapas()){
+//            model.addElement(etapa);
+//        }
+            
+        jComboBox1.setModel(model);
+        
+//        int i=0;
+//        for(CenarioAlojamento cenarioSelected : cenariosAlojamento){
+//            if(i==0){
+//                jLabel1.setText("Cenario " + cenarioSelected.getDesignacao() + ":");
+//                ArrayList<CenarioAlojamento> alojamentosReservados = cenarioSelected.getAlojamentos();
+//                DefaultListModel model1 = new DefaultListModel();
+//                for(CenarioAlojamento alojamentosCenario1 : alojamentosReservados){
+//                    model1.addElement(alojamentosCenario1);
+//                }
+//                    lCenarioAlojamento1.setModel(model1);
+//                    i++;
+//            }else{
+//                jLabel2.setText("Cenario " + cenarioSelected.getDesignacao() + ":");
+//                ArrayList<CenarioAlojamento> alojamentosReservados = cenarioSelected.getAlojamentos();
+//                DefaultListModel model2 = new DefaultListModel();
+//                for(CenarioAlojamento alojamentosCenario2 : alojamentosReservados){
+//                    model2.addElement(alojamentosCenario2);
+//                }
+//                    lCenarioAlojamento2.setModel(model2);
+//            }
+//        }
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JList lCenarioAlojamento1;
-    private javax.swing.JList lCenarioAlojamento2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblCenarioAlojamento;
     // End of variables declaration//GEN-END:variables
 }

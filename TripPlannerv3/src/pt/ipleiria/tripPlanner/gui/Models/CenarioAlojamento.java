@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.ipleiria.tripPlanner.gui.Models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import pt.ipleiria.tripPlanner.gui.Models.Quarto;
 
 /**
@@ -14,27 +14,39 @@ import pt.ipleiria.tripPlanner.gui.Models.Quarto;
  * @author Ricardo
  */
 public class CenarioAlojamento {
+
     private String designacao;
-    private ArrayList<Etapa> etapas;
-    private ArrayList<Alojamento> alojamentosReservados;
+    private Viagem viagem;
+    private HashMap<Etapa, Alojamento> mapaReservas;
 
-
-    public CenarioAlojamento(String designacao, ArrayList<Alojamento> alojamentos){
+    public CenarioAlojamento(String designacao, Viagem viagem, HashMap<Etapa, Alojamento> mapaReservas) {
         this.designacao = designacao;
-        this.alojamentosReservados = alojamentos;
-        
+        this.viagem = viagem;
+        this.mapaReservas = mapaReservas;
+
     }
 
     public String getDesignacao() {
         return designacao;
     }
 
-    public ArrayList getAlojamentos() {
-        return alojamentosReservados;
+    public void setDesignacao(String designacao) {
+        this.designacao = designacao;
     }
 
-    public void setEtapas(ArrayList<Etapa> etapas) {
-        this.etapas = etapas;
+    public Viagem getViagem() {
+        return viagem;
     }
 
+    public void setViagem(Viagem viagem) {
+        this.viagem = viagem;
+    }
+
+    public HashMap<Etapa, Alojamento> getMapaReservas() {
+        return mapaReservas;
+    }
+
+    public void setMapaReservas(HashMap<Etapa, Alojamento> mapaReservas) {
+        this.mapaReservas = mapaReservas;
+    }
 }

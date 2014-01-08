@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.ipleiria.tripPlanner.gui.cenario;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import pt.ipleiria.tripPlanner.gui.Models.CenarioAlojamento;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
+import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererAlojamento;
-import pt.ipleiria.tripPlanner.gui.events.OkEditarCenarioAlojamentoClicadoEvent;
-import pt.ipleiria.tripPlanner.gui.events.OkEditarCenarioAlojamentoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.OkInserirCenarioAlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkInserirCenarioAlojamentoClicadoListener;
 
@@ -26,13 +28,13 @@ import pt.ipleiria.tripPlanner.gui.events.OkInserirCenarioAlojamentoClicadoListe
 public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
 
     private List<OkInserirCenarioAlojamentoClicadoListener> okInserirCenarioAlojamentoClicadoListener;
-    
     private ArrayList<Alojamento> alojamentoModelList;
     private DefaultListModel<Alojamento> modelA;
-
     private ArrayList<Alojamento> reservasModelList;
-    private DefaultListModel<Alojamento> modelR;
-    
+    private Viagem viagem;
+    private CenarioAlojamento cenarioAlojamento;
+    private DefaultComboBoxModel<Etapa> comboModelEtapas;
+
     /**
      * Creates new form CriarCenarioAlojamento
      */
@@ -42,19 +44,16 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
 
         alojamentoModelList = new ArrayList<>();
         modelA = new DefaultListModel<>();
-        
+
         reservasModelList = new ArrayList<>();
         modelA = new DefaultListModel<>();
-        
-        lstAlojamentos.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
+
         lstReservas.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
-        
-        setModel();
 
         lblAviso.setVisible(false);
     }
-    
-        public synchronized void addOkInserirCenarioAlojamentoClicadoListener(OkInserirCenarioAlojamentoClicadoListener listener) {
+
+    public synchronized void addOkInserirCenarioAlojamentoClicadoListener(OkInserirCenarioAlojamentoClicadoListener listener) {
         this.okInserirCenarioAlojamentoClicadoListener.add(listener);
     }
 
@@ -83,7 +82,6 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
 //            listener.okEditarCenarioAlojamentoClicado(evento);
 //        }
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,17 +95,14 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
         btnCancelar = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        btnEliminarAssociacaoVarios = new javax.swing.JButton();
-        btnAssociarVarios = new javax.swing.JButton();
-        spViagens = new javax.swing.JScrollPane();
-        lstReservas = new javax.swing.JList();
         spParticipantes = new javax.swing.JScrollPane();
-        lstAlojamentos = new javax.swing.JList();
+        lstReservas = new javax.swing.JList();
         lblViagens = new javax.swing.JLabel();
         lblParticipantes = new javax.swing.JLabel();
         btnAssociarUm = new javax.swing.JButton();
         btnEliminarAssociacaoUm = new javax.swing.JButton();
         lblAviso = new javax.swing.JLabel();
+        lblReservaEscolhida = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tfDesignacao = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -137,41 +132,19 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnEliminarAssociacaoVarios.setText("<<");
-        btnEliminarAssociacaoVarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarAssociacaoVariosActionPerformed(evt);
-            }
-        });
-
-        btnAssociarVarios.setText(">>");
-        btnAssociarVarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssociarVariosActionPerformed(evt);
-            }
-        });
-
         lstReservas.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lstReservas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        spViagens.setViewportView(lstReservas);
-
-        lstAlojamentos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        lstAlojamentos.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        spParticipantes.setViewportView(lstAlojamentos);
+        spParticipantes.setViewportView(lstReservas);
 
         lblViagens.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        lblViagens.setText("sdfghgd");
+        lblViagens.setText("Reserva Escolhidas:");
 
         lblParticipantes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        lblParticipantes.setText("Reservas:");
+        lblParticipantes.setText("Alojamentos");
 
         btnAssociarUm.setText(">");
         btnAssociarUm.addActionListener(new java.awt.event.ActionListener() {
@@ -198,26 +171,21 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblParticipantes)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(spParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblParticipantes)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(spParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEliminarAssociacaoUm, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAssociarUm, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAssociarVarios)
-                                    .addComponent(btnEliminarAssociacaoVarios))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblViagens)
-                            .addComponent(spViagens, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnAssociarUm, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminarAssociacaoUm, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblViagens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblReservaEscolhida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
-                        .addComponent(lblAviso, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41))
+                        .addComponent(lblAviso, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,26 +194,20 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblParticipantes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(spParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblViagens)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spViagens))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(25, 25, 25)
+                                    .addComponent(lblReservaEscolhida, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnAssociarUm)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAssociarVarios)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnEliminarAssociacaoUm)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminarAssociacaoVarios)
-                                .addGap(31, 31, 31)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEliminarAssociacaoUm)))))
+                .addGap(0, 0, 0)
                 .addComponent(lblAviso))
         );
 
@@ -256,6 +218,11 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
         jLabel3.setText("Etapas:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -300,7 +267,7 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -315,86 +282,71 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        
+
         if (tfDesignacao.getText().isEmpty()) {
             lblAviso.setText("Introduza uma designacao!");
             return;
         }
 
-        for (Alojamento alojamento : DadosAplicacao.getInstance().getAlojamentos()) {
-            if (tfDesignacao.getText().equals(alojamento.getDesignacao())) {
-                lblAviso.setText("Designacao já existente!");
-                return;
+        if (cenarioAlojamento.getDesignacao().equals("")) {
+//            for (CenarioAlojamento cenarioAlojamento : viagem.getCenariosAlojamento()) {
+//                if (tfDesignacao.getText().equals(cenarioAlojamento.getDesignacao())) {
+//                    lblAviso.setText("Designacao já existente!");
+//                    return;
+//                }
+//            }
+        }
+        boolean reservado = false;
+        for (Map.Entry<Etapa, Alojamento> entry : cenarioAlojamento.getMapaReservas().entrySet()) {
+            if (entry.getKey() != null) {
+                reservado = true;
+                break;
             }
         }
-        
-        if(lstReservas.getModel().getSize() < 0){
+        if (!reservado) {
             lblAviso.setText("Reserve pelo menos um alojamento");
             return;
         }
-        
-        for (int i = 0; i < lstReservas.getModel().getSize(); i++) {
-                Alojamento alojamento = (Alojamento) lstReservas.getModel().getElementAt(i);
-                reservasModelList.add(alojamento);
+
+        if (cenarioAlojamento.getDesignacao().equals("")) {
+            cenarioAlojamento.setDesignacao(tfDesignacao.getText());
+            DadosAplicacao.getInstance().adicionarCenarioAlojamento(cenarioAlojamento);
+            limparCampos();
+            this.fireOkInserirCenarioAlojamentoClicadoEvent();
+        } else {
+            cenarioAlojamento.setDesignacao(tfDesignacao.getText());
+            DadosAplicacao.getInstance().atualizarCenarioAlojamento(cenarioAlojamento);
+            limparCampos();
+            this.fireOkInserirCenarioAlojamentoClicadoEvent();
         }
-        
-        CenarioAlojamento cenarioAlojamento = new CenarioAlojamento(tfDesignacao.getText(), reservasModelList);
-        DadosAplicacao.getInstance().adicionarCenarioAlojamento(cenarioAlojamento);
-        
-        limparCampos();
-        
-        this.fireOkInserirCenarioAlojamentoClicadoEvent();
+
     }//GEN-LAST:event_btnOkActionPerformed
 
-    private void btnEliminarAssociacaoVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAssociacaoVariosActionPerformed
-        if (lstAlojamentos.getModel().getSize() < 0) {
-            lblAviso.setText("Não há mais alojamentos para passar!");
-        } else {
-            for (int i = 0; i < lstReservas.getModel().getSize(); i++) {
-                Alojamento r = (Alojamento) lstReservas.getModel().getElementAt(i);
-                modelA.addElement(r);
-            }
-            modelR.removeAllElements();
-            lstAlojamentos.setModel(modelA);
-            lstReservas.setModel(modelR);
-        }
-    }//GEN-LAST:event_btnEliminarAssociacaoVariosActionPerformed
-
-    private void btnAssociarVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarVariosActionPerformed
-        if (lstAlojamentos.getModel().getSize() < 0) {
-            lblAviso.setText("Não há mais alojamentos para passar!");
-        } else {
-            for (int i = 0; i < lstAlojamentos.getModel().getSize(); i++) {
-                Alojamento a = (Alojamento) lstAlojamentos.getModel().getElementAt(i);
-                modelR.addElement(a);
-            }
-            modelA.removeAllElements();
-            lstAlojamentos.setModel(modelA);
-            lstReservas.setModel(modelR);
-        }
-    }//GEN-LAST:event_btnAssociarVariosActionPerformed
-
     private void btnAssociarUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarUmActionPerformed
-        if (lstAlojamentos.getSelectedValuesList().size() != 1) {
+        if (lstReservas.getSelectedValuesList().size() != 1) {
             lblAviso.setText("Apenas pode ter um alojamento selecionado");
         } else {
-            Alojamento a = (Alojamento) lstAlojamentos.getSelectedValue();
-            modelR.addElement(a);
+            Etapa etapaEscolhida = (Etapa) comboModelEtapas.getElementAt(jComboBox1.getSelectedIndex());
+
+            Alojamento a = (Alojamento) lstReservas.getSelectedValue();
             modelA.removeElement(a);
-            lstAlojamentos.setModel(modelA);
-            lstReservas.setModel(modelR);
+            lstReservas.setModel(modelA);
+            cenarioAlojamento.getMapaReservas().put(etapaEscolhida, a);
+            lblReservaEscolhida.setText(a.getDesignacao());
         }
     }//GEN-LAST:event_btnAssociarUmActionPerformed
 
     private void btnEliminarAssociacaoUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAssociacaoUmActionPerformed
-        if (lstReservas.getSelectedValuesList().size() != 1) {
+        Etapa etapaEscolhida = (Etapa) comboModelEtapas.getElementAt(jComboBox1.getSelectedIndex());
+        if (!cenarioAlojamento.getMapaReservas().containsKey(etapaEscolhida) || cenarioAlojamento.getMapaReservas().get(etapaEscolhida) == null) {
             lblAviso.setText("Selecione apenas um alojamento");
         } else {
             Alojamento a = (Alojamento) lstReservas.getSelectedValue();
-            modelR.removeElement(a);
             modelA.addElement(a);
-            lstAlojamentos.setModel(modelA);
-            lstReservas.setModel(modelR);
+            lstReservas.setModel(modelA);
+            cenarioAlojamento.getMapaReservas().put(etapaEscolhida, a);
+            lblReservaEscolhida.setText("");
+
         }
     }//GEN-LAST:event_btnEliminarAssociacaoUmActionPerformed
 
@@ -403,47 +355,63 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
         this.fireOkInserirCenarioAlojamentoClicadoEvent();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        preencherPainel();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
-    private void setModel() {
-        alojamentoModelList = DadosAplicacao.getInstance().getAlojamentos();
-        modelA = new DefaultListModel<>();
-        for (Alojamento a : alojamentoModelList) {
-            modelA.addElement(a);
+    public void preencherCampos(CenarioAlojamento cenarioAlojamento) {
+        if (cenarioAlojamento == null) {
+            this.cenarioAlojamento = new CenarioAlojamento("", viagem, new HashMap<Etapa, Alojamento>());
+            for (Etapa etapa : cenarioAlojamento.getViagem().getEtapas()) {
+                comboModelEtapas.addElement(etapa);
+                cenarioAlojamento.getMapaReservas().put(etapa, null);
+            }
+        } else {
+            this.cenarioAlojamento = cenarioAlojamento;
+            for (Etapa etapa : cenarioAlojamento.getViagem().getEtapas()) {
+                comboModelEtapas.addElement(etapa);
+            }
         }
-        lstAlojamentos.setModel(modelA);
 
-        modelR = new DefaultListModel<>();
-        lstReservas.setModel(modelR);
-    }
-    
-    public void preencherCampos(CenarioAlojamento cenarioAlojamento){
         tfDesignacao.setText(cenarioAlojamento.getDesignacao());
         DefaultListModel<Alojamento> model = new DefaultListModel();
-        ArrayList<Alojamento> listaAlojamentos= cenarioAlojamento.getAlojamentos();
-        for(Alojamento alojamento: listaAlojamentos){
-            model.addElement(alojamento);
-        }
-        
-        lstReservas.setModel(model);
+//        ArrayList<Alojamento> listaAlojamentos = cenarioAlojamento.getAlojamentos();
+//        for (Alojamento alojamento : listaAlojamentos) {
+//            model.addElement(alojamento);
+//        }
     }
-    
+
     public void setTitulo(String string) {
         jLabel1.setText(string);
     }
-    
-    public void limparCampos(){
-        tfDesignacao.setText("");
-        setModel();
-        modelR.removeAllElements();
-        lstReservas.setModel(modelR);
+
+    public void limparCampos() {
+        cenarioAlojamento = null;
+        preencherCampos(cenarioAlojamento);
     }
-    
+
+    /* public void preencherDados(Viagem viagem) {
+
+     this.viagem = viagem;
+
+     comboModelEtapas = new DefaultComboBoxModel<>();
+
+     for (Etapa etapa : viagem.getEtapas()) {
+     comboModelEtapas.addElement(etapa);
+     }
+     jComboBox1.setModel(comboModelEtapas);
+
+     DefaultListModel listModel = new DefaultListModel();
+     Etapa etapaEscolhida = (Etapa) jComboBox1.getSelectedItem();
+     for (Alojamento alojamento : etapaEscolhida.getReservas()) {
+     listModel.addElement(alojamento);
+     }
+
+     }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssociarUm;
-    private javax.swing.JButton btnAssociarVarios;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarAssociacaoUm;
-    private javax.swing.JButton btnEliminarAssociacaoVarios;
     private javax.swing.JButton btnOk;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -453,11 +421,22 @@ public class CriarEditarCenarioAlojamento extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAviso;
     private javax.swing.JLabel lblParticipantes;
+    private javax.swing.JLabel lblReservaEscolhida;
     private javax.swing.JLabel lblViagens;
-    private javax.swing.JList lstAlojamentos;
     private javax.swing.JList lstReservas;
     private javax.swing.JScrollPane spParticipantes;
-    private javax.swing.JScrollPane spViagens;
     private javax.swing.JTextField tfDesignacao;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherPainel() {
+        modelA = new DefaultListModel();
+        Etapa etapaEscolhida = (Etapa) comboModelEtapas.getElementAt(jComboBox1.getSelectedIndex());
+//        for (Alojamento alojamento : etapaEscolhida.getReservas()) {
+//            modelA.addElement(alojamento);
+//        }
+        Alojamento alojamento = cenarioAlojamento.getMapaReservas().get(etapaEscolhida);
+        lblReservaEscolhida.setText(alojamento.getDesignacao());
+        modelA.removeElement(alojamento);
+        lstReservas.setModel(modelA);
+    }
 }

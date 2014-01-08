@@ -87,15 +87,6 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         cbICF = new javax.swing.JComboBox();
         lblCondicaoFisica = new javax.swing.JLabel();
         lblErros1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        cbAdministrador = new javax.swing.JCheckBox();
-        panelAdmin = new javax.swing.JPanel();
-        pfPassword = new javax.swing.JPasswordField();
-        lblPassword = new javax.swing.JLabel();
-        tfUsername = new javax.swing.JTextField();
-        lblUsername = new javax.swing.JLabel();
-        lblAdminErro = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -117,7 +108,7 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
-        jLabel2.setText("Inserir/Editar Participantes");
+        jLabel2.setText("Inserir/Editar Participante");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Pessoais"));
@@ -207,138 +198,41 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Permissões"));
-
-        cbAdministrador.setBackground(new java.awt.Color(255, 255, 255));
-        cbAdministrador.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        cbAdministrador.setText("Administrador");
-        cbAdministrador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAdministradorActionPerformed(evt);
-            }
-        });
-
-        panelAdmin.setBackground(new java.awt.Color(255, 255, 255));
-        panelAdmin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        panelAdmin.setEnabled(false);
-
-        pfPassword.setEnabled(false);
-
-        lblPassword.setText("Password:");
-        lblPassword.setEnabled(false);
-
-        tfUsername.setEnabled(false);
-
-        lblUsername.setText("Username:");
-        lblUsername.setEnabled(false);
-
-        javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
-        panelAdmin.setLayout(panelAdminLayout);
-        panelAdminLayout.setHorizontalGroup(
-            panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAdminLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUsername)
-                    .addComponent(lblPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pfPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                    .addComponent(tfUsername))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelAdminLayout.setVerticalGroup(
-            panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAdminLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsername)
-                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbAdministrador)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(lblAdminErro, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 77, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cbAdministrador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAdminErro, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(232, 232, 232))
-        );
-
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnOk)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)))
-                .addGap(35, 35, 35))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnOk)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(35, 66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(3, 3, 3)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnCancelar)
-                                .addComponent(btnOk)))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnOk))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -366,8 +260,8 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         }
 
         if (participante == null) {
-            for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
-                if (tfBilheteIdentidade.getText().equals(participante.getBI() + "")) {
+            for (Participante participante1 : DadosAplicacao.getInstance().getParticipantes()) {
+                if (tfBilheteIdentidade.getText().equals(participante1.getBI() + "")) {
                     lblErros1.setText("BI já existente!");
                     return;
                 }
@@ -384,25 +278,6 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             return;
         }
 
-        if (cbAdministrador.isSelected()) {
-            if (tfUsername.getText().isEmpty()) {
-                lblAdminErro.setText("Introduza um username!");
-                return;
-            }
-
-            for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
-                if (tfUsername.getText().equals(participante.getUsername())) {
-                    lblAdminErro.setText("Já existe um participante com o Username introduzido!");
-                    return;
-                }
-            }
-
-
-            if (pfPassword.getPassword() == null) {
-                lblAdminErro.setText("Introduza uma password!");
-                return;
-            }
-        }
 
         //boolean editor = false;
 
@@ -423,11 +298,8 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
 //            permissoesUtilizador.add(permissaoUtilizador);
 //        }
 
-        if (cbAdministrador.isSelected()) {
-            part = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), true, tfUsername.getText(), pfPassword.getPassword(), false);
-        } else {
-            part = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), dataNasc.toCharArray(), true);
-        }
+        part = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), dataNasc.toCharArray(), true);
+        
 
         if (participante == null) {
             DadosAplicacao.getInstance().adicionarParticipante(part);
@@ -437,37 +309,10 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Utilizador Alterado!");
         }
 
-
-        panelAdmin.setEnabled(false);
-        lblPassword.setEnabled(false);
-        lblUsername.setEnabled(false);
-        tfUsername.setEnabled(false);
-        pfPassword.setEnabled(false);
-
         this.fireConfirmarClicadoEvent();
 
 
     }//GEN-LAST:event_btnOkActionPerformed
-
-    private void cbAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAdministradorActionPerformed
-        panelAdmin.setEnabled(cbAdministrador.isEnabled());
-        lblPassword.setEnabled(cbAdministrador.isEnabled());
-        lblUsername.setEnabled(cbAdministrador.isEnabled());
-        tfUsername.setEnabled(cbAdministrador.isEnabled());
-        pfPassword.setEnabled(cbAdministrador.isEnabled());
-//        cbEditor.setEnabled(false);
-        if (!cbAdministrador.isSelected()) {
-            tfUsername.setText("");
-            pfPassword.setText("");
-            panelAdmin.setEnabled(false);
-            lblPassword.setEnabled(false);
-            lblUsername.setEnabled(false);
-            tfUsername.setEnabled(false);
-            pfPassword.setEnabled(false);
-//            cbEditor.setEnabled(true);
-        }
-
-    }//GEN-LAST:event_cbAdministradorActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limparCampos();
@@ -477,29 +322,20 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOk;
-    private javax.swing.JCheckBox cbAdministrador;
     private javax.swing.JComboBox cbICF;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblAdminErro;
     private javax.swing.JLabel lblBI;
     private javax.swing.JLabel lblCondicaoFisica;
     private javax.swing.JLabel lblDataNascimento;
     private javax.swing.JLabel lblErros1;
     private javax.swing.JLabel lblLocalidade;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblUsername;
-    private javax.swing.JPanel panelAdmin;
-    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfBilheteIdentidade;
     private javax.swing.JTextField tfLocalidade;
     private javax.swing.JTextField tfNome;
-    private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 
     public void setTitulo(String string) {
@@ -511,23 +347,6 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         tfLocalidade.setText(participante.getLocalidade());
         tfNome.setText(participante.getNome());
         cbICF.setSelectedIndex(participante.getICF());
-        if (participante.isAdministrador()) {
-            cbAdministrador.setSelected(true);
-            tfUsername.setText(participante.getUsername());
-            pfPassword.setText(participante.getPassword().toString());
-            panelAdmin.setEnabled(true);
-            lblPassword.setEnabled(true);
-            lblUsername.setEnabled(true);
-            tfUsername.setEnabled(true);
-            pfPassword.setEnabled(true);
-//            cbEditor.setEnabled(false);
-        } else {
-            panelAdmin.setEnabled(false);
-            lblPassword.setEnabled(false);
-            lblUsername.setEnabled(false);
-            tfUsername.setEnabled(false);
-            pfPassword.setEnabled(false);
-        }
 
 //        if (participante.isEditor()) {
 //            if (participante.getPermissoes() != null) {
@@ -546,19 +365,11 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         tfBilheteIdentidade.setText("");
         tfLocalidade.setText("");
         tfNome.setText("");
-        tfUsername.setText("");
         cbICF.setSelectedIndex(0);
         //lstPermissoes.removeAll();
-        pfPassword.setText("");
         jDateChooser2.setCalendar(null);
         lblErros1.setText("");
-        cbAdministrador.setSelected(false);
         //cbEditor.setSelected(false);
-        panelAdmin.setEnabled(false);
-        lblPassword.setEnabled(false);
-        lblUsername.setEnabled(false);
-        tfUsername.setEnabled(false);
-        pfPassword.setEnabled(false);
     }
 
     public void setParticipante(Participante participante) {

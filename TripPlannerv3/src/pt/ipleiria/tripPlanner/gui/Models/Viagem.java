@@ -21,6 +21,7 @@ public class Viagem {
     ArrayList<Participante> participantesAutor;
     ArrayList<Reserva> reservas;
 
+
     public Viagem(String designacao, ArrayList<Etapa> etapas, ArrayList<Alojamento> alojamentos, String tipoViagem) {
         this.designacao = designacao;
         this.etapas = etapas;

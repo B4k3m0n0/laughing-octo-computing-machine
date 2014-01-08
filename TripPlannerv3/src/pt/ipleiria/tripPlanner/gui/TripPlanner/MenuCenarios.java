@@ -39,8 +39,8 @@ public class MenuCenarios extends javax.swing.JPanel {
 
     protected synchronized void fireGestaoCenarioAlojamentoClicadoEvent() {
         for (GestaoCenarioAlojamentoClicadoListener listener : this.gestaoCenarioAlojamentoClicadoListener) {
-            GestaoCenarioAlojamentoClicadoEvent evento = new GestaoCenarioAlojamentoClicadoEvent(this);
-            listener.gestaoCenarioAlojamentoClicado(evento);
+            //GestaoCenarioAlojamentoClicadoEvent evento = new GestaoCenarioAlojamentoClicadoEvent(this);
+            //listener.gestaoCenarioAlojamentoClicado(evento);
         }
     }
 

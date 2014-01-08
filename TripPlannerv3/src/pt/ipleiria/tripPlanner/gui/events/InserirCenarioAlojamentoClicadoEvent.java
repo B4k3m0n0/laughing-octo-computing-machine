@@ -5,13 +5,21 @@
 package pt.ipleiria.tripPlanner.gui.events;
 
 import java.util.EventObject;
+import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 
 /**
  *
  * @author Ricardo
  */
 public class InserirCenarioAlojamentoClicadoEvent extends EventObject{
-    public InserirCenarioAlojamentoClicadoEvent(Object source){
+    
+    private Viagem viagem;
+    public InserirCenarioAlojamentoClicadoEvent(Object source, Viagem viagem){
         super(source);   
+        this.viagem = viagem;
+    }
+
+    public Viagem getViagem() {
+        return viagem;
     }
 }

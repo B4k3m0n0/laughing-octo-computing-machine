@@ -57,7 +57,7 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
         this.inserirCenarioAlojamentoClicadoListener = new ArrayList<>();
         this.editarCenarioAlojamentoClicadoListener = new ArrayList<>();
         this.voltarGestaoCenarioAlojamentoClicadoListener = new ArrayList<>();
-
+        setModel();
         //jList1.setCellRenderer((ListCellRenderer) new CellRendererCenarioAlojamento());
     }
 
@@ -158,6 +158,7 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
         lblErro = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCenario = new javax.swing.JTable();
+        AtivarCenarioViagem = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -248,6 +249,13 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tableCenario);
 
+        AtivarCenarioViagem.setText("jButton1");
+        AtivarCenarioViagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtivarCenarioViagemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -270,10 +278,15 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jbPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jbComparar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jbPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jbComparar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(AtivarCenarioViagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addComponent(lblErro, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblLista))
                         .addGap(0, 3, Short.MAX_VALUE))
@@ -304,7 +317,9 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbPesquisar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbComparar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbComparar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AtivarCenarioViagem, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErro, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,12 +346,15 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jbCompararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCompararActionPerformed
-//        if(jList1.getSelectedIndex() != 2){
-//            ArrayList<CenarioAlojamento> cenariosAlojamentosSelecionados =  (ArrayList<CenarioAlojamento>) jList1.getSelectedValuesList();
-//            this.fireCompararCenarioAlojamentoClicadoEvent(cenariosAlojamentosSelecionados);
-//        }else{
-//            lblErro.setText("Tem de selecionar dois cenarios de alojamento para poder comparar!");
-//        }
+        lblErro.setText("");
+
+        if (tableCenario.getSelectedRowCount() != 2) {
+            CenariosTableModel model = (CenariosTableModel) tableCenario.getModel();
+            ArrayList<CenarioAlojamento> cenariosComparaveis = (ArrayList<CenarioAlojamento>) model.getSelectedRows(tableCenario.getSelectedRows());
+            this.fireCompararCenarioAlojamentoClicadoEvent(cenariosComparaveis);
+        } else {
+            lblErro.setText("Tem de selecionar um cenario!");
+        }
     }//GEN-LAST:event_jbCompararActionPerformed
 
     private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed
@@ -369,16 +387,16 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     }//GEN-LAST:event_tfPesquisarActionPerformed
 
     private void tfPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPesquisarKeyPressed
-        DefaultListModel<Viagem> model = new DefaultListModel<>();
-        model.clear();
+        ArrayList<CenarioAlojamento> parts = new ArrayList<>();
         String filtro = tfPesquisar.getText();
-        for (Viagem viagem : DadosAplicacao.getInstance().getViagens()) {
-            if (viagem.getDesignacao().contains(filtro)) {
-                model.addElement(viagem);
+
+        for (CenarioAlojamento cenario : viagem.getCenariosDeAlojamento()) {
+
+            if (cenario.getDesignacao().toLowerCase().contains(filtro)) {
+                parts.add(cenario);
             }
         }
-
-//        jList1.setModel(model);
+        tableCenario.setModel(new CenariosTableModel(parts));
     }//GEN-LAST:event_tfPesquisarKeyPressed
 
     private void tfPesquisarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPesquisarFocusGained
@@ -393,20 +411,61 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
 
+        lblErro.setText("");
+
+        if (tableCenario.getSelectedRow() != 1) {
+            int i = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer eliminar o cenario selecionado?");
+
+            if (i != JOptionPane.YES_OPTION) {
+                return;
+            }
+        } else {
+            lblErro.setText("Tem de selecionar um, e apenas um, cenario de alojamento!");
+        }
+
         CenariosTableModel model = (CenariosTableModel) tableCenario.getModel();
-        CenarioAlojamento cenarioAlojamento = model.getSelectedRow(tableCenario.getSelectedRow());
-        //        if(jList1.getSelectedIndex() != -1){
-//            int resposta = JOptionPane.showConfirmDialog(this, "Têm a certeza que pretende remover o cenario de alojamento " + jList1.getSelectedValue().toString() + "?");
-//            if(resposta == 1){
-//                CenarioAlojamento cenarioAlojamentoSelected = (CenarioAlojamento) jList1.getSelectedValue();
-//                DadosAplicacao.getInstance().removerCenarioAlojamento(cenarioAlojamentoSelected);
-//                JOptionPane.showMessageDialog(this, "Cenario de deslocamento removido com sucesso!");
-//            }
-//        }else{
-//            lblErro.setText("Têm de selecionar um cenario de alojamento!");
-//        }
+
+        CenarioAlojamento cenario = model.getSelectedRow(tableCenario.getSelectedRow());
+
+        model.removeElement(cenario);
+
+        tableCenario.setModel(model);
+
+
+
+
     }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void AtivarCenarioViagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtivarCenarioViagemActionPerformed
+        lblErro.setText("");
+
+        if (tableCenario.getSelectedRow() != 1) {
+            int i = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer ativar/reservar o cenario de alojamento selecionado para esta viagem?");
+
+            if (i != JOptionPane.YES_OPTION) {
+                return;
+            }
+        } else {
+            lblErro.setText("Tem de selecionar um, e apenas um, cenario de alojamento!");
+        }
+
+
+        CenariosTableModel model = (CenariosTableModel) tableCenario.getModel();
+
+        for (CenarioAlojamento cenario : viagem.getCenariosDeAlojamento()) {
+            if (cenario.equals(model.getSelectedRow(tableCenario.getSelectedRow()))) {
+                cenario.setAtivo(true);
+            } else {
+                cenario.setAtivo(false);
+            }
+
+        }
+
+        tableCenario.setModel(model);
+
+    }//GEN-LAST:event_AtivarCenarioViagemActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AtivarCenarioViagem;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbComparar;
@@ -422,10 +481,18 @@ public class GestaodeCenariodeAlojamento extends javax.swing.JPanel {
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
 
-    public void preencherCampos(Viagem viagem) {
+    public void viagemPassada(Viagem viagem) {
 
         this.viagem = viagem;
         lblLista.setText("Lista de Cenários de Alojamento da viagem " + viagem.getDesignacao() + ":");
 
+    }
+
+    private void setModel() {
+        if (!viagem.getCenariosDeAlojamento().isEmpty()) {
+            ArrayList<CenarioAlojamento> cenarioModelList = viagem.getCenariosDeAlojamento();
+            CenariosTableModel model = new CenariosTableModel(cenarioModelList);
+            tableCenario.setModel(model);
+        }
     }
 }

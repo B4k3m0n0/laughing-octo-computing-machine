@@ -18,7 +18,8 @@ public class Viagem {
     ArrayList<Alojamento> alojamentos;
     String tipoViagem;
     ArrayList<Participante> participantes;
-    ArrayList<Participante> participantesAutor;
+    private Participante Autor;
+    private ArrayList<Participante> editores;
     ArrayList<Reserva> reservas;
     ArrayList<CenarioAlojamento> cenariosDeAlojamento;
 
@@ -30,7 +31,9 @@ public class Viagem {
         this.tipoViagem = tipoViagem;
 
         participantes = new ArrayList<>();
-        participantesAutor =  new ArrayList<>();
+        Autor = DadosAplicacao.getInstance().getLogado();
+        DadosAplicacao.getInstance().getLogado().setAutor(true);
+        cenariosDeAlojamento = new ArrayList<>();
 
     }
 
@@ -40,6 +43,7 @@ public class Viagem {
         this.alojamentos = alojamentos;
         this.tipoViagem = tipoViagem;
         this.participantes = participantes;
+        cenariosDeAlojamento = new ArrayList<>();
     }
 
     public String getDesignacao() {
@@ -66,12 +70,22 @@ public class Viagem {
         return participantes;
     }
 
-    public void setParticipantesAutor(ArrayList<Participante> participantesAutor) {
-        this.participantesAutor = participantesAutor;
-    }
 
     public ArrayList<CenarioAlojamento> getCenariosDeAlojamento() {
         return cenariosDeAlojamento;
     }
+
+    public void setEditores(ArrayList<Participante> editores) {
+        this.editores = editores;
+    }
+
+    public Participante getAutor() {
+        return Autor;
+    }
+
+    public ArrayList<Participante> getEditores() {
+        return editores;
+    }
+    
     
 }

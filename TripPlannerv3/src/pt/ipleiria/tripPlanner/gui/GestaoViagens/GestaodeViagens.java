@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererViagem;
 import pt.ipleiria.tripPlanner.gui.events.AssociarViagensClicadoListener;
@@ -164,7 +165,7 @@ public class GestaodeViagens extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblErro = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCenariosAlojamento = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -174,6 +175,11 @@ public class GestaodeViagens extends javax.swing.JPanel {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        lstViagens.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstViagensValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(lstViagens);
 
@@ -219,10 +225,10 @@ public class GestaodeViagens extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         jLabel1.setText("Viagens");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCenariosAlojamento.setText("jButton1");
+        btnCenariosAlojamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCenariosAlojamentoActionPerformed(evt);
             }
         });
 
@@ -241,7 +247,7 @@ public class GestaodeViagens extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblErro, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
+                        .addComponent(btnCenariosAlojamento)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -275,7 +281,7 @@ public class GestaodeViagens extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btnCenariosAlojamento)
                         .addGap(19, 19, 19)))
                 .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -321,13 +327,34 @@ public class GestaodeViagens extends javax.swing.JPanel {
         this.fireAssociarViagensClicadoEvent();
     }//GEN-LAST:event_btnAssociarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCenariosAlojamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCenariosAlojamentoActionPerformed
         if (lstViagens.getSelectedIndex() != -1) {
             this.fireGestaoCenarioAlojamentoClicadoEvent((Viagem) lstViagens.getSelectedValue());
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma viagem!");
         }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCenariosAlojamentoActionPerformed
+
+    private void lstViagensValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstViagensValueChanged
+        Viagem viagem = (Viagem) lstViagens.getSelectedValue();
+
+        if(DadosAplicacao.getInstance().getLogado().equals(viagem.getAutor())){
+            return;
+        }
+        
+        for (Participante participante : viagem.getEditores()) {
+            if (participante.equals(DadosAplicacao.getInstance().getLogado())) {
+                btnAssociar.setEnabled(true);
+                btnCenariosAlojamento.setEnabled(true);
+            }else{
+                btnAssociar.setEnabled(false);
+                btnCenariosAlojamento.setEnabled(false);
+            }
+        }
+        
+        
+
+    }//GEN-LAST:event_lstViagensValueChanged
 
     public synchronized void addGestaoCenarioAlojamentoClicadoListener(GestaoCenarioAlojamentoClicadoListener listener) {
         this.viagemCenarioAlojamentoClicadoListener.add(listener);
@@ -354,12 +381,12 @@ public class GestaodeViagens extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssociar;
+    private javax.swing.JButton btnCenariosAlojamento;
     private javax.swing.JButton btnCriar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -375,6 +402,15 @@ public class GestaodeViagens extends javax.swing.JPanel {
             model.addElement(viagens);
         }
         lstViagens.setModel(model);
+
+        if (DadosAplicacao.getInstance().getLogado().equals(DadosAplicacao.getInstance().getSystemAdmin())) {
+            btnAssociar.setEnabled(true);
+            btnCenariosAlojamento.setEnabled(true);
+        } else {
+            btnAssociar.setEnabled(false);
+            btnCenariosAlojamento.setEnabled(false);
+        }
+
     }
 
     public void limparCampos() {

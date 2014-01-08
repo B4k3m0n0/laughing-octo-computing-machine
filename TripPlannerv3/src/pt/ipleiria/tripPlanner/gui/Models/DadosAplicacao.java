@@ -28,7 +28,7 @@ public class DadosAplicacao {
     private Participante logado;
     private ArrayList<Quarto> quartos;
     private ArrayList<CenarioAlojamento> cenariosDeAlojamento;
-    private String systemAdmin;
+    private Participante systemAdmin;
     private ArrayList<Reserva> reservas;
 
     private DadosAplicacao() {
@@ -61,9 +61,9 @@ public class DadosAplicacao {
         
         Participante participante1;
         
-        participante1 = new Participante("Rafael", dataNascJoao, 12175988, "Leiria", 5, true, "rafa", pass.toCharArray(), false);
+        participante1 = new Participante("Rafael", dataNascJoao, 12175988, "Leiria", 5, false, "rafa", pass.toCharArray(), false);
         adicionarParticipante(participante1);
-        systemAdmin = participante1.getNome();
+        systemAdmin = participante1;
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dataNasc = formatter.format(dataNascJoao.getTime());
@@ -104,7 +104,7 @@ public class DadosAplicacao {
     }
 
     
-    public String getSystemAdmin() {
+    public Participante getSystemAdmin() {
         return systemAdmin;
     }
     

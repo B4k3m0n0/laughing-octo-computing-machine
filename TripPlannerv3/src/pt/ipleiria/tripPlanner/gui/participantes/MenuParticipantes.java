@@ -359,7 +359,7 @@ public class MenuParticipantes extends javax.swing.JPanel {
     }//GEN-LAST:event_tfPesquisarActionPerformed
 
     private void filtro(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtro
-        System.err.println("AQUI");
+
         ArrayList<Participante> parts = new ArrayList<>();
         String filtro = tfPesquisar.getText();
 
@@ -389,11 +389,11 @@ public class MenuParticipantes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     public void actualizarListaParticipantes() {
-        if (DadosAplicacao.getInstance().getLogado().isAutor()) {
+        if (DadosAplicacao.getInstance().getLogado().isAutor() || DadosAplicacao.getInstance().getLogado().equals(DadosAplicacao.getInstance().getSystemAdmin())) {
             btnEditar.setEnabled(true);
             btnAdicionar.setEnabled(true);
         } else {
-            btnEditar.setEnabled(false);
+            btnAdicionar.setEnabled(false);
             btnEditar.setEnabled(false);
         }
         setModel();

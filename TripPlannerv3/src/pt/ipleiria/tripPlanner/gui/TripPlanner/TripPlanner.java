@@ -530,7 +530,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     public void inserirCenarioAlojamentoClicado(InserirCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         criarEditarCenarioAlojamento.setTitulo("Novo Cenario de Alojamento");
-//        criarEditarCenarioAlojamento.preencherCampos(evt.getViagem());
+//        criarEditarCenarioAlojamento.viagemPassada(evt.getViagem());
         cl.show(this.jPanel1, "criarEditarCenarioAlojamento");
     }
     

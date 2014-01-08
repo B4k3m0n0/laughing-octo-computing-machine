@@ -10,7 +10,7 @@ import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 public class CenariosTableModel extends AbstractTableModel {
 
     public static final String columnNames[] = {
-        "Designação", "Número de etapas", "Número de etapas com cenário"};
+        "Designação", "Número de etapas com alojamento", "Ativo", "Preço"};
     private static final long serialVersionUID = 0xa8564b34b6035c6fL;
     private final List<CenarioAlojamento> data;
 
@@ -80,6 +80,10 @@ public class CenariosTableModel extends AbstractTableModel {
 
     public void removeAll(List lista) {
         data.removeAll(lista);
+    }
+    
+    public void removeElement(CenarioAlojamento cenario){
+        data.remove(cenario);
     }
 
     public List getData() {

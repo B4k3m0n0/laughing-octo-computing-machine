@@ -304,7 +304,7 @@ public class AssociarViagens extends javax.swing.JPanel {
 //        DadosAplicacao.getInstance().getViagem(viagem).setParticipantesAutor(getLstEditor());
         this.viagem = viagem;
         DadosAplicacao.getInstance().getViagem(viagem).setParticipantes(associados);
-        DadosAplicacao.getInstance().getViagem(viagem).setParticipantesAutor(editores);
+        DadosAplicacao.getInstance().getViagem(viagem).setEditores(editores);
         
        /* for (Participante a : associados){
             System.out.println(a.getBI());

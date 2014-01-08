@@ -18,12 +18,13 @@ public class CenarioAlojamento {
     private String designacao;
     private Viagem viagem;
     private HashMap<Etapa, Alojamento> mapaReservas;
+    private boolean ativo;
 
     public CenarioAlojamento(String designacao, Viagem viagem, HashMap<Etapa, Alojamento> mapaReservas) {
         this.designacao = designacao;
         this.viagem = viagem;
         this.mapaReservas = mapaReservas;
-
+        this.ativo = false;
     }
 
     public String getDesignacao() {
@@ -49,4 +50,14 @@ public class CenarioAlojamento {
     public void setMapaReservas(HashMap<Etapa, Alojamento> mapaReservas) {
         this.mapaReservas = mapaReservas;
     }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+    
+    
 }
